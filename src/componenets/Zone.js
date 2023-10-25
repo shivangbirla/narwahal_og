@@ -1,264 +1,36 @@
-import React, { useEffect, useState } from "react";
-import rack_png from "../assets/rack_img.jpg";
-import { getProducts } from "../api/productRequest";
-import { data_boxes } from "../data/data_boxes";
+import React from "react";
+import Inventory from "./Inventory";
+import Navbar from "./Navbar";
+import Showcase from "./Showcase";
+import ship_image from "../assets/ship_image.png";
+import click_image from "../assets/click_image.png";
+import ZoneLoader from "./ZoneLoader";
 
-const Zone = () => {
-  const [mappedProducts, setMappedProducts] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState([]);
-  const [selectedSide, setSelectedSide] = useState("FRONT");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getProducts();
-        const data = response.data;
-        console.log(data);
-
-        setMappedProducts(data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchData();
-  }, []);
-
-  const frontProducts = data_boxes.products.filter(
-    (product) => product.side === "front"
-  );
-  const backProducts = data_boxes.products.filter(
-    (product) => product.side === "back"
-  );
-
-  // console.log("mapped products:" + mappedProducts);
-  // function to group products by level
-  const groupProductsByLevel = (products, level) => {
-    return products.filter((product) => product.level === level);
-  };
-
-  // Group front products by level
-  const frontLevel1Products = groupProductsByLevel(frontProducts, 1);
-  const frontLevel2Products = groupProductsByLevel(frontProducts, 2);
-  const frontLevel3Products = groupProductsByLevel(frontProducts, 3);
-
-  // Group back products by level
-  const backLevel1Products = groupProductsByLevel(backProducts, 1);
-  const backLevel2Products = groupProductsByLevel(backProducts, 2);
-  const backLevel3Products = groupProductsByLevel(backProducts, 3);
-
-  // Create a function to sort products by product.box in ascending order
-  const sortProductsByBoxAscending = (products) => {
-    return products.slice().sort((a, b) => a.box - b.box);
-  };
-
-  const sortedFrontLevel1Products =
-    sortProductsByBoxAscending(frontLevel1Products);
-  const sortedFrontLevel2Products =
-    sortProductsByBoxAscending(frontLevel2Products);
-  const sortedFrontLevel3Products =
-    sortProductsByBoxAscending(frontLevel3Products);
-
-  const sortedBackLevel1Products =
-    sortProductsByBoxAscending(backLevel1Products);
-  const sortedBackLevel2Products =
-    sortProductsByBoxAscending(backLevel2Products);
-  const sortedBackLevel3Products =
-    sortProductsByBoxAscending(backLevel3Products);
-
-  const handleProductClick = (itemArray) => {
-    setSelectedProduct(itemArray);
-  };
-
-  const handleButtonClick = (side) => {
-    setSelectedSide(side);
-  };
-
+const Zone = ({ searchValue, setSearchValue }) => {
+  // if(true) return <ZoneLoader/>
   return (
-    <>
-      <div className="p-10">
-        <div className="container mx-auto flex justify-between items-center p-1.5">
-          <div className="space-x-8 ml-6 mt-6 mb-1.5">
-            <button
-              className={`px-6 py-1 rounded-full border-2 font-semibold ${
-                selectedSide === "FRONT"
-                  ? "bg-[#D7EDFF] text-[#00a6fb] border-[#00a6fb]"
-                  : ""
-              }`}
-              onClick={() => handleButtonClick("FRONT")}
-            >
-              FRONT
-            </button>
-            <button
-              className={`px-6 py-1 rounded-full border-2 font-semibold ${
-                selectedSide === "BACK"
-                  ? "bg-[#D7EDFF] text-[#00a6fb] border-[#00a6fb]"
-                  : ""
-              }`}
-              onClick={() => handleButtonClick("BACK")}
-            >
-              BACK
-            </button>
+    <div className="w-screen bg-[#F8F9FA] flex gap-6 h-screen">
+      <div className="w-[256px] "></div>
+      <div className="w-[0.5px] h-full bg-[#D9D9D9]"></div>
+      <div className="w-full px-8 flex flex-col gap-6">
+        <Navbar setSearchValue={setSearchValue} />
+        <Inventory />
+        <div className="flex gap-9 justify-between">
+          <Showcase />
+          <div className="flex flex-col w-[400px] justify-between">
+            <div className="flex justify-center items-center w-[318.689px] h-[172px] bg-white border-[1.77px] border-[#B7E0FF]">
+              <img src={ship_image} alt="" />
+            </div>
+            <div className="flex flex-col mb-9">
+              <img src={click_image} className="w-[343px] h-[172px] " alt="" />
+              <p className="text-[#727272] text-base text-center">“Click” to zoom in the box.</p>
+            </div>
           </div>
         </div>
-        <div>
-          {selectedSide === "FRONT" ? (
-            <div className="flex flex-row mt-20">
-              <div className="relative">
-                <img
-                  src={rack_png}
-                  alt="Rack"
-                  className="h-[430px] w-[430px]"
-                />
-                <div className="grid grid-cols-4 absolute top-[-5%] left-7 w-full h-full">
-                  {sortedFrontLevel1Products.map((product, index) => (
-                    <div
-                      key={product._id}
-                      className="w-[50px] h-[50px] bg-gray-300 rounded-lg flex justify-center items-center cursor-pointer"
-                      onClick={() => handleProductClick(product.item)}
-                    >
-                      <h2 className="text-[14px] text-center">
-                        {product.material}
-                      </h2>
-                    </div>
-                  ))}
-                </div>
-                <div className="grid grid-cols-4 absolute top-[21%] left-7 w-full h-full">
-                  {sortedFrontLevel2Products.map((product, index) => (
-                    <div
-                      key={product._id}
-                      className="w-[50px] h-[50px] bg-gray-300 rounded-lg flex justify-center items-center cursor-pointer"
-                    >
-                      <h2 className="text-[14px] text-center">
-                        {product.material}
-                      </h2>
-                    </div>
-                  ))}
-                </div>
-                <div className="grid grid-cols-4 absolute top-[47%] left-7 w-full h-full">
-                  {sortedFrontLevel3Products.map((product, index) => (
-                    <div
-                      key={product._id}
-                      className="w-[50px] h-[50px] bg-gray-300 rounded-lg flex justify-center items-center cursor-pointer"
-                    >
-                      <h2 className="text-[14px] text-center">
-                        {product.material}
-                      </h2>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="flex flex-row mt-20">
-              <div className="relative">
-                <img
-                  src={rack_png}
-                  alt="Rack"
-                  className="h-[430px] w-[430px]"
-                />
-                <div className="grid grid-cols-4 absolute top-[-5%] left-7 w-full h-full">
-                  {sortedBackLevel1Products.map((product, index) => (
-                    <div
-                      key={product._id}
-                      className="w-[50px] h-[50px] bg-gray-300 rounded-lg flex justify-center items-center cursor-pointer"
-                      onClick={() => handleProductClick(product.item)}
-                    >
-                      <h2 className="text-[14px] text-center">
-                        {product.material}
-                      </h2>
-                    </div>
-                  ))}
-                </div>
-                <div className="grid grid-cols-4 absolute top-[21%] left-7 w-full h-full">
-                  {sortedBackLevel2Products.map((product, index) => (
-                    <div
-                      key={product._id}
-                      className="w-[50px] h-[50px] bg-gray-300 rounded-lg flex justify-center items-center cursor-pointer"
-                    >
-                      <h2 className="text-[14px] text-center">
-                        {product.material}
-                      </h2>
-                    </div>
-                  ))}
-                </div>
-                <div className="grid grid-cols-4 absolute top-[47%] left-7 w-full h-full">
-                  {sortedBackLevel3Products.map((product, index) => (
-                    <div
-                      key={product._id}
-                      className="w-[50px] h-[50px] bg-gray-300 rounded-lg flex justify-center items-center cursor-pointer"
-                    >
-                      <h2 className="text-[14px] text-center">
-                        {product.material}
-                      </h2>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div>
-          {selectedProduct && selectedProduct.length > 0 && (
-            <div className="absolute left-[45vw] top-[10vh] w-[50vw] h-[80vh] overflow-y-auto">
-              <table className="min-w-full bg-[#343a40] text-white rounded-2xl shadow-md">
-                <thead>
-                  <tr>
-                    <th className="px-4 py-2 text-left text-sm font-semibold uppercase">
-                      MACH_DESC
-                    </th>
-                    <th className="px-4 py-2 text-left text-sm font-semibold uppercase">
-                      MAKER_DESC
-                    </th>
-                    <th className="px-4 py-2 text-left text-sm font-semibold uppercase">
-                      MATERIAL
-                    </th>
-                    <th className="px-4 py-2 text-left text-sm font-semibold uppercase">
-                      MATERIAL_DESC
-                    </th>
-                    <th className="px-4 py-2 text-left text-sm font-semibold uppercase">
-                      PART_NO
-                    </th>
-                    <th className="px-4 py-2 text-left text-sm font-semibold uppercase">
-                      ROB
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {selectedProduct.map((product, index) => (
-                    <tr
-                      key={index}
-                      className={
-                        index % 2 === 0 ? "bg-[#6c757d]" : "bg-[#ced4da]"
-                      }
-                    >
-                      <td className="px-4 py-2 whitespace-nowrap text-[#F5F5F5]">
-                        {product.mach_desc}
-                      </td>
-                      <td className="px-4 py-2 whitespace-nowrap text-[#F5F5F5]">
-                        {product.maker_desc}
-                      </td>
-                      <td className="px-4 py-2 whitespace-nowrap text-[#F5F5F5]">
-                        {product.material}
-                      </td>
-                      <td className="px-4 py-2 whitespace-nowrap text-[#F5F5F5]">
-                        {product.material_desc}
-                      </td>
-                      <td className="px-4 py-2 whitespace-nowrap text-[#F5F5F5]">
-                        {product.part_no}
-                      </td>
-                      <td className="px-4 py-2 whitespace-nowrap text-[#F5F5F5]">
-                        {product.rob}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
       </div>
-    </>
+
+      {/* <Area searchValue={searchValue} /> */}
+    </div>
   );
 };
 
