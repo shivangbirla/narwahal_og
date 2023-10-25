@@ -8,9 +8,8 @@ import Sidebar from "./componenets/Sidebar";
 const App = () => {
   const [searchValue, setSearchValue] = useState("areaa");
   return (
-    <>
-      <Sidebar />
-      {/* <Routes>
+    <div className="flex ">
+      <Routes>
         <Route
           path="/"
           element={
@@ -18,8 +17,8 @@ const App = () => {
           }
         />
         <Route path="/zone" element={<Zone />} />
-      </Routes> */}
-    </>
+      </Routes>
+    </div>
   );
 };
 
