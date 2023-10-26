@@ -14,9 +14,9 @@ const Zone = ({ searchValue, setSearchValue }) => {
   setTimeout(() => {
     setloading(false)
   }, 1000);
-  if(loading) return <ZoneLoader/>
+  if(true) return <ZoneLoader/>
   return (
-    <div className=" h-auto w-screen px-9 min-h-screen box-border  bg-[#F8F9FA] flex lg:gap-6 ">
+    <div className=" h-auto w-screen px-9 min-h-screen box-border overflow-y-scroll  bg-[#F8F9FA] flex lg:gap-6 pb-5 ">
       <div className=" hidden lg:block">
         <Sidebar className="" />
       </div>

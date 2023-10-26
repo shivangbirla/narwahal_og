@@ -15,7 +15,7 @@ const App = () => {
     <div className=" ">
       <React.Fragment key={"left"}>
         <Drawer anchor={"left"} open={open} onClose={() => setOpen(false)}>
-          <div className="w-[300px]">
+          <div className="w-[300px] pl-6">
             <Sidebar />
           </div>
         </Drawer>
