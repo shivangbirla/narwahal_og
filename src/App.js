@@ -4,11 +4,14 @@ import { useState } from "react";
 import Zone from "./componenets/Zone";
 import Home from "./componenets/Home";
 import Sidebar from "./componenets/Sidebar";
+import Base from "./componenets/Base";
 
 const App = () => {
   const [searchValue, setSearchValue] = useState("areaa");
   return (
+
     <div className="flex ">
+       <Base />
       <Routes>
         <Route
           path="/"
