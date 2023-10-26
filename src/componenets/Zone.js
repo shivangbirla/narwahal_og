@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import Inventory from "./Inventory";
 import Navbar from "./Navbar";
 import Showcase from "./Showcase";
@@ -7,24 +7,35 @@ import ship_image from "../assets/ship_image.png";
 import click_image from "../assets/click_image.png";
 import ZoneLoader from "./ZoneLoader";
 import Sidebar from "./Sidebar";
+import { Divider } from "@mui/material";
 
 const Zone = ({ searchValue, setSearchValue }) => {
-  // if(true) return <ZoneLoader/>
+  const [loading, setloading] = useState(true)
+  setTimeout(() => {
+    setloading(false)
+  }, 1000);
+  if(loading) return <ZoneLoader/>
   return (
-    <div className="w-screen bg-[#F8F9FA] flex gap-6 h-screen">
-      <Sidebar />
+    <div className=" h-auto w-screen px-9 min-h-screen box-border  bg-[#F8F9FA] flex lg:gap-6 ">
+      <div className=" hidden lg:block">
+        <Sidebar className="" />
+      </div>
 
-      <div className="w-[0.5px] h-full bg-[#D9D9D9]"></div>
-      <div className="w-full px-8 flex flex-col gap-6">
+      <Divider
+        orientation="vertical"
+        className="hidden lg:block px-1"
+        flexItem
+      />
+      <div className="   flex flex-col gap-6">
         <Navbar setSearchValue={setSearchValue} />
-        <Inventory />
-        <div className="flex gap-9 justify-between">
-          <Showcase />
-          <div className="flex flex-col w-[400px] justify-between">
-            <div className="flex justify-center items-center w-[318.689px] h-[172px] bg-white border-[1.77px] border-[#B7E0FF]">
-              <img src={ship_image} alt="" />
+        <Inventory isZone={true} />
+        <div className="flex w-full  flex-col md:flex-row gap-9 justify-between">
+          <Showcase setloading={setloading}/>
+          <div className="flex flex-col   justify-between ">
+            <div className="flex justify-center items-center mx-auto w-fit h-auto  lg:max-w-[318.689px] h-[172px] bg-white border-[1.77px] border-[#B7E0FF]">
+              <img src={ship_image} className="" alt="" />
             </div>
-            <div className="flex flex-col mb-9">
+            <div className="flex flex-col mb-9 mt-9 mx-auto">
               <img src={click_image} className="w-[343px] h-[172px] " alt="" />
               <p className="text-[#727272] text-base text-center">
                 “Click” to zoom in the box.

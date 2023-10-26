@@ -3,16 +3,26 @@ import Navbar from "./Navbar";
 import Area from "./Area";
 import Inventory from "./Inventory";
 import Sidebar from "./Sidebar";
+import Base from "./Base";
+import { Divider } from "@mui/material";
 
 const Home = ({ searchValue, setSearchValue }) => {
   return (
-    <div className="w-screen bg-[#F8F9FA] flex gap-6 h-screen">
-      <Sidebar />
+    <div className=" h-auto w-screen px-9 min-h-screen box-border  bg-[#F8F9FA] flex lg:gap-6">
+      <div className=" hidden lg:block">
+        <Sidebar className="" />
+      </div>
 
-      <div className="w-[0.5px] h-full bg-[#D9D9D9]"></div>
-      <div className="w-full px-8 flex flex-col">
+      <Divider
+        orientation="vertical"
+        className="hidden lg:block px-1"
+        flexItem
+      />
+      <div className="flex flex-col gap-6">
         <Navbar setSearchValue={setSearchValue} />
         <Inventory />
+
+        <Base />
       </div>
 
       {/* <Area searchValue={searchValue} /> */}

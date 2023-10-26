@@ -10,19 +10,19 @@ const Base = () => {
   };
 
   return (
-    <div className="h-screen w-screen m-40">
+    <div className="w-fit max-w-[813px]  mt-[300px] sm:mt-52">
       {selected ? (
         <img
           src={selected_area}
           alt="selected area"
-          className="w-[900px] h-auto object-cover cursor-pointer"
+          className=" h-auto object-cover rotate-90 md:rotate-0 scale-150 sm:scale-100 cursor-pointer"
           onClick={toggleSelected}
         />
       ) : (
         <img
           src={area}
           alt="area"
-          className={`w-[900px] h-auto object-cover cursor-pointer ${
+          className={` h-auto object-cover rotate-90 md:rotate-0 scale-150 sm:scale-100 cursor-pointer ${
             selected ? "hidden" : ""
           }`}
           onClick={toggleSelected}

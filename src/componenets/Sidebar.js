@@ -46,8 +46,8 @@ const Sidebar = () => {
 
   return (
     <>
-      <nav className="w-[23vw] h-[100vh] bg-inherit">
-        <div className="flex flex-col pl-10 pt-[30px] mb-6">
+      <nav className="box-border w-[100%] max-w-[251px] border-box h-full bg-inherit">
+        <div className="flex flex-col  pt-[30px] mb-6">
           <img
             src={narwahal_logo}
             alt="narwahal_logo"
@@ -60,20 +60,24 @@ const Sidebar = () => {
           {menuItems.map((item, index) => (
             <li
               key={index}
-              className={`w-full h-[65px] flex items-center gap-5 cursor-pointer pl-12 ${
+              className={`w-full h-[65px] flex items-center gap-5 cursor-pointer  ${
                 selectedItem === item.alt ? "bg-[#61D0F1] shadow-md" : ""
-              } transition-transform transform-gpu hover:scale-110`}
+              } transition-transform transform-gpu `}
               onClick={() => handleItemClick(item.alt)}
             >
+              <div className="flex justify-center items-center rounded-xl bg-white w-[35px] h-[35px] ">
+
               <img
                 src={item.img}
                 alt={item.alt}
                 className="w-[24px] h-[24px]"
               />
+              </div>
               <span className="text-[14px]">{item.text}</span>
             </li>
           ))}
-          <div className="w-[251px] h-[190.5px] bg-[#47AFFF] ml-5 mt-4 pt-[1px] rounded-lg">
+        </ul>
+          <div className="w-[251px] h-[190.5px] bg-[#47AFFF]  mt-4 pt-[1px] rounded-lg">
             <img
               alt="icon"
               src={icon_img}
@@ -98,8 +102,6 @@ const Sidebar = () => {
               </span>
             </button>
           </div>
-            <img src={randomImg} className="w-[20px] h-[20px]"  alt="" />
-        </ul>
       </nav>
     </>
   );
