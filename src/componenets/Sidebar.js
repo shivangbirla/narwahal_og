@@ -7,6 +7,8 @@ import narwahal_logo from "../assets/narwahal_logo.png";
 import pms_img from "../assets/pms_img.png";
 import sparepartorder_img from "../assets/sparepartorder_img.png";
 
+import randomImg from "../assets/random.svg";
+
 const Sidebar = () => {
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -44,7 +46,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <nav className="w-[23vw] h-[100vh] bg-[#adb5bd]">
+      <nav className="w-[23vw] h-[100vh] bg-inherit">
         <div className="flex flex-col pl-10 pt-[30px] mb-6">
           <img
             src={narwahal_logo}
@@ -53,6 +55,7 @@ const Sidebar = () => {
           />
           <span className="w-[126px] h-[22px]">Project Narwhal</span>
         </div>
+
         <ul>
           {menuItems.map((item, index) => (
             <li
@@ -95,6 +98,7 @@ const Sidebar = () => {
               </span>
             </button>
           </div>
+            <img src={randomImg} className="w-[20px] h-[20px]"  alt="" />
         </ul>
       </nav>
     </>

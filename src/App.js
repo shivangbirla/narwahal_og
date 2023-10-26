@@ -9,10 +9,10 @@ import Base from "./componenets/Base";
 const App = () => {
   const [searchValue, setSearchValue] = useState("areaa");
   return (
-    <>
-      <Base />
-      {/* <Sidebar /> */}
-      {/* <Routes>
+
+    <div className="flex ">
+       <Base />
+      <Routes>
         <Route
           path="/"
           element={
@@ -20,8 +20,8 @@ const App = () => {
           }
         />
         <Route path="/zone" element={<Zone />} />
-      </Routes> */}
-    </>
+      </Routes>
+    </div>
   );
 };
 
