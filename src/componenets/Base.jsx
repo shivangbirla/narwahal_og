@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import area from "../assets/area.svg";
 import selected_area from "../assets/selected_area.svg";
+import { useNavigate, useRoutes } from "react-router-dom";
 
 const Base = () => {
+  const navigate = useNavigate();
   const [selected, setSelected] = useState(false);
 
   const toggleSelected = () => {
     setSelected(!selected);
+    setTimeout(() => {
+      navigate("/zone")
+    }, 1000);
   };
 
   return (
