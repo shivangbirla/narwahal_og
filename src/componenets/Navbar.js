@@ -23,7 +23,7 @@ const Navbar = ({ searchValue, setSearchValue }) => {
     <div className="flex justify-between py-2 my-4 ">
       <div className=" lg:hidden w-[17px] h-full flex items-center justify-center" onClick={()=>setOpen(true)}>
         <svg
-          className="w-full h-full"
+          className="w-full h-full my-auto"
           viewBox="0 0 15 15"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
