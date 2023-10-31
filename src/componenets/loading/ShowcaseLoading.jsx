@@ -5,7 +5,7 @@ import loadinggirl from "../../assets/loadinggirl.png";
 
 const ShowcaseLoading = () => {
   return (
-    <div className="flex gap-6 px-2 py-4">
+    <div className="flex w-full  flex-col md:flex-row gap-9 justify-between">
       <div className="bg-white rounded-xl p-4  flex flex-col w-[812px] h-[535px] gap-5">
         <div className="flex gap-2 items-center ">
           <Skeleton variant="circular" width={40} height={40} />

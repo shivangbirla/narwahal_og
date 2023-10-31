@@ -3,7 +3,7 @@ import React from "react";
 
 const SeachNavLoading = () => {
   return (
-    <div className="flex justify-between px-2 py-4">
+    <div className="flex justify-between py-2 my-4">
       <Skeleton
         variant="rounded"
         className="rounded-full"

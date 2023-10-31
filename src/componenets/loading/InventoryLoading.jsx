@@ -1,9 +1,5 @@
-import React, { useState } from 'react'
-import Select from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
 import { Skeleton } from '@mui/material';
+import React from 'react';
 const Inventory = () => {
   
 
