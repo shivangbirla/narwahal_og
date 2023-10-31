@@ -12,6 +12,10 @@ const Inventory = ({ isZone = false }) => {
 
   const deckotions = [
     {
+      value: 0,
+      label: "Deck 0",
+    },
+    {
       value: 1,
       label: "Deck 1",
     },
@@ -103,11 +107,16 @@ const Inventory = ({ isZone = false }) => {
                 <option value={option.value}>{option.label}</option>
               ))}
             </select>
-            <select value={zone} onCanPlay={(e) => setZone(e.target.value)}>
-              {Zoneotions.map((option) => (
-                <option value={option.value}>{option.label}</option>
-              ))}
-            </select>
+            <button
+              className={
+                selectedSide === "BACK"
+                  ? "rounded-lg bg-[#C9E6FD] px-6 py-1.5 border border-black text-black"
+                  : "rounded-lg bg-white border px-6 py-1.5  border-black text-black"
+              }
+              onClick={() => setSelectedSide("BACK")}
+            >
+              BACK
+            </button>
           </div>
         )}
       </div>
