@@ -11,5 +11,5 @@ module.exports = {
       xsm: { min: "400px" },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography"), require("@tailwindcss/forms")],
 };

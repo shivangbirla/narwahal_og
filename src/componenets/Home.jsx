@@ -22,7 +22,7 @@ const Home = ({ searchValue, setSearchValue }) => {
         <Navbar setSearchValue={setSearchValue} />
         <Inventory />
 
-        <Base className="mb-5"/>
+        <Base className=""/>
       </div>
 
       {/* <Area searchValue={searchValue} /> */}
