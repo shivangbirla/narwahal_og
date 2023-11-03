@@ -40,7 +40,7 @@ const Navbar = ({ searchValue, setSearchValue }) => {
         <img src={question} alt="" className="w-[17px] h-[17px]" />
         <input
           type="text"
-          className="px-3 bg-inherit outline-none border-none  w-full"
+          className="px-3 bg-inherit outline-none border-none  w-full focus:outline-none"
           src=""
         />
         <img src={hamburgeralt} alt="" />

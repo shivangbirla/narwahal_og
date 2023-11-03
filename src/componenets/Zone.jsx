@@ -9,11 +9,22 @@ import ZoneLoader from "./ZoneLoader";
 import Sidebar from "./Sidebar";
 import { Divider } from "@mui/material";
 
+
 const Zone = ({ searchValue, setSearchValue }) => {
+
   const [loading, setloading] = useState(true)
   setTimeout(() => {
     setloading(false)
   }, 1000);
+
+  const getParams = () => {
+    const foo = new URL(window.location.href);
+    const searchParamss = Object.fromEntries(
+      Array(...foo.searchParams.entries())
+    );
+    return searchParamss;
+  };
+  const params = getParams();
   if(loading) return <ZoneLoader/>
   return (
     <div className=" h-auto w-screen px-9 min-h-screen box-border overflow-y-scroll  bg-[#F8F9FA] flex lg:gap-6 pb-5 ">
@@ -30,7 +41,7 @@ const Zone = ({ searchValue, setSearchValue }) => {
         <Navbar setSearchValue={setSearchValue} />
         <Inventory isZone={true} />
         <div className="flex w-full  flex-col md:flex-row gap-9 justify-between">
-          <Showcase setloading={setloading}/>
+          <Showcase setloading={setloading} params={params}/>
           <div className="flex flex-col   justify-between ">
             <div className="flex justify-center items-center mx-auto w-fit h-auto  lg:max-w-[318.689px] h-[172px] bg-white border-[1.77px] border-[#B7E0FF]">
               <img src={ship_image} className="" alt="" />

@@ -18,11 +18,12 @@ const Home = ({ searchValue, setSearchValue }) => {
         className="hidden lg:block px-1"
         flexItem
       />
-      <div className="flex w-full flex-col gap-6 mb-48 md:mb-auto h-fit">
+      <div className="flex  w-full flex-col gap-6 mb-48 md:mb-auto h-fit">
         <Navbar setSearchValue={setSearchValue} />
         <Inventory />
-
-        <Base className=""/>
+        <div className="max-w-[1213px]">
+          <Base className="" />
+        </div>
       </div>
 
       {/* <Area searchValue={searchValue} /> */}
