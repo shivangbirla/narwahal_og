@@ -5,16 +5,19 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import { MainContext } from "./Context";
 const Inventory = ({ isZone = false }) => {
-  const [deck, setDeck] = useState(null);
-  const [area, setArea] = useState(null);
-  const [zone, setZone] = useState(null);
-  const { selectedSide, setSelectedSide } = useContext(MainContext);
+  const {
+    selectedSide,
+    setSelectedSide,
+    area,
+    setArea,
+    deck,
+    setDeck,
+    zone,
+    setZone,
+  } = useContext(MainContext);
+  console.log(deck, area);
 
   const deckotions = [
-    {
-      value: 0,
-      label: "Deck 0",
-    },
     {
       value: 1,
       label: "Deck 1",
@@ -30,16 +33,16 @@ const Inventory = ({ isZone = false }) => {
   ];
   const Areaotions = [
     {
-      value: 1,
-      label: "Area 1",
+      value: "A",
+      label: "Area A",
     },
     {
-      value: 2,
-      label: "Area 2",
+      value: "B",
+      label: "Area B",
     },
     {
-      value: 3,
-      label: "Area 3",
+      value: "D",
+      label: "Area D",
     },
   ];
   const Zoneotions = [
@@ -96,27 +99,19 @@ const Inventory = ({ isZone = false }) => {
           </div>
         ) : (
           <div className="flex gap-6">
-            <select value={deck} onCanPlay={(e) => setDeck(e.target.value)}>
+            <select value={deck} onChange={(e) => setDeck(e.target.value)}>
+              <option > Select Deck</option>
               {deckotions.map((option) => (
                 <option value={option.value}>{option.label}</option>
               ))}
             </select>
             {/* <Select options={deckotions } label={"Deck"} value={deck} /> */}
-            <select value={area} onCanPlay={(e) => setArea(e.target.value)}>
+            <select value={area} onChange={(e) => setArea(e.target.value)}>
+              <option > Select Area</option>
               {Areaotions.map((option) => (
                 <option value={option.value}>{option.label}</option>
               ))}
             </select>
-            <button
-              className={
-                selectedSide === "BACK"
-                  ? "rounded-lg bg-[#C9E6FD] px-6 py-1.5 border border-black text-black"
-                  : "rounded-lg bg-white border px-6 py-1.5  border-black text-black"
-              }
-              onClick={() => setSelectedSide("BACK")}
-            >
-              BACK
-            </button>
           </div>
         )}
       </div>
