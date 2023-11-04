@@ -1,17 +1,7 @@
-FROM node:alpine AS builder
-
-# Declaring env
-ENV NODE_ENV production
-
-# Setting up the work directory
+FROM node:alpine
 WORKDIR /app
-
-# Installing dependencies
-COPY ./package.json ./
+COPY package.json ./
+COPY package-lock.json ./
 RUN npm install
-
-# Copying all the files in our project
-COPY . .
-
-# Building our application
-RUN npm run build
+COPY ./ ./
+CMD ["npm", "start"]
