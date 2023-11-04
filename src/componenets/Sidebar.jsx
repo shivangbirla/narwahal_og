@@ -46,8 +46,8 @@ const Sidebar = () => {
 
   return (
     <>
-      <nav className="box-border w-[100%] max-w-[251px] border-box h-full bg-inherit">
-        <div className="flex flex-col  pt-[30px] mb-6">
+      <nav className="box-border border-box h-full bg-inherit w-[20vw]">
+        <div className="flex flex-col pt-[30px] mb-6 px-10">
           <img
             src={narwahal_logo}
             alt="narwahal_logo"
@@ -60,7 +60,7 @@ const Sidebar = () => {
           {menuItems.map((item, index) => (
             <li
               key={index}
-              className={`w-full h-[65px] flex items-center gap-5 cursor-pointer  ${
+              className={`w-full h-[65px] flex items-center gap-5 cursor-pointer px-10 ${
                 selectedItem === item.alt ? "bg-[#61D0F1] shadow-md" : ""
               } transition-transform transform-gpu `}
               onClick={() => handleItemClick(item.alt)}
@@ -76,7 +76,7 @@ const Sidebar = () => {
             </li>
           ))}
         </ul>
-        <div className="w-[251px] h-[190.5px] bg-[#47AFFF]  mt-4 pt-[1px] rounded-lg">
+        <div className="w-[251px] h-[190.5px] bg-[#47AFFF] mx-10 mt-5 pt-[1px] rounded-lg">
           <img
             alt="icon"
             src={icon_img}

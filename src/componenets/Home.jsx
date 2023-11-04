@@ -8,17 +8,12 @@ import { Divider } from "@mui/material";
 
 const Home = ({ searchValue, setSearchValue }) => {
   return (
-    <div className=" h-auto w-screen px-9 min-h-screen box-border overflow-y-scroll  bg-[#F8F9FA] flex lg:gap-6 pb-5">
-      <div className=" hidden lg:block">
+    <div className="h-auto w-screen pr-9 min-h-screen box-border overflow-y-scroll bg-[#F8F9FA] flex lg:gap-0 pb-5">
+      <div className="hidden lg:block">
         <Sidebar className="" />
       </div>
-
-      <Divider
-        orientation="vertical"
-        className="hidden lg:block px-1"
-        flexItem
-      />
-      <div className="flex  w-full flex-col gap-6 mb-48 md:mb-auto h-fit">
+      <Divider orientation="vertical" className="hidden lg:block" flexItem />
+      <div className="flex w-full flex-col pl-[50px] gap-6 mb-48 md:mb-auto h-fit">
         <Navbar setSearchValue={setSearchValue} />
         <Inventory />
         <div className="max-w-[1213px]">
