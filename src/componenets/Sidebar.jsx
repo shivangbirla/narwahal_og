@@ -66,42 +66,41 @@ const Sidebar = () => {
               onClick={() => handleItemClick(item.alt)}
             >
               <div className="flex justify-center items-center rounded-xl bg-white w-[35px] h-[35px] ">
-
-              <img
-                src={item.img}
-                alt={item.alt}
-                className="w-[24px] h-[24px]"
-              />
+                <img
+                  src={item.img}
+                  alt={item.alt}
+                  className="w-[24px] h-[24px]"
+                />
               </div>
               <span className="text-[14px]">{item.text}</span>
             </li>
           ))}
         </ul>
-          <div className="w-[251px] h-[190.5px] bg-[#47AFFF]  mt-4 pt-[1px] rounded-lg">
-            <img
-              alt="icon"
-              src={icon_img}
-              className="w-[33px] h-[35px] m-5 cursor-pointer"
-            />
-            <span className="text-[#ffffff] block ml-4 text-[14px]">
-              Need Help?
+        <div className="w-[251px] h-[190.5px] bg-[#47AFFF]  mt-4 pt-[1px] rounded-lg">
+          <img
+            alt="icon"
+            src={icon_img}
+            className="w-[33px] h-[35px] m-5 cursor-pointer"
+          />
+          <span className="text-[#ffffff] block ml-4 text-[14px]">
+            Need Help?
+          </span>
+          <span className="text-[#ffffff] block text-[13px] ml-4">
+            Please check our docs
+          </span>
+          <button
+            className={`w-[214px] h-[40px] bg-white rounded-xl ml-4 mt-2 cursor-pointer ${
+              selectedItem === "documentation"
+                ? "active:scale-95 transition-all duration-20 ease-in-out shadow-md"
+                : ""
+            }`}
+            onClick={() => setSelectedItem("documentation")}
+          >
+            <span className="text-black text-[12px] font-semibold">
+              DOCUMENTATION
             </span>
-            <span className="text-[#ffffff] block text-[13px] ml-4">
-              Please check our docs
-            </span>
-            <button
-              className={`w-[214px] h-[40px] bg-white rounded-xl ml-4 mt-2 cursor-pointer ${
-                selectedItem === "documentation"
-                  ? "active:scale-90 transition-all duration-100 ease-in-out shadow-md"
-                  : ""
-              }`}
-              onClick={() => setSelectedItem("documentation")}
-            >
-              <span className="text-black text-[12px] font-semibold">
-                DOCUMENTATION
-              </span>
-            </button>
-          </div>
+          </button>
+        </div>
       </nav>
     </>
   );

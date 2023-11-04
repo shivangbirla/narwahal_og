@@ -100,14 +100,14 @@ const Inventory = ({ isZone = false }) => {
         ) : (
           <div className="flex gap-6">
             <select value={deck} onChange={(e) => setDeck(e.target.value)}>
-              <option > Select Deck</option>
+              <option> Select Deck</option>
               {deckotions.map((option) => (
                 <option value={option.value}>{option.label}</option>
               ))}
             </select>
             {/* <Select options={deckotions } label={"Deck"} value={deck} /> */}
             <select value={area} onChange={(e) => setArea(e.target.value)}>
-              <option > Select Area</option>
+              <option>Select Area</option>
               {Areaotions.map((option) => (
                 <option value={option.value}>{option.label}</option>
               ))}

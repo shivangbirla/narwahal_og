@@ -2,26 +2,32 @@ import React, { useContext, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import question from "../assets/questionmark.png";
 import hamburgeralt from "../assets/alternateHamburgerMenu.svg";
-import questionWithOutline from "../assets/questionwithround.svg"
-import bell from "../assets/bell.svg"
-import avatar from "../assets/avatar.png"
+import questionWithOutline from "../assets/questionwithround.svg";
+import bell from "../assets/bell.svg";
+import avatar from "../assets/avatar.png";
 import { MainContext } from "./Context";
-
+import { IoArrowBackCircleOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = ({ searchValue, setSearchValue }) => {
   const [selectedArea, setSelectedArea] = useState("areaa");
-
+  const navigate = useNavigate();
   const { open, setOpen } = useContext(MainContext);
-
 
   const handleAreaClick = (area) => {
     setSearchValue(area);
     setSelectedArea(area);
   };
 
+  const goBack = () => {
+    navigate(-1);
+  };
   return (
-    <div className="flex justify-between py-2 my-4 ">
-      <div className=" lg:hidden w-[17px] h-full flex items-center justify-center" onClick={()=>setOpen(true)}>
+    <div className="flex justify-between py-2 my-4 items-center">
+      <div
+        className=" lg:hidden w-[17px] h-full flex items-center justify-center"
+        onClick={() => setOpen(true)}
+      >
         <svg
           className="w-full h-full my-auto"
           viewBox="0 0 15 15"
@@ -36,12 +42,25 @@ const Navbar = ({ searchValue, setSearchValue }) => {
           ></path>
         </svg>
       </div>
+      <div>
+        <IoArrowBackCircleOutline
+          onClick={goBack}
+          className="w-[32px] h-[32px] cursor-pointer"
+        />
+      </div>
       <div className="flex ml-2 sm:ml-auto rounded-full bg py-2 px-5 bg-[#D8EEFF] w-[56%] justify-between items-center">
         <img src={question} alt="" className="w-[17px] h-[17px]" />
         <input
           type="text"
-          className="px-3 bg-inherit outline-none border-none  w-full focus:outline-none"
-          src=""
+          style={{
+            padding: "0.5rem",
+            backgroundColor: "inherit",
+            width: "100%",
+            border: "none",
+            outline: "none",
+            borderBottom: "none",
+            boxShadow: "none",
+          }}
         />
         <img src={hamburgeralt} alt="" />
       </div>

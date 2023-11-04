@@ -12,9 +12,9 @@ const Box = ({ box, index }) => {
   return (
     <div className="flex flex-col gap-[3px] w-full h-full">
       {box?.length > 1 ? (
-        <div className=" w-full h-1/2">
+        <div className="w-full h-1/2">
           <div
-            className="w-2/3 h-full mx-auto flex justify-center items-center text-sm font-bold text-white bg-amber-800"
+            className="w-2/3 h-full mx-auto flex justify-center items-center text-sm font-bold text-white bg-amber-800 rounded-lg"
             onClick={() => {
               handleClick(box[1]);
             }}
@@ -29,7 +29,7 @@ const Box = ({ box, index }) => {
       {!!box &&
         (box[0].type === "metal" ? (
           <div
-            className="bg-slate-600 h-1/2 w-5/6 mx-auto flex justify-center items-center text-sm font-bold text-white"
+            className="bg-slate-600 h-1/2 w-5/6 mx-auto flex justify-center items-center text-sm font-bold text-white rounded-lg"
             onClick={() => {
               handleClick(box[0]);
             }}
@@ -38,7 +38,7 @@ const Box = ({ box, index }) => {
           </div>
         ) : (
           <div
-            className="w-2/3 h-1/2 mx-auto flex justify-center items-center text-sm font-bold text-white bg-amber-800 "
+            className="w-2/3 h-1/2 mx-auto flex justify-center items-center text-sm font-bold text-white bg-amber-800 rounded-lg"
             onClick={() => {
               handleClick(box[0]);
             }}

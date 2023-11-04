@@ -23,7 +23,6 @@ const Base = () => {
   //     navigate("/zone")
   //   }, 1000);
   // };
-  ;
   const handleClick = (zone) => {
     navigate({
       pathname: "/zone",
@@ -63,7 +62,7 @@ const Base = () => {
             onClick={() => handleClick("2")}
             className="w-full h-1/2 rounded-xl bg-[#C9E6FD] hover:bg-sky-300 hover:border-sky-800 hover:border"
           >
-            Zone-3
+            Zone-2
           </button>
         </div>
       </div>
