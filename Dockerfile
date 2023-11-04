@@ -7,11 +7,11 @@ ENV NODE_ENV production
 WORKDIR /app
 
 # Installing dependencies
-COPY ./package.json ./app/package.json
+COPY ./package.json ./
 RUN npm install
 
 # Copying all the files in our project
-COPY . /app
+COPY . .
 
 # Building our application
-CMD ["npm", "run", "start"]
+RUN npm run build
