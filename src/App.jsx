@@ -8,15 +8,18 @@ import Base from "./componenets/Base";
 import { MainContext } from "./componenets/Context";
 import { Divider, Drawer } from "@mui/material";
 import Signup from "./componenets/Signup";
+
 import Navbar from "./componenets/Navbar";
 import toast, { Toaster } from "react-hot-toast";
+
+import Checkin from "./componenets/Checkin";
+
 
 const App = () => {
   const [searchValue, setSearchValue] = useState("areaa");
   const { open, setOpen } = useContext(MainContext);
 
-  if(false) return <Signup />
-  
+
   return (
     <div className=" ">
       <React.Fragment key={"left"}>
@@ -27,6 +30,7 @@ const App = () => {
         </Drawer>
       </React.Fragment>
       {/* <Base /> */}
+
       <Toaster
         toastOptions={{
           className: "",
@@ -58,10 +62,12 @@ const App = () => {
                 />
               }
             />
-            <Route path="/zone" element={<Zone />} />
+            <Route path="/checkin" element={<Checkin />} />
+            
           </Routes>
         </div>
       </div>
+
     </div>
     // <Signup />
   );

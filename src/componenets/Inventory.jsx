@@ -64,7 +64,7 @@ const Inventory = ({ isZone = false }) => {
 
   return (
     <div className="min-h-[238px]   max-w-[1213px] bg-white gap-9 p-7 flex flex-col rounded-2xl">
-      <h1 className="text-3xl font-medium text-black "> Inventory</h1>
+      <h1 className="text-3xl font-medium text-black">Inventory</h1>
       <div className="bg-[#D8EEFF] rounded-lg p-3 gap-3 flex  items-center">
         <div className="bg-[#D9D9D9]  h-[30px] w-[30px] text-white text-xs overflow-hidden p-1 flex justify-center items-center  rounded-lg">
           LOGO
