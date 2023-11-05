@@ -52,8 +52,7 @@ const Sidebar = () => {
       path: "/spare",
     },
   ];
-  console.log("location", location.pathname);
-  console.log(menuItems);
+ 
 
   useEffect(() => {}, []);
 
@@ -78,7 +77,9 @@ const Sidebar = () => {
                 className={`w-full h-[65px] flex items-center gap-[11px] text-[#7C7C7C] font-bold cursor-pointer px-5 py-3 ${
                   active ? "bg-white rounded-xl shadow-md !text-black  " : ""
                 } transition-transform transform-gpu `}
-                onClick={() => handleItemClick(item.alt)}
+                onClick={() => {
+                  navigate(item.path);
+                }}
               >
                 <div
                   className={`flex justify-center items-center rounded-xl bg-white w-[35px] h-[35px] ${

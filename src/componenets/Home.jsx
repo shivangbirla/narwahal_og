@@ -10,7 +10,7 @@ import Zone from "./Zone";
 import toast from "react-hot-toast";
 import Product from "./Product";
 
-const Home = ({ searchValue, setSearchValue }) => {
+const Home = () => {
    const {
      selectedSide,
      setSelectedSide,
