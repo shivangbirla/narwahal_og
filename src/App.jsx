@@ -8,12 +8,13 @@ import Base from "./componenets/Base";
 import { MainContext } from "./componenets/Context";
 import { Drawer } from "@mui/material";
 import Signup from "./componenets/Signup";
+import Checkin from "./componenets/Checkin";
 
 const App = () => {
   const [searchValue, setSearchValue] = useState("areaa");
   const { open, setOpen } = useContext(MainContext);
 
-  if(false) return <Signup />
+  if (false) return <Signup />;
   return (
     <div className=" ">
       <React.Fragment key={"left"}>
@@ -32,6 +33,7 @@ const App = () => {
           }
         />
         <Route path="/zone" element={<Zone />} />
+        <Route path="/checkin" element={<Checkin />} />
       </Routes>
     </div>
     // <Signup />
