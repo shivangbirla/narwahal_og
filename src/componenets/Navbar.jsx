@@ -48,7 +48,7 @@ const Navbar = ({ searchValue, setSearchValue }) => {
           className="w-[32px] h-[32px] cursor-pointer"
         />
       </div>
-      <div className="flex ml-2 sm:ml-auto rounded-full bg py-2 px-5 bg-[#D8EEFF] w-[56%] justify-between items-center">
+      <div className="flex ml-2  rounded-full bg py-2 px-5 bg-[#D8EEFF] w-[56%] justify-between items-center">
         <img src={question} alt="" className="w-[17px] h-[17px]" />
         <input
           type="text"
