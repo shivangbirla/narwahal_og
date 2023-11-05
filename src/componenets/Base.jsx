@@ -48,7 +48,7 @@ const Base = () => {
   };
 
   return (
-    <div className="flex gap-0 ; w-full h-full relative   ">
+    <div className="flex gap-0 md:scale-100 md:rotate-0 rotate-90 w-full h-full scale-y-[.6] relative   ">
       <div className="w-[60%] h-full p-2 flex gap-2 z-10 bg-white rounded-l-2xl">
         <div className="w-1/2 h-full flex flex-col gap-2">
           <button
