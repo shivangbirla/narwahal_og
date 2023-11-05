@@ -9,7 +9,15 @@ const ContextProvider = ({ children }) => {
   const [deck, setDeck] = useState(null)
   const [zone, setZone] = useState(null)
   const [selectedBox, setBox] = useState(null);
-   const [selectedProduct, setSelectedProduct] = useState([]);
+    const [arr, setArr] = useState([
+      [null, null, null, null],
+      [null, null, null, null],
+      [null, null, null, null],
+    ]);
+  
+
+  const [page, setPage] = useState("HOME")
+   
 
   const values = {
     open,
@@ -24,8 +32,10 @@ const ContextProvider = ({ children }) => {
     setZone,
     selectedBox,
     setBox,
-    selectedProduct,
-    setSelectedProduct,
+    page,
+    setPage,
+    arr,
+    setArr
   };
   return <MainContext.Provider value={values}>{children}</MainContext.Provider>;
 };

@@ -1,58 +1,94 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { getBoxes } from "../api/productRequest";
+import { MainContext } from "./Context";
 import Inventory from "./Inventory";
-import Navbar from "./Navbar";
 import Showcase from "./Showcase";
-import ship_image from "../assets/ship_image.png";
-import click_image from "../assets/click_image.png";
-import ZoneLoader from "./ZoneLoader";
-import Sidebar from "./Sidebar";
-import { Divider } from "@mui/material";
+import ShowcaseLoading from "./loading/ShowcaseLoading";
+import SideView from "./SideView";
 
 const Zone = ({ searchValue, setSearchValue }) => {
-  const [loading, setloading] = useState(true);
-  setTimeout(() => {
-    setloading(false);
-  }, 1000);
+  const [loading, setloading] = useState(false);
+  const {
+    selectedSide,
+    setSelectedSide,
+    area,
+    setArea,
+    deck,
+    setDeck,
+    zone,
+    setZone,
+    page,
+    setPage,
+    arr,
+    setArr
+  } = useContext(MainContext);
 
-  const getParams = () => {
-    const foo = new URL(window.location.href);
-    const searchParamss = Object.fromEntries(
-      Array(...foo.searchParams.entries())
-    );
-    return searchParamss;
-  };
-  const params = getParams();
-  if (loading) return <ZoneLoader />;
+
+
+  useEffect(() => {
+    const updateArr = (data) => {
+      const newArr = [
+        [null, null, null, null],
+        [null, null, null, null],
+        [null, null, null, null],
+      ];
+
+      try {
+        data.forEach((boxData) => {
+          const boxValue = boxData.box;
+          if (boxValue >= 1 && boxValue <= 12) {
+            const row = Math.floor((boxValue - 1) / 4);
+            const col = (boxValue - 1) % 4;
+
+            if (!!newArr[row][col]) {
+              if (newArr[row][col][0].type === "metal") {
+                newArr[row][col] = [...newArr[row][col], boxData];
+              } else {
+                newArr[row][col] = [boxData, ...newArr[row][col]];
+              }
+            } else newArr[row][col] = [boxData];
+          }
+        });
+      } catch (error) {}
+
+      setArr(newArr);
+    };
+
+    // Assuming data is already filtered as shown in your code
+
+    const fetchData = async () => {
+      setloading(true);
+      try {
+        const response = await getBoxes(zone, area, deck, selectedSide);
+
+        let data = response.data;
+
+        updateArr(data);
+        
+      } catch (error) {
+        toast.error(error.response.data.detail);
+        setPage("HOME");
+      } finally {
+        setloading(false);
+      }
+    };
+    fetchData();
+  }, [area, deck, zone, selectedSide]);
+
   return (
-    <div className="h-auto w-screen pr-9 min-h-screen box-border overflow-y-scroll  bg-[#F8F9FA] flex lg:gap-0 pb-5">
-      <div className="hidden lg:block">
-        <Sidebar className="" />
-      </div>
-      <Divider
-        orientation="vertical"
-        className="hidden lg:block px-0"
-        flexItem
-      />
-      <div className="flex flex-col gap-6 pl-[50px]">
-        <Navbar setSearchValue={setSearchValue} />
-        <Inventory isZone={true} />
+    <div className="flex flex-col gap-10">
+      <Inventory isZone={true} />
+      {loading ? (
+        <ShowcaseLoading />
+      ) : (
         <div className="flex flex-col md:flex-row gap-9 justify-between">
-          <Showcase setloading={setloading} params={params} />
-          <div className="flex flex-col justify-between">
-            <div className="flex justify-center items-center mx-auto w-fit h-auto lg:max-w-[318.689px] max-h-[172px] bg-white border-[1.77px] border-[#B7E0FF]">
-              <img src={ship_image} className="" alt="" />
-            </div>
-            <div className="flex flex-col mb-9 mt-9 mx-auto">
-              <img src={click_image} className="w-[343px] h-[172px]" alt="" />
-              <p className="text-[#727272] text-base text-center">
-                “Click” to zoom in the box.
-              </p>
-            </div>
+          <div className="h-[535px] xl:w-[831px]">
+            <Showcase divider />
           </div>
+          <SideView />
         </div>
-      </div>
-
-      {/* <Area searchValue={searchValue} /> */}
+      )}
     </div>
   );
 };

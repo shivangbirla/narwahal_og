@@ -1,27 +1,42 @@
-import React from "react";
+import React, { useContext } from "react";
 import Navbar from "./Navbar";
 import Area from "./Area";
 import Inventory from "./Inventory";
 import Sidebar from "./Sidebar";
 import Base from "./Base";
 import { Divider } from "@mui/material";
+import { MainContext } from "./Context";
+import Zone from "./Zone";
+import toast from "react-hot-toast";
+import Product from "./Product";
 
 const Home = ({ searchValue, setSearchValue }) => {
-  return (
-    <div className="h-auto w-screen pr-9 min-h-screen box-border overflow-y-scroll bg-[#F8F9FA] flex lg:gap-0 pb-5">
-      <div className="hidden lg:block">
-        <Sidebar className="" />
-      </div>
-      <Divider orientation="vertical" className="hidden lg:block" flexItem />
-      <div className="flex w-full flex-col pl-[50px] gap-6 mb-48 md:mb-auto h-fit">
-        <Navbar setSearchValue={setSearchValue} />
-        <Inventory />
-        <div className="max-w-[1213px]">
-          <Base className="" />
-        </div>
-      </div>
+   const {
+     selectedSide,
+     setSelectedSide,
+     area,
+     setArea,
+     deck,
+     setDeck,
+     zone,
+     setZone,
+     page,
+     setPage,
+   } = useContext(MainContext);
 
-      {/* <Area searchValue={searchValue} /> */}
+   if(page ==="ZONE"){
+    return <Zone />
+   }
+   if(page ==="PRODUCT"){
+    return <Product />
+   }
+  //  toast.success("hello world!");
+  return (
+    <div className="flex flex-col gap-10">
+      <Inventory />
+      <div className="max-w-[1213px] w-full h-[417px] ">
+        <Base className="" />
+      </div>
     </div>
   );
 };
