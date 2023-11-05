@@ -4,17 +4,18 @@ import { MainContext } from "./Context";
 // TODO: keep wood after metal in array
 
 const Box = ({ box, index }) => {
-  const { selectedBox, setBox } = useContext(MainContext);
+  const { selectedBox, setBox,setPage } = useContext(MainContext);
   const handleClick = (selected) => {
     setBox(selected);
+    setPage("PRODUCT")
   };
 
   return (
     <div className="flex flex-col gap-[3px] w-full h-full">
       {box?.length > 1 ? (
-        <div className="w-full h-1/2">
+        <div className="w-full  h-1/2">
           <div
-            className="w-2/3 h-full mx-auto flex justify-center items-center text-sm font-bold text-white bg-amber-800 rounded-lg"
+            className="w-2/3 max-w-[44px] h-full mx-auto flex justify-center items-center text-sm font-bold text-white bg-[#B65C02] rounded-lg"
             onClick={() => {
               handleClick(box[1]);
             }}
@@ -29,7 +30,7 @@ const Box = ({ box, index }) => {
       {!!box &&
         (box[0].type === "metal" ? (
           <div
-            className="bg-slate-600 h-1/2 w-5/6 mx-auto flex justify-center items-center text-sm font-bold text-white rounded-lg"
+            className="bg-[#595959] max-w-[44px] h-1/2 w-5/6 mx-auto flex justify-center items-center text-sm font-bold text-white rounded-lg"
             onClick={() => {
               handleClick(box[0]);
             }}
@@ -38,7 +39,7 @@ const Box = ({ box, index }) => {
           </div>
         ) : (
           <div
-            className="w-2/3 h-1/2 mx-auto flex justify-center items-center text-sm font-bold text-white bg-amber-800 rounded-lg"
+            className="w-2/3 h-1/2 mx-auto flex justify-center items-center text-sm font-bold text-white max-w-[44px] bg-[#B65C02] rounded-lg"
             onClick={() => {
               handleClick(box[0]);
             }}

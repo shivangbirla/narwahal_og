@@ -2,13 +2,13 @@ import axios from "axios";
 
 const API = axios.create({ baseURL: "http://139.59.59.166" });
 
-export const getBoxes = (zone, area, deck, selectedSide) => {
+export const getBoxes = async (zone, area, deck, selectedSide) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
-  return API.get(
+  return await API.get(
     `/products/fetch_boxes?deck=${deck}&area=${area}&zone=${zone}&side=${selectedSide.toLowerCase()}`,
     config
   );

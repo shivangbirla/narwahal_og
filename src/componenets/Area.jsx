@@ -37,7 +37,7 @@ const Area = ({ searchValue }) => {
             />
             <div className="absolute top-5 left-[140px] grid grid-cols-3 gap-x-16 gap-y-5">
               {selectedData.map((value, index) => (
-                <Link to="/zone">
+                <Link key={index} to="/zone">
                   <div
                     key={index}
                     className="bg-gradient-to-r from-gray-700 to-gray-400 p-4 rounded-lg flex justify-center items-center h-[140px] w-[200px]"

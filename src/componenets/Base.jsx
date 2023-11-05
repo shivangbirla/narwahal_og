@@ -3,6 +3,7 @@ import area from "../assets/area.svg";
 import selected_area from "../assets/selected_area.svg";
 import { useNavigate, useRoutes, createSearchParams } from "react-router-dom";
 import { MainContext } from "./Context";
+import toast from "react-hot-toast";
 
 const Base = () => {
   const navigate = useNavigate();
@@ -15,6 +16,8 @@ const Base = () => {
     setDeck,
     zone,
     setZone,
+    page,
+    setPage,
   } = useContext(MainContext);
 
   // const toggleSelected = () => {
@@ -22,20 +25,30 @@ const Base = () => {
   //   setTimeout(() => {
   //     navigate("/zone")
   //   }, 1000);
+
   // };
   const handleClick = (zone) => {
-    navigate({
-      pathname: "/zone",
-      search: `?${createSearchParams({
-        deck: deck,
-        area: area,
-        zone: zone,
-      })}`,
-    });
+    // navigate({
+    //   pathname: "/zone",
+    //   search: `?${createSearchParams({
+    //     deck: deck,
+    //     area: area,
+    //     zone: zone,
+    //   })}
+    // });
+    // toast.success("hello world!");
+    console.log(area,deck,zone)
+    if(!zone || !deck || !area){
+      toast.error("Please select a deck, area and  than zone");
+    }
+
+    
+    setZone(zone)
+    setPage("ZONE")
   };
 
   return (
-    <div className="flex gap-0 rotate-90 md:rotate-0 md:h-[417px] relative md:w-full h-[70vw] w-[50vh] ">
+    <div className="flex gap-0 ; w-full h-full relative   ">
       <div className="w-[60%] h-full p-2 flex gap-2 z-10 bg-white rounded-l-2xl">
         <div className="w-1/2 h-full flex flex-col gap-2">
           <button

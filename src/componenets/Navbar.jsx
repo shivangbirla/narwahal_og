@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import question from "../assets/questionmark.png";
 import hamburgeralt from "../assets/alternateHamburgerMenu.svg";
@@ -12,16 +12,33 @@ import { useNavigate } from "react-router-dom";
 const Navbar = ({ searchValue, setSearchValue }) => {
   const [selectedArea, setSelectedArea] = useState("areaa");
   const navigate = useNavigate();
-  const { open, setOpen } = useContext(MainContext);
+  const { open, setOpen,page,setPage } = useContext(MainContext);
+  const [search, setsearch] = useState("")
+  const [searchResult, setSearchResult] = useState([
+  ]);
 
   const handleAreaClick = (area) => {
     setSearchValue(area);
     setSelectedArea(area);
   };
 
-  const goBack = () => {
-    navigate(-1);
-  };
+  useEffect(()=>{
+    const getSearch = async () => {
+      if(search==="") return ;
+    }
+    getSearch()
+  },[search])
+
+ 
+
+  const handleBack = () => {
+    if(page==="ZONE"){
+      setPage("HOME")
+    }
+    else if(page==="PRODUCT"){
+      setPage("ZONE")
+    }
+  }
   return (
     <div className="flex justify-between py-2 my-4 items-center">
       <div
@@ -42,13 +59,13 @@ const Navbar = ({ searchValue, setSearchValue }) => {
           ></path>
         </svg>
       </div>
-      <div>
-        <IoArrowBackCircleOutline
-          onClick={goBack}
-          className="w-[32px] h-[32px] cursor-pointer"
-        />
-      </div>
-      <div className="flex ml-2  rounded-full bg py-2 px-5 bg-[#D8EEFF] w-[56%] justify-between items-center">
+      {page !== "HOME" && (
+        <div onClick={handleBack}>
+          <IoArrowBackCircleOutline className="w-[32px] h-[32px] cursor-pointer" />
+        </div>
+      )}
+
+      <div className="relative flex ml-2  rounded-full bg py-2 px-5 bg-[#D8EEFF] w-[56%] justify-between items-center">
         <img src={question} alt="" className="w-[17px] h-[17px]" />
         <input
           type="text"
@@ -61,8 +78,23 @@ const Navbar = ({ searchValue, setSearchValue }) => {
             borderBottom: "none",
             boxShadow: "none",
           }}
+          placeholder="Search"
+          value={search}
+          onChange={(e) => setsearch(e.target.value)}
         />
         <img src={hamburgeralt} alt="" />
+
+        {searchResult.length > 0 && (
+          <div className="absolute bg-white p-3 w-11/12 min-h-[300px] max-h-[600px] rounded-lg shadow-lg overflow-y-scroll top-[115%] z-50 opacity-90">
+            <div className="w-full h-full ">
+              {searchResult.map((result, index) => (
+                <div className="w-full h-12 flex items-center justify-between border-b border-gray-200">
+                  <p className="text-lg font-normal">{result.content}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
       <div className="flex items-center gap-3">
         <div className="flex items-center justify-center w-[40px] h-[40px] bg-white rounded-xl">

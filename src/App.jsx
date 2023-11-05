@@ -9,12 +9,14 @@ import { MainContext } from "./componenets/Context";
 import { Divider, Drawer } from "@mui/material";
 import Signup from "./componenets/Signup";
 import Navbar from "./componenets/Navbar";
+import toast, { Toaster } from "react-hot-toast";
 
 const App = () => {
   const [searchValue, setSearchValue] = useState("areaa");
   const { open, setOpen } = useContext(MainContext);
 
   if(false) return <Signup />
+  
   return (
     <div className=" ">
       <React.Fragment key={"left"}>
@@ -25,6 +27,19 @@ const App = () => {
         </Drawer>
       </React.Fragment>
       {/* <Base /> */}
+      <Toaster
+        toastOptions={{
+          className: "",
+          style: {
+            // border: "1px solid #713200",
+            padding: "16px",
+            fontSize: "16px",
+            minHeight: "40px",
+            gap: "16px",
+            // color: "#713200",
+          },
+        }}
+      />
 
       <div className="h-auto w-screen pr-9 min-h-screen box-border overflow-y-scroll bg-[#F8F9FA] flex lg:gap-0 pb-5">
         <div className="hidden lg:block">
