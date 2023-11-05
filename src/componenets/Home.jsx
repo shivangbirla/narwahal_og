@@ -10,7 +10,7 @@ import Zone from "./Zone";
 import toast from "react-hot-toast";
 import Product from "./Product";
 
-const Home = ({ searchValue, setSearchValue }) => {
+const Home = () => {
    const {
      selectedSide,
      setSelectedSide,
@@ -32,10 +32,12 @@ const Home = ({ searchValue, setSearchValue }) => {
    }
   //  toast.success("hello world!");
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-10 ">
       <Inventory />
-      <div className="max-w-[1213px] w-full h-[417px] ">
-        <Base className="" />
+      <div className="max-w-[1213px] md:rotate-0 w-full md:h-[417px] h-[60vh]  ">
+        <div className=" w-full h-full">
+          <Base className="" />
+        </div>
       </div>
     </div>
   );

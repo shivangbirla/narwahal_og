@@ -50,7 +50,7 @@ const App = () => {
           <Sidebar className="" />
         </div>
         <Divider orientation="vertical" className="hidden lg:block" flexItem />
-        <div className="flex w-full flex-col pl-[50px] gap-6 mb-48 md:mb-auto h-fit">
+        <div className="flex w-full flex-col pl-6 gap-6 mb-48 md:mb-auto h-fit">
           <Navbar setSearchValue={setSearchValue} />
           <Routes>
             <Route
