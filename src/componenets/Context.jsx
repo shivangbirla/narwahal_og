@@ -5,19 +5,17 @@ export const MainContext = createContext();
 const ContextProvider = ({ children }) => {
   const [open, setOpen] = useState(false);
   const [selectedSide, setSelectedSide] = useState("FRONT");
-  const [area, setArea] = useState(null)
-  const [deck, setDeck] = useState(null)
-  const [zone, setZone] = useState(null)
+  const [area, setArea] = useState(null);
+  const [deck, setDeck] = useState(null);
+  const [zone, setZone] = useState(null);
   const [selectedBox, setBox] = useState(null);
-    const [arr, setArr] = useState([
-      [null, null, null, null],
-      [null, null, null, null],
-      [null, null, null, null],
-    ]);
-  
+  const [arr, setArr] = useState([
+    [null, null, null, null],
+    [null, null, null, null],
+    [null, null, null, null],
+  ]);
 
-  const [page, setPage] = useState("HOME")
-   
+  const [page, setPage] = useState("HOME");
 
   const values = {
     open,
@@ -35,7 +33,7 @@ const ContextProvider = ({ children }) => {
     page,
     setPage,
     arr,
-    setArr
+    setArr,
   };
   return <MainContext.Provider value={values}>{children}</MainContext.Provider>;
 };

@@ -11,16 +11,10 @@ const Zone = ({ searchValue, setSearchValue }) => {
   const [loading, setloading] = useState(false);
   const {
     selectedSide,
-    setSelectedSide,
     area,
-    setArea,
     deck,
-    setDeck,
     zone,
-    setZone,
-    page,
     setPage,
-    arr,
     setArr
   } = useContext(MainContext);
 

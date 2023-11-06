@@ -1,28 +1,39 @@
 import React, { useState } from "react";
 import products from "../data/data_table";
+import { cn } from "../lib/utils";
 
 const Cin_table = () => {
-  const [selectedView, setSelectedView] = useState("listview");
+  const [selectedView, setSelectedView] = useState("List View");
 
-  const handleViewClick = (view) => {
-    setSelectedView(view);
-  };
+
+  const tabs = [
+    {
+      content: "List View",
+    },
+    {
+      content: "Board",
+    },
+  ];
   return (
     <>
       <div className="bg-[#F8F9FA]">
         <h2 className="text-[22px] font-medium mb-4">Check In</h2>
-        <div className="flex flex-row text-[18px] font-medium bg-[#FFF] max-w-[300px] w-auto border-solid border-b-0 border-gray-200 border-2 rounded-tl-md rounded-tr-md p-1 cursor-pointer">
-          <div
-            onClick={() => handleViewClick("listview")}
-            className="mr-12 ml-8"
-          >
-            List View
-          </div>
-          <div onClick={() => handleViewClick("board")} className="">
-            Board
-          </div>
+        <div className="flex flex-row text-[18px] rounded-t-xl   font-medium bg-[#FFF] max-w-[352px] w-auto  border-solid border-b-0 border-gray-200 border-2 cursor-pointer">
+          {tabs.map((tab, index) => (
+            <div
+              className={cn(
+                "w-1/2 bg-[#E8E8E8] py-3 px-11",
+                selectedView === tab.content && "bg-white !rounded-t-xl "
+              )}
+              onClick={() => {
+                setSelectedView(tab.content);
+              }}
+            >
+              {tab.content}
+            </div>
+          ))}
         </div>
-        {selectedView === "listview" && products && products.length > 0 && (
+        {selectedView === "List View" && products && products.length > 0 && (
           <div className="h-fit rounded-2xl rounded-tl-none overflow-hidden">
             <table className="min-w-full bg-white text-black shadow-sm">
               <thead className="bg-[#dae9f4]">
@@ -76,7 +87,7 @@ const Cin_table = () => {
               </tbody>
             </table>
             <div className="mt-6 flex justify-end mr-4 gap-4">
-              <button className="rounded-md border-black border-2 px-4 py-[2px]">
+                <button className="rounded-md border-black border px-4 py-[2px]">
                 Cancel
               </button>
               <button className="rounded-md border-2 px-4 py-[2px] border-[#47AFFF] bg-[#47AFFF] text-white">

@@ -1,14 +1,11 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-sparse-arrays */
-import React, { useContext, useEffect, useState } from "react";
+import { Divider } from "@mui/material";
+import React, { useContext } from "react";
 import rack_png from "../assets/rack_image_1.png";
-import { getBoxes, getProducts } from "../api/productRequest";
-import { data_boxes } from "../data/data_boxes";
-import { CircularProgress, Divider, Modal, selectClasses } from "@mui/material";
-import { MainContext } from "./Context";
-import Box from "./Box";
-import toast from "react-hot-toast";
-import ShowcaseLoading from "./loading/ShowcaseLoading";
 import { cn } from "../lib/utils";
+import Box from "./Box";
+import { MainContext } from "./Context";
 
 const Showcase = ({flag=false,divider=false}) => {
  const {arr,area,deck,zone} = useContext(MainContext)

@@ -1,6 +1,6 @@
 import React from "react";
 import Logotemp from "../assets/Logotemp.png";
-import { Divider, Skeleton } from "@mui/material";
+import { Divider } from "@mui/material";
 import SideNavLoading from "./loading/SideNavLoading";
 import InventoryLoading from "./loading/InventoryLoading";
 import SeachNavLoading from "./loading/SearchNavLoading";

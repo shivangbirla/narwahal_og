@@ -1,13 +1,13 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
+import icon_img from "../assets/Icon.png";
 import checking_in_img from "../assets/checking_in_img.png";
 import checkout_img from "../assets/checkout_img.png";
-import icon_img from "../assets/Icon.png";
 import inventory_img from "../assets/inventory_img.png";
 import narwahal_logo from "../assets/narwahal_logo.png";
 import pms_img from "../assets/pms_img.png";
 import sparepartorder_img from "../assets/sparepartorder_img.png";
 
-import randomImg from "../assets/random.svg";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
@@ -52,7 +52,6 @@ const Sidebar = () => {
       path: "/spare",
     },
   ];
- 
 
   useEffect(() => {}, []);
 

@@ -1,22 +1,12 @@
-import React, { useContext, useState } from "react";
-import area from "../assets/area.svg";
-import selected_area from "../assets/selected_area.svg";
-import { useNavigate, useRoutes, createSearchParams } from "react-router-dom";
-import { MainContext } from "./Context";
+import React, { useContext } from "react";
 import toast from "react-hot-toast";
+import { MainContext } from "./Context";
 
 const Base = () => {
-  const navigate = useNavigate();
   const {
-    selectedSide,
-    setSelectedSide,
     area,
-    setArea,
     deck,
-    setDeck,
-    zone,
     setZone,
-    page,
     setPage,
   } = useContext(MainContext);
 

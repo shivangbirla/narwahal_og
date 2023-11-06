@@ -4,7 +4,7 @@ import { MainContext } from "./Context";
 // TODO: keep wood after metal in array
 
 const Box = ({ box, index }) => {
-  const { selectedBox, setBox,setPage } = useContext(MainContext);
+  const {  setBox,setPage } = useContext(MainContext);
   const handleClick = (selected) => {
     setBox(selected);
     setPage("PRODUCT")

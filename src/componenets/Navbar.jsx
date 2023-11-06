@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import question from "../assets/questionmark.png";
@@ -11,10 +12,10 @@ import { useNavigate } from "react-router-dom";
 
 const Navbar = ({ searchValue, setSearchValue }) => {
   const [selectedArea, setSelectedArea] = useState("areaa");
-  const navigate = useNavigate();
-  const { open, setOpen,page,setPage } = useContext(MainContext);
-  const [search, setsearch] = useState("")
+  const { open, setOpen, page, setPage } = useContext(MainContext);
+  const [search, setsearch] = useState("");
   const [searchResult, setSearchResult] = useState([
+    
   ]);
 
   const handleAreaClick = (area) => {
@@ -22,23 +23,20 @@ const Navbar = ({ searchValue, setSearchValue }) => {
     setSelectedArea(area);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     const getSearch = async () => {
-      if(search==="") return ;
-    }
-    getSearch()
-  },[search])
-
- 
+      if (search === "") return;
+    };
+    getSearch();
+  }, [search]);
 
   const handleBack = () => {
-    if(page==="ZONE"){
-      setPage("HOME")
+    if (page === "ZONE") {
+      setPage("HOME");
+    } else if (page === "PRODUCT") {
+      setPage("ZONE");
     }
-    else if(page==="PRODUCT"){
-      setPage("ZONE")
-    }
-  }
+  };
   return (
     <div className="flex justify-between py-2 my-4 items-center">
       <div
@@ -104,7 +102,7 @@ const Navbar = ({ searchValue, setSearchValue }) => {
           <img src={bell} className="w-[24px] h-[24px]" alt="" />
         </div>
 
-        <img src={avatar} />
+        <img src={avatar} alt=""/>
 
         <p className="text-lg font-normal hidden md:block">Himanshu Tiwari</p>
       </div>
