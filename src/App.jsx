@@ -1,16 +1,12 @@
-import React, { useContext } from "react";
+import { Divider, Drawer } from "@mui/material";
+import React, { useContext, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import { useState } from "react";
-import Zone from "./componenets/Zone";
+import { MainContext } from "./componenets/Context";
 import Home from "./componenets/Home";
 import Sidebar from "./componenets/Sidebar";
-import Base from "./componenets/Base";
-import { MainContext } from "./componenets/Context";
-import { Divider, Drawer } from "@mui/material";
-import Signup from "./componenets/Signup";
 
+import { Toaster } from "react-hot-toast";
 import Navbar from "./componenets/Navbar";
-import toast, { Toaster } from "react-hot-toast";
 
 import Checkin from "./componenets/Checkin";
 
