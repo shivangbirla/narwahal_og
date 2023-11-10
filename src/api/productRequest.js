@@ -27,3 +27,16 @@ export const getProducts = (selectedBox) => {
     config
   );
 };
+export const searchProducts = (search) => {
+  if(!search) return []
+  
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  return API.get(
+    `/products/search_product?search_string=${search}`,
+    config
+  );
+};
