@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import Navbar from "./componenets/Navbar";
 
 import Checkin from "./componenets/Checkin";
+import Pms from "./componenets/Pms";
 
 
 const App = () => {
@@ -59,6 +60,7 @@ const App = () => {
               }
             />
             <Route path="/checkin" element={<Checkin />} />
+            <Route path="/pms" element={<Pms />} />
             
           </Routes>
         </div>

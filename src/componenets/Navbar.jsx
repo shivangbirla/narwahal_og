@@ -9,14 +9,13 @@ import avatar from "../assets/avatar.png";
 import { MainContext } from "./Context";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import { searchProducts } from "../api/productRequest";
 
 const Navbar = ({ searchValue, setSearchValue }) => {
   const [selectedArea, setSelectedArea] = useState("areaa");
   const { open, setOpen, page, setPage } = useContext(MainContext);
   const [search, setsearch] = useState("");
-  const [searchResult, setSearchResult] = useState([
-    
-  ]);
+  const [searchResult, setSearchResult] = useState([]);
 
   const handleAreaClick = (area) => {
     setSearchValue(area);
@@ -25,7 +24,36 @@ const Navbar = ({ searchValue, setSearchValue }) => {
 
   useEffect(() => {
     const getSearch = async () => {
-      if (search === "") return;
+      if (search === "") {
+        setSearchResult([]);
+        return;
+      }
+      try {
+        const results = await searchProducts(search);
+        if (results.status !== 200) {
+          setSearchResult([
+            {
+              content: "Nothing found",
+            },
+          ]);
+          return;
+        }
+        console.log(results.data);
+        const arr = results.data.map((result) => {
+          return {
+            content: result.mach_desc + " " + result.maker_desc,
+          };
+        });
+        setSearchResult(arr);
+      } catch (error) {
+
+        setSearchResult([
+          {
+            content: error.response.data.detail,
+          },
+        ]);
+        return;
+      }
     };
     getSearch();
   }, [search]);
@@ -83,11 +111,11 @@ const Navbar = ({ searchValue, setSearchValue }) => {
         <img src={hamburgeralt} alt="" />
 
         {searchResult.length > 0 && (
-          <div className="absolute bg-white p-3 w-11/12 min-h-[300px] max-h-[600px] rounded-lg shadow-lg overflow-y-scroll top-[115%] z-50 opacity-90">
+          <div className="absolute bg-white p-3 w-11/12 min-h-[300px] max-h-[600px] rounded-lg shadow-lg overflow-y-scroll top-[115%] z-50 ">
             <div className="w-full h-full ">
               {searchResult.map((result, index) => (
                 <div className="w-full h-12 flex items-center justify-between border-b border-gray-200">
-                  <p className="text-lg font-normal">{result.content}</p>
+                  <p className="text-xs font-normal">{result.content}</p>
                 </div>
               ))}
             </div>
@@ -102,7 +130,7 @@ const Navbar = ({ searchValue, setSearchValue }) => {
           <img src={bell} className="w-[24px] h-[24px]" alt="" />
         </div>
 
-        <img src={avatar} alt=""/>
+        <img src={avatar} alt="" />
 
         <p className="text-lg font-normal hidden md:block">Himanshu Tiwari</p>
       </div>
