@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { cn } from "../lib/utils";
 import touch from "../assets/touch_app.svg";
 import products from "../data/data_table";
+import Modal from "./Modal";
 
 const Pms = () => {
   const [selectedView, setSelectedView] = useState("Timeline");
+  const [selectedValue, setSelectedValue] = useState("");
 
   const tabs = [
     {
@@ -26,8 +28,6 @@ const Pms = () => {
       content: "Monthly",
     },
   ];
-
-  const [selectedValue, setSelectedValue] = useState("");
 
   const handleSelectChange = (event) => {
     setSelectedValue(event.target.value);
@@ -167,89 +167,71 @@ const Pms = () => {
         )}
       </div>
 
-      <div>
-        {isComponentOpen && (
-          <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50">
-            <div className="max-w-[1400px] max-h-[720px] mt-[180px] mx-auto p-6 bg-white rounded-md shadow-lg">
-              <div className="flex items-center">
-                <div className="flex gap-5">
-                  <h1>PMS Job Description</h1>
-                  <div className="flex flex-row gap-3">
-                    <button className="px-[18px] py-[7px] border border-black rounded-lg">
-                      Instructions
-                    </button>
-                    <button className="px-[18px] py-[7px] border border-black rounded-lg">
-                      Drawings
-                    </button>
-                  </div>
-                </div>
+      <Modal isOpen={isComponentOpen} setIsOpen={closeComponent}>
+        <div className=" w-full h-full">
+          <div className="flex items-center">
+            <div className="flex gap-5">
+              <h1>PMS Job Description</h1>
+              <div className="flex flex-row gap-3">
+                <button className="px-[18px] py-[7px] border border-black rounded-lg">
+                  Instructions
+                </button>
+                <button className="px-[18px] py-[7px] border border-black rounded-lg">
+                  Drawings
+                </button>
               </div>
-              <table className="min-w-full text-black">
-                <thead className="bg-[#F3F9FF]">
-                  <tr>
-                    <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                      Part Description
-                    </th>
-                    <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                      Part No.
-                    </th>
-                    <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                      ROB
-                    </th>
-                    <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                      Working & Replace
-                    </th>
-                    <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                      Location
-                    </th>
-                    <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                      Used
-                    </th>
-                    <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                      Remaining Qty.
-                    </th>
-                    <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                      Condition
-                    </th>
-                    <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                      Detection
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="pt-2 pb-4">
-                  {products.map((product, index) => (
-                    <tr key={index} className="bg-white text-[#535353]">
-                      {/* Adjusted padding and whitespace styles */}
-                      <td className="px-2 py-1 whitespace-nowrap">
-                        {product.mach_desc}
-                      </td>
-                      <td className="px-2 py-1 whitespace-nowrap">
-                        {product.maker_desc}
-                      </td>
-                      <td className="px-2 py-1 whitespace-nowrap">
-                        {product.material}
-                      </td>
-                      <td className="px-2 py-1 whitespace-nowrap">
-                        {product.material_desc}
-                      </td>
-                      <td className="px-2 py-1 whitespace-nowrap">
-                        {product.part_no}
-                      </td>
-                      <td className="px-2 py-1 whitespace-nowrap">
-                        {product.rob}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              {/* Button to close the component */}
-              <button className="mt-4" onClick={closeComponent}>
-                Close Component
-              </button>
             </div>
           </div>
-        )}
-      </div>
+          <table className="min-w-full text-black shadow-sm">
+            <thead className="bg-[#F3F9FF]">
+              <tr>
+                <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                  Maintenance Job
+                </th>
+                <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                  PIC
+                </th>
+                <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                  Interval
+                </th>
+                <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                  Due Date
+                </th>
+                <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                  Status
+                </th>
+              </tr>
+            </thead>
+            <tbody className="pt-[10px] pb-[12px]">
+              {[1, 2, 3, 4, 5, 6, 7].map((_, index) => (
+                <tr
+                  key={index}
+                  className="bg-white text-[#535353]"
+                  onClick={openComponent}
+                >
+                  <td className="px-[15px] py-[6px] whitespace-nowrap px-auto">
+                    Lorem Ipsum
+                  </td>
+                  <td className="px-[15px] py-[6px] whitespace-nowrap">Pic</td>
+                  <td className="px-[15px] py-[6px] whitespace-nowrap">
+                    Interval
+                  </td>
+                  <td className="px-[15px] py-[6px] whitespace-nowrap">
+                    Due Date
+                  </td>
+                  <td className="px-[15px] py-[6px] whitespace-nowrap">
+                    Status
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {/* Button to close the component */}
+          <button className="mt-4" onClick={closeComponent}>
+            Close Component
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 };

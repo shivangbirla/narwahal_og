@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import question from "../assets/questionmark.png";
 import hamburgeralt from "../assets/alternateHamburgerMenu.svg";
@@ -16,10 +16,22 @@ const Navbar = ({ searchValue, setSearchValue }) => {
   const { open, setOpen, page, setPage } = useContext(MainContext);
   const [search, setsearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const dialogRef = useRef(null);
 
   const handleAreaClick = (area) => {
     setSearchValue(area);
     setSelectedArea(area);
+  };
+
+  const toggleDialog = () => {
+    setIsDialogOpen(!isDialogOpen);
+  };
+
+  const handleOutsideClick = (event) => {
+    if (dialogRef.current && !dialogRef.current.contains(event.target)) {
+      setIsDialogOpen(false);
+    }
   };
 
   useEffect(() => {
@@ -46,7 +58,6 @@ const Navbar = ({ searchValue, setSearchValue }) => {
         });
         setSearchResult(arr);
       } catch (error) {
-
         setSearchResult([
           {
             content: error.response.data.detail,
@@ -57,6 +68,14 @@ const Navbar = ({ searchValue, setSearchValue }) => {
     };
     getSearch();
   }, [search]);
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
 
   const handleBack = () => {
     if (page === "ZONE") {
@@ -126,8 +145,27 @@ const Navbar = ({ searchValue, setSearchValue }) => {
         <div className="flex items-center justify-center w-[40px] h-[40px] bg-white rounded-xl">
           <img src={questionWithOutline} className="w-[24px] h-[24px]" alt="" />
         </div>
-        <div className="flex items-center justify-center w-[40px] h-[40px] bg-white rounded-xl">
-          <img src={bell} className="w-[24px] h-[24px]" alt="" />
+        <div className="relative">
+          <button
+            onClick={toggleDialog}
+            disabled={isDialogOpen}
+            className="flex items-center justify-center w-[40px] h-[40px] bg-white rounded-xl"
+          >
+            <img src={bell} className="w-[24px] h-[24px]" alt="" />
+          </button>
+          {isDialogOpen && (
+            <div
+              ref={dialogRef}
+              className="absolute top-14 -left-[50%] z-50 bg-white p-4 shadow-lg border  rounded-2xl border-gray-300"
+            >
+              {/* Your dialog content goes here */}
+
+              <div>This is the dialog content</div>
+            </div>
+          )}
+          {isDialogOpen && (
+            <div className="absolute -top-[10] left-[25%] w-[0] h-[0] border-solid border-transparent border-[13.9615px] border-b-[15px] border-t-0 border-r-[13.9615px] border-l-[13.9615px] border-b-solid border-b-white shadow-lg"></div>
+          )}
         </div>
 
         <img src={avatar} alt="" />
