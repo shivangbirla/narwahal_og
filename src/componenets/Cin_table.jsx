@@ -28,7 +28,7 @@ const Cin_table = () => {
       <div className="bg-[#F8F9FA]">
         <h2 className="text-[20px] font-medium mb-6">Check In</h2>
         <div className="flex justify-between items-center">
-          <div className="flex flex-row text-[18px] font-medium w-auto cursor-pointer">
+          <div className="flex flex-row text-[16px] font-medium w-auto cursor-pointer">
             <div
               className={`bg-[#E8E8E8] py-3 px-2 min-w-[160px] mx-auto text-center ${
                 selectedView === "Check in Spares" ? "bg-white" : ""
