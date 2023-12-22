@@ -7,15 +7,13 @@ import Sidebar from "./componenets/Sidebar";
 
 import { Toaster } from "react-hot-toast";
 import Navbar from "./componenets/Navbar";
-
-import Checkin from "./componenets/Checkin";
 import Pms from "./componenets/Pms";
-
+import Checkout from "./componenets/Checkout";
+import Checkin from "./componenets/Checkin";
 
 const App = () => {
   const [searchValue, setSearchValue] = useState("areaa");
   const { open, setOpen } = useContext(MainContext);
-
 
   return (
     <div className=" ">
@@ -60,12 +58,11 @@ const App = () => {
               }
             />
             <Route path="/checkin" element={<Checkin />} />
+            <Route path="/checkout" element={<Checkout />} />
             <Route path="/pms" element={<Pms />} />
-            
           </Routes>
         </div>
       </div>
-
     </div>
     // <Signup />
   );

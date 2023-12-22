@@ -36,7 +36,7 @@ const Sidebar = () => {
       img: checkout_img,
       alt: "Check out",
       text: "Check out",
-      path: "/chechout",
+      path: "/checkout",
     },
     {
       img: inventory_img,

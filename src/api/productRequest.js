@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API = axios.create({ baseURL: "http://139.59.59.166" });
+const API = axios.create({ baseURL: "http://159.89.204.17:81" });
 
 export const getBoxes = async (zone, area, deck, selectedSide) => {
   const config = {
