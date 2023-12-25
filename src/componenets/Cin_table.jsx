@@ -5,17 +5,17 @@ import { cn } from "../lib/utils";
 const Cin_table = () => {
   const [selectedView, setSelectedView] = useState("Check in Spares");
 
-  // const tabs = [
-  //   {
-  //     content: "Check in Spares",
-  //   },
-  //   {
-  //     content: "Check in New Spares",
-  //   },
-  //   {
-  //     content: "Check in DryDock Spares",
-  //   },
-  // ];
+  const tabs = [
+    {
+      content: "Check in Spares",
+    },
+    {
+      content: "Check in New Spares",
+    },
+    {
+      content: "Check in DryDock Spares",
+    },
+  ];
 
   const [selectedValue, setSelectedValue] = useState("");
 
@@ -28,38 +28,21 @@ const Cin_table = () => {
       <div className="bg-[#F8F9FA]">
         <h2 className="text-[20px] font-medium mb-6">Check In</h2>
         <div className="flex justify-between items-center">
-          <div className="flex flex-row text-[16px] font-medium w-auto cursor-pointer">
-            <div
-              className={`bg-[#E8E8E8] py-3 px-2 min-w-[160px] mx-auto text-center ${
-                selectedView === "Check in Spares" ? "bg-white" : ""
-              }`}
-              onClick={() => {
-                setSelectedView("Check in Spares");
-              }}
-            >
-              Check in Spares
-            </div>
-            <div
-              className={`bg-[#E8E8E8] py-3 px-2 min-w-[200px] text-center ${
-                selectedView === "Check in New Spares" ? "bg-white" : ""
-              }`}
-              onClick={() => {
-                setSelectedView("Check in New Spares");
-              }}
-            >
-              Check in New Spares
-            </div>
-            <div
-              className={`bg-[#E8E8E8] py-3 px-2 min-w-[240px] text-center ${
-                selectedView === "Check in DryDock Spares" ? "bg-white" : ""
-              }`}
-              onClick={() => {
-                setSelectedView("Check in DryDock Spares");
-              }}
-            >
-              Check in DryDock Spares
-            </div>
-          </div>
+          <ul className="tabs group">
+            {tabs.map((tab, index) => (
+              <li
+                className={cn(
+                  // "w-1/2 bg-[#E8E8E8] py-3 px-11",
+                  selectedView === tab.content && "active"
+                )}
+                onClick={() => {
+                  setSelectedView(tab.content);
+                }}
+              >
+                <div>{tab.content}</div>
+              </li>
+            ))}
+          </ul>
 
           <div className="flex flex-row items-center mr-6">
             <label htmlFor="dropdown" className="text-[16px] font-medium mr-4">

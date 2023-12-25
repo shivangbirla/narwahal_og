@@ -10,6 +10,7 @@ import Navbar from "./componenets/Navbar";
 import Pms from "./componenets/Pms";
 import Checkout from "./componenets/Checkout";
 import Checkin from "./componenets/Checkin";
+import Spo from "./componenets/Spo";
 
 const App = () => {
   const [searchValue, setSearchValue] = useState("areaa");
@@ -40,12 +41,12 @@ const App = () => {
         }}
       />
 
-      <div className="h-auto w-screen pr-9 min-h-screen box-border overflow-y-scroll bg-[#F8F9FA] flex lg:gap-0 pb-5">
+      <div className="h-full w-screen pr-9 min-h-screen box-border overflow-y-scroll bg-[#F8F9FA] flex lg:gap-0 pb-5">
         <div className="hidden lg:block">
           <Sidebar className="" />
         </div>
         <Divider orientation="vertical" className="hidden lg:block" flexItem />
-        <div className="flex w-full flex-col pl-6 gap-6 mb-48 md:mb-auto h-fit">
+        <div className="flex w-full flex-col  pl-14 gap-6 mb-48 md:mb-auto h-fit">
           <Navbar setSearchValue={setSearchValue} />
           <Routes>
             <Route
@@ -60,6 +61,7 @@ const App = () => {
             <Route path="/checkin" element={<Checkin />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/pms" element={<Pms />} />
+            <Route path="/spo" element={<Spo />} />
           </Routes>
         </div>
       </div>

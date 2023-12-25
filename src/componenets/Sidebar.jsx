@@ -49,7 +49,7 @@ const Sidebar = () => {
       img: sparepartorder_img,
       alt: "Spare Part Order",
       text: "Spare Part Order",
-      path: "/spare",
+      path: "/spo",
     },
   ];
 
