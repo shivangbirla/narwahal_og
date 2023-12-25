@@ -164,7 +164,7 @@ const Navbar = ({ searchValue, setSearchValue }) => {
             </div>
           )}
           {isDialogOpen && (
-            <div className="absolute -top-[10] left-[25%] w-[0] h-[0] border-solid border-transparent border-[13.9615px] border-b-[15px] border-t-0 border-r-[13.9615px] border-l-[13.9615px] border-b-solid border-b-white shadow-lg"></div>
+            <div className="absolute -top-[10] left-[25%] w-[0] h-[0] border-solid border-transparent border-[13.9615px] border-b-[15px] border-t-0 border-r-[13.9615px] border-l-[13.9615px] border-b-solid border-b-gray-300 shadow-lg"></div>
           )}
         </div>
 

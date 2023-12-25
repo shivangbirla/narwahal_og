@@ -49,21 +49,21 @@ const Pms = () => {
   return (
     <div className="flex flex-col gap-[22px] h-full">
       <div className="bg-[#F8F9FA]">
-        <div className="flex flex-row text-[17px] font-medium bg-[#FFF] max-w-[352px] w-auto cursor-pointer rounded-t-2xl">
+        <ul className="tabs group">
           {tabs.map((tab, index) => (
-            <div
+            <li
               className={cn(
-                "w-1/2 bg-[#E8E8E8] py-3 px-11",
-                selectedView === tab.content && "bg-white"
+                // "w-1/2 bg-[#E8E8E8] py-3 px-11",
+                selectedView === tab.content && "active"
               )}
               onClick={() => {
                 setSelectedView(tab.content);
               }}
             >
-              {tab.content}
-            </div>
+              <div>{tab.content}</div>
+            </li>
           ))}
-        </div>
+        </ul>
         <div className="w-full bg-white flex flex-col gap-8 p-7 rounded-xl rounded-tl-none">
           <div className="rounded-xl px-3 py-2 text-black flex gap-2 bg-[#E7F4FF]">
             <img src={touch} alt="" className="w-[24px] h-[24px]" />
@@ -168,10 +168,12 @@ const Pms = () => {
       </div>
 
       <Modal isOpen={isComponentOpen} setIsOpen={closeComponent}>
-        <div className=" w-full h-full">
+        <div className=" w-full h-full flex flex-col gap-6">
           <div className="flex items-center">
-            <div className="flex gap-5">
-              <h1>PMS Job Description</h1>
+            <div className="flex gap-5 w-full justify-between">
+              <h1 className="my-auto text-black  font-sans font-medium text-lg leading-normal tracking-tighter">
+                PMS Job Description
+              </h1>
               <div className="flex flex-row gap-3">
                 <button className="px-[18px] py-[7px] border border-black rounded-lg">
                   Instructions
@@ -227,7 +229,7 @@ const Pms = () => {
             </tbody>
           </table>
           {/* Button to close the component */}
-          <button className="mt-4" onClick={closeComponent}>
+          <button className=" self-end" onClick={closeComponent}>
             Close Component
           </button>
         </div>

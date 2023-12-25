@@ -34,7 +34,7 @@ const Spo = () => {
   return (
     <div className="flex flex-col gap-[22px] h-full">
       <div className="bg-[#F8F9FA]">
-        <div className="w-full bg-white flex flex-col gap-8 p-7 rounded-xl rounded-tl-none">
+        <div className="w-full bg-white flex flex-col gap-8 p-7 rounded-xl ">
           <h1 className="text-black font-medium font-dm-sans text-[28px] leading-normal">
             Separate Parts Order
           </h1>

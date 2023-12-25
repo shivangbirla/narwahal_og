@@ -2,3 +2,105 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.tabs li { 
+  /* Makes a horizontal row */
+  float: left; 
+	
+  /* So the psueudo elements can be
+     abs. positioned inside */
+  position: relative; 
+}
+.tabs div { 
+  /* Make them block level
+     and only as wide as they need */
+  float: left; 
+  padding: 10px 40px; 
+  text-decoration: none;
+  
+  /* Default colors */ 
+  color: black;
+  background: #F2F2F2; 
+  
+  /* Only round the top corners */
+  -webkit-border-top-left-radius: 15px;
+  -webkit-border-top-right-radius: 15px;
+  -moz-border-radius-topleft: 15px;
+  -moz-border-radius-topright: 15px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px; 
+}
+.tabs .active {
+  /* Highest, active tab is on top */
+  z-index: 3;
+}
+.tabs .active a { 
+  /* Colors when tab is active */
+  background: white; 
+  color: black; 
+}
+.tabs li:before, .tabs li:after, 
+.tabs li div:before, .tabs li div:after {
+  /* All pseudo elements are 
+     abs. positioned and on bottom */
+  position: absolute;
+  bottom: 0;
+}
+/* Only the first, last, and active
+   tabs need pseudo elements at all */
+.tabs  li:first-child div:before, .tabs  li:last-child div:after,.tabs  li:first-child:before, .tabs  li:last-child:after {
+  display:none;
+}
+.tabs li:last-child:after,   .tabs li:last-child div:after,
+.tabs li:first-child:before, .tabs li:first-child div:before,
+.tabs .active:after,   .tabs .active:before, 
+.tabs .active div:after, .tabs .active div:before {
+  content: "";
+}
+.tabs .active:before, .tabs .active:after, .tabs .active div {
+  background: white; 
+  
+  /* Squares below circles */
+  z-index: 1;
+}
+/* Squares */
+.tabs li:before, .tabs li:after {
+  background: #F2F2F2;
+  width: 10px;
+  height: 10px;
+}
+.tabs li:before {
+  left: -10px;      
+}
+.tabs li:after { 
+  right: -10px;
+}
+/* Circles */
+.tabs li div:after, .tabs li div:before {
+  width: 20px; 
+  height: 20px;
+  /* Circles are circular */
+  -webkit-border-radius: 10px;
+  -moz-border-radius:    10px;
+  border-radius:         10px;
+  background: #222;
+  
+  /* Circles over squares */
+  z-index: 2;
+}
+.tabs .active div:after, .tabs .active div:before {
+  background: #F2F2F2;
+}
+/* First and last tabs have different
+   outside color needs */
+.tabs li:first-child.active div:before,
+.tabs li:last-child.active div:after {
+  background: #222222;
+}
+.tabs li div:before {
+  left: -20px;
+}
+.tabs li div:after {
+  right: -20px;
+}
