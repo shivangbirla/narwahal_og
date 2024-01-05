@@ -11,6 +11,7 @@ import Pms from "./componenets/Pms";
 import Checkout from "./componenets/Checkout";
 import Checkin from "./componenets/Checkin";
 import Spo from "./componenets/Spo";
+import Inventory_listview from "./componenets/Inventory_listview";
 
 const App = () => {
   const [searchValue, setSearchValue] = useState("areaa");
@@ -62,6 +63,7 @@ const App = () => {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/pms" element={<Pms />} />
             <Route path="/spo" element={<Spo />} />
+            <Route path="/test" element={<Inventory_listview />} />
           </Routes>
         </div>
       </div>

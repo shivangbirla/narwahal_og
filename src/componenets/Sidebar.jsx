@@ -115,7 +115,7 @@ const Sidebar = () => {
           <button
             className={`w-full h-[40px] self-center bg-white rounded-xl  cursor-pointer ${
               selectedItem === "documentation"
-                ? "active:scale-95 transition-all duration-20 ease-in-out shadow-md"
+                ? "active:scale-95 transition-all duration-10 ease-in-out shadow-md"
                 : ""
             }`}
             onClick={() => setSelectedItem("documentation")}
