@@ -1,7 +1,7 @@
 import React from "react";
 import { cn } from "../lib/utils";
 
-const Modal = ({ children, isOpen, setIsOpen, classes }) => {
+const Modal03 = ({ children, isOpen, setIsOpen, classes }) => {
   return (
     <div
       className={cn(
@@ -14,7 +14,7 @@ const Modal = ({ children, isOpen, setIsOpen, classes }) => {
     >
       <div
         className={cn(
-          "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-fit absolute bg-white md:w-5/6 w-[90%] overflow-y-auto shadow-xl delay-400 duration-500 ease-in-out transition-all transform rounded-3xl p-8",
+          "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-fit absolute bg-white md:w-5/6 w-[90%] max-h-screen-80 overflow-y-auto shadow-xl delay-400 duration-500 ease-in-out transition-all transform rounded-3xl p-8",
           classes
         )}
       >
@@ -31,4 +31,4 @@ const Modal = ({ children, isOpen, setIsOpen, classes }) => {
   );
 };
 
-export default Modal;
+export default Modal03;
