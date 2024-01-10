@@ -11,6 +11,7 @@ import Pms from "./componenets/Pms";
 import Checkout from "./componenets/Checkout";
 import Checkin from "./componenets/Checkin";
 import Spo from "./componenets/Spo";
+import Signup from "./componenets/Signup";
 
 const App = () => {
   const [searchValue, setSearchValue] = useState("areaa");
@@ -61,12 +62,13 @@ const App = () => {
             <Route path="/checkin" element={<Checkin />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/pms" element={<Pms />} />
+            
             <Route path="/spo" element={<Spo />} />
           </Routes>
         </div>
       </div>
     </div>
-    // <Signup />
+      // <Signup />
   );
 };
 

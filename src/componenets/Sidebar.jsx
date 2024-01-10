@@ -64,7 +64,7 @@ const Sidebar = () => {
             alt="narwahal_logo"
             className="w-[98px] h-[21px]"
           />
-          <span className="w-[126px] h-[22px]">Project Narwhal</span>
+          <span className="w-[126px] h-[22px]">Narwhal Project</span>
         </div>
 
         <ul className="mx-auto w-4/5">

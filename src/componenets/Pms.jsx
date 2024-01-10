@@ -175,10 +175,10 @@ const Pms = () => {
                 PMS Job Description
               </h1>
               <div className="flex flex-row gap-3">
-                <button className="px-[18px] py-[7px] border border-black rounded-lg">
+                <button className="px-[18px] py-[7px] border border-gray-300 rounded-lg">
                   Instructions
                 </button>
-                <button className="px-[18px] py-[7px] border border-black rounded-lg">
+                <button className="px-[18px] py-[7px] border border-gray-300 rounded-lg">
                   Drawings
                 </button>
               </div>
@@ -188,19 +188,31 @@ const Pms = () => {
             <thead className="bg-[#F3F9FF]">
               <tr>
                 <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                  Maintenance Job
+                  Part Description
                 </th>
                 <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                  PIC
+                  Part No.
                 </th>
                 <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                  Interval
+                  ROB
                 </th>
                 <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                  Due Date
+                  Working & Replace
                 </th>
                 <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                  Status
+                  Location
+                </th>
+                <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                  Used
+                </th>
+                <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                  Remaining Qty.
+                </th>
+                <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                  Condition
+                </th>
+                <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                  Detection
                 </th>
               </tr>
             </thead>
@@ -216,10 +228,22 @@ const Pms = () => {
                   </td>
                   <td className="px-[15px] py-[6px] whitespace-nowrap">Pic</td>
                   <td className="px-[15px] py-[6px] whitespace-nowrap">
-                    Interval
+                    Status
                   </td>
                   <td className="px-[15px] py-[6px] whitespace-nowrap">
                     Due Date
+                  </td>
+                  <td className="px-[15px] py-[6px] whitespace-nowrap">
+                    Interval
+                  </td>
+                  <td className="px-[15px] py-[6px] whitespace-nowrap">
+                    Status
+                  </td>
+                  <td className="px-[15px] py-[6px] whitespace-nowrap">
+                    Status
+                  </td>
+                  <td className="px-[15px] py-[6px] whitespace-nowrap">
+                    Status
                   </td>
                   <td className="px-[15px] py-[6px] whitespace-nowrap">
                     Status
@@ -229,8 +253,11 @@ const Pms = () => {
             </tbody>
           </table>
           {/* Button to close the component */}
-          <button className=" self-end" onClick={closeComponent}>
-            Close Component
+          <button
+            className=" self-end rounded-lg bg-blue-500 flex py-3 px-6 text-white font-medium text-sm hover:bg-blue-600 justify-center items-center "
+            onClick={closeComponent}
+          >
+            Complete
           </button>
         </div>
       </Modal>
