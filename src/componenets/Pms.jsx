@@ -239,10 +239,10 @@ const Pms = () => {
                 PMS Job Description
               </h1>
               <div className="flex flex-row gap-3">
-                <button className="px-[18px] py-[7px] border border-black rounded-lg">
+                <button className="px-[18px] py-[7px] border border-gray-300 rounded-lg">
                   Instructions
                 </button>
-                <button className="px-[18px] py-[7px] border border-black rounded-lg">
+                <button className="px-[18px] py-[7px] border border-gray-300 rounded-lg">
                   Drawings
                 </button>
               </div>
@@ -251,6 +251,7 @@ const Pms = () => {
           <table className="min-w-full text-black shadow-sm">
             <thead className="bg-[#F3F9FF]">
               <tr>
+
                 <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
                   Part Description
                 </th>
@@ -276,6 +277,7 @@ const Pms = () => {
                   Condition
                 </th>
                 <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
+
                   Detection
                 </th>
               </tr>
@@ -290,12 +292,15 @@ const Pms = () => {
                     {opt.part_no}
                   </td>
                   <td className="px-[15px] py-[6px] whitespace-nowrap">
+
                     {opt.rob}
+
                   </td>
                   <td className="px-[15px] py-[6px] whitespace-nowrap">
                     {opt.work}
                   </td>
                   <td className="px-[15px] py-[6px] whitespace-nowrap">
+
                     LOCATION
                   </td>
                   <td className="px-[15px] py-[6px] whitespace-nowrap">USED</td>
@@ -307,11 +312,13 @@ const Pms = () => {
                   </td>
                   <td className="px-[15px] py-[6px] whitespace-nowrap">
                     DETECTION
+
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+
           {selectedValue === "in_progress" ? (
             <button
               className="self-end bg-[#47AFFF] text-white rounded-md px-[24px] py-[8px]"
@@ -336,6 +343,7 @@ const Pms = () => {
           ) : (
             <div></div>
           )}
+
         </div>
       </Modal03>
     </div>

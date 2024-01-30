@@ -48,13 +48,13 @@ const Spo = () => {
           </div>
           <div className="flex flex-row gap-5 ">
             <button className="px-[18px] py-[7px] border border-black rounded-lg">
-              "Monthly"
+              Monthly
             </button>
             <button className="px-[18px] py-[7px] border border-black rounded-lg">
-              "Quaterly"
+              Quaterly
             </button>
             <button className="px-[18px] py-[7px] border border-black rounded-lg">
-              "Anually"
+              Anually
             </button>
           </div>
         </div>
@@ -139,15 +139,21 @@ const Spo = () => {
         </div>
       </div>
 
-      <Modal isOpen={isComponentOpen} setIsOpen={closeComponent} classes={"!w-fit"}>
-        <div className="w-fit h-fit flex flex-col gap-8">
+      <Modal
+        isOpen={isComponentOpen}
+        setIsOpen={closeComponent}
+        classes={"!w-[500px] !p-6"}
+      >
+
+       
+        <div className="w-full h-fit flex flex-col gap-8">
           <h1 className="text-black font-medium font-dm-sans text-[28px] leading-normal">
             Order
           </h1>
 
-          <div className="flex flex-col gap-3">
-            <div className="flex flex-row gap-3">
-              <h2 className="text-black  font-normal font-dm-sans text-[20px] leading-normal">
+          <div className="flex flex-col gap-3   mx-auto ">
+            <div className="flex flex-row gap-3 ">
+              <h2 className="text-black  font-normal my-auto text-[20px] leading-normal">
                 Quantity
               </h2>
               <input
@@ -159,17 +165,15 @@ const Spo = () => {
                   borderRadius: "5px",
                   border: "1px solid rgba(0, 0, 0, 0.20)",
                 }}
-
               />
             </div>
             <div className="w-full flex justify-end gap-4">
-              <button className="rounded-md border-2 px-4 py-[2px] border-gray-400  text-gray-400">
+              <button className="rounded-md border px-4 py-[2px] border-gray-300  text-gray-400">
                 Back
               </button>
-              <button className="rounded-md border-2 px-4 py-[2px] border-[#47AFFF] bg-[#47AFFF] text-white">
+              <button className="rounded-md border px-4 py-[2px] border-[#47AFFF] bg-[#47AFFF] text-white">
                 Confirm
               </button>
-
             </div>
           </div>
         </div>
