@@ -1,12 +1,64 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { cn } from "../lib/utils";
 import touch from "../assets/touch_app.svg";
 import products from "../data/data_table";
-import Modal from "./Modal";
+import Modal03 from "./Modal03";
 
 const Pms = () => {
   const [selectedView, setSelectedView] = useState("Timeline");
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState("completed");
+  const [selectedButton, setSelectedButton] = useState("week");
+  const [options, setOptions] = useState([]);
+  const [index, setIndex] = useState(1);
+
+  const fetchOptions = async () => {
+    try {
+      const response = await fetch(
+        `http://159.89.204.17:81/pms/get_jobs?status=${selectedValue}&due_within=${selectedButton}`
+      );
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        setOptions(data);
+      } else {
+        throw new Error(`Error: ${await response.text()}`);
+      }
+    } catch (error) {
+      console.error("Error fetching options:", error.message);
+    }
+  };
+
+  const updateOptions = async (pmsCode, status) => {
+    try {
+      const requestOptions = {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({}),
+      };
+
+      const response = await fetch(
+        `http://159.89.204.17:81/pms/jobs/${pmsCode}/change_status?status=${status}`,
+        requestOptions
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        console.log("Updated");
+        // Handle the updated data as needed
+      } else {
+        throw new Error(`Error: ${await response.text()}`);
+      }
+    } catch (error) {
+      console.error("Error updating options:", error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchOptions();
+  }, [selectedButton, selectedValue]);
 
   const tabs = [
     {
@@ -20,12 +72,15 @@ const Pms = () => {
   const buttons = [
     {
       content: "Daily",
+      value: "today",
     },
     {
       content: "Weekly",
+      value: "week",
     },
     {
       content: "Monthly",
+      value: "month",
     },
   ];
 
@@ -73,9 +128,16 @@ const Pms = () => {
             </p>
           </div>
 
-          <div className="flex flex-row gap-5 ">
+          <div className="flex flex-row gap-5">
             {buttons.map((button) => (
-              <button className="px-[18px] py-[7px] border border-black rounded-lg">
+              <button
+                className={`px-[18px] py-[7px] border rounded-lg ${
+                  selectedButton === button.value
+                    ? "bg-[#E7F4FF] border-black"
+                    : "border-black"
+                }`}
+                onClick={() => setSelectedButton(button.value)}
+              >
                 {button.content}
               </button>
             ))}
@@ -96,9 +158,9 @@ const Pms = () => {
               value={selectedValue}
               onChange={handleSelectChange}
             >
-              <option value="option1">In Progress</option>
-              <option value="option2">Completed</option>
-              <option value="option3">Planning</option>
+              <option value="in_progress">In Progress</option>
+              <option value="completed">Completed</option>
+              <option value="planning">Planning</option>
             </select>
           </div>
         </div>
@@ -128,26 +190,29 @@ const Pms = () => {
                     </tr>
                   </thead>
                   <tbody className="pt-[10px] pb-[12px]">
-                    {[1, 2, 3, 4, 5, 6, 7].map((_, index) => (
+                    {options.map((option, index) => (
                       <tr
                         key={index}
                         className="bg-white text-[#535353]"
-                        onClick={openComponent}
+                        onClick={() => {
+                          openComponent();
+                          setIndex(index);
+                        }}
                       >
                         <td className="px-[15px] py-[6px] whitespace-nowrap px-auto">
-                          Lorem Ipsum
+                          {option.pms_desc}
                         </td>
                         <td className="px-[15px] py-[6px] whitespace-nowrap">
-                          Pic
+                          PIC
                         </td>
                         <td className="px-[15px] py-[6px] whitespace-nowrap">
-                          Interval
+                          {selectedButton}
                         </td>
                         <td className="px-[15px] py-[6px] whitespace-nowrap">
-                          Due Date
+                          {option.due_date}
                         </td>
                         <td className="px-[15px] py-[6px] whitespace-nowrap">
-                          Status
+                          {selectedValue}
                         </td>
                       </tr>
                     ))}
@@ -166,9 +231,8 @@ const Pms = () => {
           </div>
         )}
       </div>
-
-      <Modal isOpen={isComponentOpen} setIsOpen={closeComponent}>
-        <div className=" w-full h-full flex flex-col gap-6">
+      <Modal03 isOpen={isComponentOpen} setIsOpen={closeComponent}>
+        <div className="w-full h-[550px] flex flex-col gap-6">
           <div className="flex items-center">
             <div className="flex gap-5 w-full justify-between">
               <h1 className="my-auto text-black  font-sans font-medium text-lg leading-normal tracking-tighter">
@@ -187,80 +251,101 @@ const Pms = () => {
           <table className="min-w-full text-black shadow-sm">
             <thead className="bg-[#F3F9FF]">
               <tr>
-                <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+
+                <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
                   Part Description
                 </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
                   Part No.
                 </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
                   ROB
                 </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
                   Working & Replace
                 </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
                   Location
                 </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
                   Used
                 </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                  Remaining Qty.
+                <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
+                  Remanining Qty.
                 </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
                   Condition
                 </th>
-                <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
+
                   Detection
                 </th>
               </tr>
             </thead>
             <tbody className="pt-[10px] pb-[12px]">
-              {[1, 2, 3, 4, 5, 6, 7].map((_, index) => (
-                <tr
-                  key={index}
-                  className="bg-white text-[#535353]"
-                  onClick={openComponent}
-                >
+              {options[index]?.products.map((opt, i) => (
+                <tr key={i} className="bg-white text-[#535353]">
                   <td className="px-[15px] py-[6px] whitespace-nowrap px-auto">
-                    Lorem Ipsum
-                  </td>
-                  <td className="px-[15px] py-[6px] whitespace-nowrap">Pic</td>
-                  <td className="px-[15px] py-[6px] whitespace-nowrap">
-                    Status
+                    {opt.material_desc}
                   </td>
                   <td className="px-[15px] py-[6px] whitespace-nowrap">
-                    Due Date
+                    {opt.part_no}
                   </td>
                   <td className="px-[15px] py-[6px] whitespace-nowrap">
-                    Interval
+
+                    {opt.rob}
+
                   </td>
                   <td className="px-[15px] py-[6px] whitespace-nowrap">
-                    Status
+                    {opt.work}
                   </td>
                   <td className="px-[15px] py-[6px] whitespace-nowrap">
-                    Status
+
+                    LOCATION
+                  </td>
+                  <td className="px-[15px] py-[6px] whitespace-nowrap">USED</td>
+                  <td className="px-[15px] py-[6px] whitespace-nowrap">
+                    {opt.scanned_quantity}
                   </td>
                   <td className="px-[15px] py-[6px] whitespace-nowrap">
-                    Status
+                    {opt.reconditioned}
                   </td>
                   <td className="px-[15px] py-[6px] whitespace-nowrap">
-                    Status
+                    DETECTION
+
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-          {/* Button to close the component */}
-          <button
-            className=" self-end rounded-lg bg-blue-500 flex py-3 px-6 text-white font-medium text-sm hover:bg-blue-600 justify-center items-center "
-            onClick={closeComponent}
-          >
-            Complete
-          </button>
+
+          {selectedValue === "in_progress" ? (
+            <button
+              className="self-end bg-[#47AFFF] text-white rounded-md px-[24px] py-[8px]"
+              onClick={() =>
+                updateOptions(options[index].pms_code, "completed")
+              }
+            >
+              Complete
+            </button>
+          ) : (
+            <div></div>
+          )}
+          {selectedValue === "planning" ? (
+            <button
+              className="self-end bg-[#47AFFF] text-white rounded-md px-[24px] py-[8px]"
+              onClick={() =>
+                updateOptions(options[index].pms_code, "in_progress")
+              }
+            >
+              Check-Out & Start
+            </button>
+          ) : (
+            <div></div>
+          )}
+
         </div>
-      </Modal>
+      </Modal03>
     </div>
   );
 };
