@@ -11,6 +11,7 @@ import Pms from "./componenets/Pms";
 import Checkout from "./componenets/Checkout";
 import Checkin from "./componenets/Checkin";
 import Spo from "./componenets/Spo";
+import InventoryHome from "./componenets/InvertoryHome";
 
 import Inventory_listview from "./componenets/Inventory_listview";
 
@@ -57,10 +58,7 @@ const App = () => {
             <Route
               path="/"
               element={
-                <Home
-                  searchValue={searchValue}
-                  setSearchValue={setSearchValue}
-                />
+                <InventoryHome/>
               }
             />
             <Route path="/checkin" element={<Checkin />} />
@@ -68,7 +66,7 @@ const App = () => {
             <Route path="/pms" element={<Pms />} />
             
             <Route path="/spo" element={<Spo />} />
-            <Route path="/test" element={<Inventory_listview />} />
+            {/* <Route path="/test" element={<Inventory_listview />} /> */}
           </Routes>
         </div>
       </div>
