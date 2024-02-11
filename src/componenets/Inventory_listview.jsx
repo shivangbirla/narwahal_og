@@ -15,6 +15,8 @@ import Modal01 from "./Modal01";
 import Modal02 from "./Modal02";
 import InputBox from "./InputBox";
 import search from "../assets/search.png";
+import AddIcon from "@mui/icons-material/Add";
+import { Modal } from "@mui/material";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -49,6 +51,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 const Inventory_listview = ({ setIsHome }) => {
   const [expanded, setExpanded] = React.useState("panel1");
+  const [isopen, setIsopen] = useState(false);
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -71,7 +74,9 @@ const Inventory_listview = ({ setIsHome }) => {
   const buttons = [
     {
       content: "Floor View",
-      onClick: () => setIsHome(false),
+      onClick: () => {
+        setIsHome(true);
+      },
     },
     {
       content: "List View",
@@ -118,10 +123,14 @@ const Inventory_listview = ({ setIsHome }) => {
     <>
       <div className="bg-[#F8F9FA]">
         <div className="flex flex-col">
-          <h2 className="text-[36px] font-medium mb-6">Inventory</h2>
+          <h2 className="text-3xl font-medium mb-[22px]">Inventory</h2>
+
           <div className="flex flex-row gap-5 mb-[30px]">
             {buttons.map((button) => (
-              <button className="px-[18px] py-[7px] border border-black rounded-lg" onClick={button.onClick}>
+              <button
+                className="px-[18px] py-[7px] border border-black rounded-lg"
+                onClick={button.onClick}
+              >
                 {button.content}
               </button>
             ))}
@@ -129,11 +138,7 @@ const Inventory_listview = ({ setIsHome }) => {
         </div>
         <div className="flex">
           <ul className="tabs group">
-            <li
-              className={cn(
-                "active"
-              )}
-            >
+            <li className={cn("active")}>
               <div>List View</div>
             </li>
           </ul>
@@ -153,17 +158,20 @@ const Inventory_listview = ({ setIsHome }) => {
                     <div className="text-[#252528] text-[22px]">
                       Main Engine (Hyundai Heavy Industry)
                     </div>
-                    <div className="mr-[20px]"></div>
                   </div>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography>
-                    <img
-                      src={button_img}
-                      alt="add-button"
-                      className="absolute w-[74px] h-[32px] right-[72px] top-[2px]"
-                    />
-                    <div className="p-[8px] shadow-sm bg-opacity-25 rounded-2xl">
+                    <div className="p-[8px] flex flex-col gap-3 shadow-sm bg-opacity-25 rounded-2xl">
+                      <button
+                        onClick={() => {
+                          setIsopen(true);
+                        }}
+                        className="bg-[#47AFFF] self-end  hover:bg-blue-500 text-white rounded-lg py-1 px-3 "
+                      >
+                        <AddIcon className="w-4 h-4" />
+                        Add
+                      </button>
                       <div className="h-fit rounded-2xl overflow-hidden">
                         <table className="min-w-full text-black shadow-sm">
                           <thead className="bg-[#F3F9FF]">
@@ -249,12 +257,16 @@ const Inventory_listview = ({ setIsHome }) => {
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography>
-                    <img
-                      src={button_img}
-                      alt="add-button"
-                      className="absolute w-[74px] h-[32px] right-[72px] top-[2px]"
-                    />
-                    <div className="p-[8px] shadow-sm bg-opacity-25 rounded-2xl">
+                    <div className="p-[8px] flex flex-col gap-3 shadow-sm bg-opacity-25 rounded-2xl">
+                      <button
+                        onClick={() => {
+                          setIsopen(true);
+                        }}
+                        className="bg-[#47AFFF] self-end  hover:bg-blue-500 text-white rounded-lg py-1 px-3 "
+                      >
+                        <AddIcon className="w-4 h-4" />
+                        Add
+                      </button>
                       <div className="h-fit rounded-2xl overflow-hidden">
                         <table className="min-w-full text-black shadow-sm">
                           <thead className="bg-[#F3F9FF]">
@@ -335,7 +347,7 @@ const Inventory_listview = ({ setIsHome }) => {
         )}
 
         <Modal01 isOpen={isComponentOpen} setIsOpen={closeComponent}>
-          <div className="w-full flex flex-col items-center">
+          <div className="w-full flex flex-col gap-6 items-center">
             <div className="flex items-center justify-between w-full">
               <h1 className="text-lg">Shelve- Lorem Ipsum</h1>
               <div className="flex  justify-end gap-3">
@@ -347,7 +359,7 @@ const Inventory_listview = ({ setIsHome }) => {
                   />
                   <input
                     type="text"
-                    // placeholder={placeholder}
+                    placeholder={"Search"}
                     // value={value}
                     // onChange={onChange}
                     className="pl-9 pr-4 py-2 border h-full bg-transparent border-gray-300 rounded-md focus:outline-none focus:border-blue-500 "
@@ -358,15 +370,17 @@ const Inventory_listview = ({ setIsHome }) => {
                 </button>
               </div>
             </div>
-            <div className="h-full flex flex-col gap-6">
+            <div className="h-full w-full flex flex-col gap-6">
               <Accordion
                 // expanded={expanded === "panel2"}
                 defaultExpanded
+                className="!rounded-lg !bg-gray-50"
                 // onChange={handleChange("panel2")}
               >
                 <AccordionSummary
                   aria-controls="panel1d-content"
                   id="panel1d-header"
+                  className="!bg-gray-50 !rounded-lg !py-4"
                 >
                   <div className="flex items-center">
                     <div className="">
@@ -439,7 +453,7 @@ const Inventory_listview = ({ setIsHome }) => {
                           </td>
                           <td className="px-[15px] py-[6px] whitespace-nowrap">
                             <button
-                              className="bg-[#47AFFF] text-sm p-1 text-white disabled:bg-slate-200 disabled:text-black cursor-pointer rounded-md"
+                              className="bg-[#47AFFF] text-[10px] px-2 py-[2px] my-auto text-white disabled:bg-slate-200 disabled:text-gray-400 disabled:border-gray-300 disabled:border cursor-pointer rounded-md"
                               disabled={index === 3}
                             >
                               Track{" "}
@@ -452,12 +466,15 @@ const Inventory_listview = ({ setIsHome }) => {
                 </AccordionDetails>
               </Accordion>
               <Accordion
-              // expanded={expanded === "panel2"}
-              // onChange={handleChange("panel2")}
+                className="!rounded-lg !bg-gray-50"
+
+                // expanded={expanded === "panel2"}
+                // onChange={handleChange("panel2")}
               >
                 <AccordionSummary
                   aria-controls="panel1d-content"
                   id="panel1d-header"
+                  className="!bg-gray-50 !rounded-lg !py-4"
                 >
                   <div className="flex items-center">
                     <div className="">
@@ -585,6 +602,52 @@ const Inventory_listview = ({ setIsHome }) => {
             </table>
           </div>
         </Modal02>
+
+        <Modal
+          open={isopen}
+          onClose={() => setIsopen(false)}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <div className="flex flex-col gap-3 bg-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-7 rounded-lg">
+            <h1 className="font-bold text-lg">Add product</h1>
+            <form className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
+                <label htmlFor="name">Name:</label>
+                <input
+                  className="border-none outline-none rounded-lg bg-gray-100"
+                  type="text"
+                  id="name"
+                  name="name"
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="quantity">Quantity:</label>
+                <input
+                  className="border-none outline-none rounded-lg bg-gray-100"
+                  type="number"
+                  id="quantity"
+                  name="quantity"
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="id">ID:</label>
+                <input
+                  className="border-none outline-none rounded-lg bg-gray-100"
+                  type="text"
+                  id="id"
+                  name="id"
+                />
+              </div>
+              <button
+                // type="submit"
+                className="bg-blue-500 text-white font-semibold py-2 px-4 rounded"
+              >
+                Add
+              </button>
+            </form>
+          </div>
+        </Modal>
       </div>
     </>
   );

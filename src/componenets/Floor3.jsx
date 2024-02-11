@@ -136,7 +136,7 @@ const Floor3 = ({onClick}) => {
         stroke-opacity="0.1"
         stroke-width="0.79402"
       />
-      <g ref={ref}>
+      <g ref={ref} className="cursor-pointer">
         <rect
           x="678.062"
           y="472.5"
