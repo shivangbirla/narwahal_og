@@ -27,7 +27,7 @@ const FloorData = ({ inventory, rack, shelve, isComponentOpen }) => {
       .map((item) => {
         return {
           machine_name: item.machine_name,
-          _id: item._id,
+          _id: item.id,
           pages: item.pages,
         };
       })
@@ -172,16 +172,16 @@ export const AccordianComponent = ({
           <thead className="bg-[#F3F9FF]">
             <tr>
               <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                Machinery Description{" "}
+                Material Code{" "}
               </th>
-              <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+              {/* <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
                 Maker{" "}
-              </th>
+              </th> */}
               <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
                 Material Description{" "}
               </th>
               <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                Condition
+                Re-Condition
               </th>
               <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
                 Part No.
@@ -189,45 +189,54 @@ export const AccordianComponent = ({
               <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
                 ROB{" "}
               </th>
-              <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+              {/* <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
                 Package Qty.{" "}
-              </th>
+              </th> */}
               <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
                 Track{" "}
               </th>
             </tr>
           </thead>
+          {/* {
+    "_id": "65cc7a9abcf1e9296c2b4522",
+    "material_code": "VS.NAS.9035579",
+    "material_desc": "FUSE, 250V 2A",
+    "part_no": "119902300-A-2",
+    "rob": 0,
+    "work": 1,
+    "reconditioned": 0,
+    "consumed": 0
+} */}
           <tbody className="pt-[10px] pb-[12px]">
-            {data.map((_, index) => (
+            {data.map((da, index) => (
               <tr
                 key={index}
                 className={cn(
                   "bg-white text-[#535353]",
-                  index === 3 && "bg-[#FFF7F2] text-[#E56108] "
+                  da.rob === 0 && "bg-[#FFF7F2] text-[#E56108] "
                 )}
                 // onClick={openComponent01}
               >
                 <td className="px-[15px] py-[6px] whitespace-nowrap px-auto">
-                  Machinery Description{" "}
-                </td>
-                <td className="px-[15px] py-[6px] whitespace-nowrap">Maker</td>
-                <td className="px-[15px] py-[6px] whitespace-nowrap">
-                  Material Description{" "}
+                  {da.material_code}{" "}
                 </td>
                 <td className="px-[15px] py-[6px] whitespace-nowrap">
-                  Condition{" "}
+                  {da.material_desc}
                 </td>
                 <td className="px-[15px] py-[6px] whitespace-nowrap">
-                  Part No.
+                  {da.reconditioned}{" "}
                 </td>
-                <td className="px-[15px] py-[6px] whitespace-nowrap">ROB </td>
                 <td className="px-[15px] py-[6px] whitespace-nowrap">
-                  Package Qty.{" "}
+                  {da.part_no}{" "}
                 </td>
+                <td className="px-[15px] py-[6px] whitespace-nowrap">
+                  {da.rob}
+                </td>
+
                 <td className="px-[15px] py-[6px] whitespace-nowrap">
                   <button
                     className="bg-[#47AFFF] text-[10px] px-2 py-[2px] my-auto text-white disabled:bg-slate-200 disabled:text-gray-400 disabled:border-gray-300 disabled:border cursor-pointer rounded-md"
-                    disabled={index === 3}
+                    disabled={da.rob === 0}
                   >
                     Track{" "}
                   </button>
