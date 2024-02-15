@@ -277,10 +277,10 @@ const Pms = () => {
                 PMS Job Description
               </h1>
               <div className="flex flex-row gap-3">
-                <button className="px-[18px] py-[7px] border border-black rounded-lg">
+                <button className="px-[18px] py-[7px] border border-gray-300 rounded-lg">
                   Instructions
                 </button>
-                <button className="px-[18px] py-[7px] border border-black rounded-lg">
+                <button className="px-[18px] py-[7px] border border-gray-300 rounded-lg">
                   Drawings
                 </button>
               </div>
@@ -388,6 +388,7 @@ const Pms = () => {
               </tbody>
             )}
           </table>
+
           {selectedValue === "in_progress" ? (
             <button
               className="self-end bg-[#47AFFF] text-white rounded-md px-[24px] py-[8px]"

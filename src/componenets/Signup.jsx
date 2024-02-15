@@ -16,7 +16,7 @@ const Signup = () => {
           />
           <div className="flex flex-col md:gap-6 gap-3">
             <h1 className="text-3xl md:text-[60px] font-bold">Sign in to</h1>
-            <h2 className="text-xl md:text-[40px] font-medium">Project Narwhal</h2>
+            <h2 className="text-xl md:text-[40px] font-medium">Narwhal Project</h2>
             <img src={signup} alt="signup-img" className="w-[635px] h-auto" />
           </div>
         </div>

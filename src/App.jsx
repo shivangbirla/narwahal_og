@@ -11,7 +11,12 @@ import Pms from "./componenets/Pms";
 import Checkout from "./componenets/Checkout";
 import Checkin from "./componenets/Checkin";
 import Spo from "./componenets/Spo";
+import InventoryHome from "./componenets/InvertoryHome";
+
 import Inventory_listview from "./componenets/Inventory_listview";
+
+import Signup from "./componenets/Signup";
+
 
 const App = () => {
   const [searchValue, setSearchValue] = useState("areaa");
@@ -53,22 +58,20 @@ const App = () => {
             <Route
               path="/"
               element={
-                <Home
-                  searchValue={searchValue}
-                  setSearchValue={setSearchValue}
-                />
+                <InventoryHome/>
               }
             />
             <Route path="/checkin" element={<Checkin />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/pms" element={<Pms />} />
+            
             <Route path="/spo" element={<Spo />} />
-            <Route path="/test" element={<Inventory_listview />} />
+            {/* <Route path="/test" element={<Inventory_listview />} /> */}
           </Routes>
         </div>
       </div>
     </div>
-    // <Signup />
+      // <Signup />
   );
 };
 

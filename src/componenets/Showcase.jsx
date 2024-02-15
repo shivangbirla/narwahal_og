@@ -22,7 +22,7 @@ const Showcase = ({flag=false,divider=false}) => {
         <>
           <div className="w-full text-black text-xl font-normal">
             Deck-{deck} &gt; Area-{area} &gt; Zone-
-            {zone} 
+            {zone}
           </div>
           <Divider className="w-full " />
         </>
