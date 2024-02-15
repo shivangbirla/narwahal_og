@@ -251,7 +251,6 @@ const Pms = () => {
           <table className="min-w-full text-black shadow-sm">
             <thead className="bg-[#F3F9FF]">
               <tr>
-
                 <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
                   Part Description
                 </th>
@@ -277,7 +276,6 @@ const Pms = () => {
                   Condition
                 </th>
                 <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
-
                   Detection
                 </th>
               </tr>
@@ -292,15 +290,12 @@ const Pms = () => {
                     {opt.part_no}
                   </td>
                   <td className="px-[15px] py-[6px] whitespace-nowrap">
-
                     {opt.rob}
-
                   </td>
                   <td className="px-[15px] py-[6px] whitespace-nowrap">
                     {opt.work}
                   </td>
                   <td className="px-[15px] py-[6px] whitespace-nowrap">
-
                     LOCATION
                   </td>
                   <td className="px-[15px] py-[6px] whitespace-nowrap">USED</td>
@@ -312,7 +307,6 @@ const Pms = () => {
                   </td>
                   <td className="px-[15px] py-[6px] whitespace-nowrap">
                     DETECTION
-
                   </td>
                 </tr>
               ))}
@@ -343,7 +337,6 @@ const Pms = () => {
           ) : (
             <div></div>
           )}
-
         </div>
       </Modal03>
     </div>
