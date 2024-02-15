@@ -2,20 +2,17 @@ import { Divider, Drawer } from "@mui/material";
 import React, { useContext, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { MainContext } from "./componenets/Context";
-import Home from "./componenets/Home";
 import Sidebar from "./componenets/Sidebar";
 
 import { Toaster } from "react-hot-toast";
+import Checkin from "./componenets/Checkin";
+import Checkout from "./componenets/Checkout";
+import InventoryHome from "./componenets/InvertoryHome";
 import Navbar from "./componenets/Navbar";
 import Pms from "./componenets/Pms";
-import Checkout from "./componenets/Checkout";
-import Checkin from "./componenets/Checkin";
 import Spo from "./componenets/Spo";
-import InventoryHome from "./componenets/InvertoryHome";
 
-import Inventory_listview from "./componenets/Inventory_listview";
 
-import Signup from "./componenets/Signup";
 
 
 const App = () => {
