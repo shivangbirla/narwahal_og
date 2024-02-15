@@ -164,7 +164,7 @@ const Pms = () => {
                 onClick={() => setSelectedButton(button.value)}
               >
                 {button.content}
-              </button>
+              </button> 
             ))}
           </div>
         </div>
