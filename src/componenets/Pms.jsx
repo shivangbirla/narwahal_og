@@ -22,7 +22,7 @@ const Pms = () => {
       setLoading(true);
 
       const response = await fetch(
-        `${BASE_URL}/pms/get_jobs?status=${selectedValue}&due_within=${selectedButton}`
+        `${BASE_URL}/pms/get_jobs?status=${selectedValue}&due_within=${selectedButton}?page_no=1`
       );
       if (response.ok) {
         const data = await response.json();
