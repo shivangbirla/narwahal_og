@@ -3,7 +3,11 @@ import { cn } from "../lib/utils";
 import touch from "../assets/touch_app.svg";
 import products from "../data/data_table";
 import Modal from "./Modal";
+
+import { BASE_URL } from "../lib/functions";
+
 import ShowcaseLoading from "./loading/ShowcaseLoading";
+
 
 const Pms = () => {
   const [selectedView, setSelectedView] = useState("Timeline");
@@ -19,7 +23,7 @@ const Pms = () => {
       setLoading(true);
 
       const response = await fetch(
-        `http://159.89.204.17:81/pms/get_jobs?status=${selectedValue}&due_within=${selectedButton}`
+        `${BASE_URL}/pms/get_jobs?status=${selectedValue}&due_within=${selectedButton}`
       );
       if (response.ok) {
         const data = await response.json();
@@ -48,7 +52,7 @@ const Pms = () => {
       };
 
       const response = await fetch(
-        `http://159.89.204.17:81/pms/jobs/${pmsCode}/change_status?status=${status}`,
+        `${BASE_URL}/pms/jobs/${pmsCode}/change_status?status=${status}`,
         requestOptions
       );
 
@@ -68,7 +72,7 @@ const Pms = () => {
   const updatePic = async (pmsCode, pic) => {
     try {
       const response = await fetch(
-        `http://159.89.204.17:81/pmsjobs/{pms_code)/change_pic/?pms_code=${pmsCode}&pic=${pic}`
+        `${BASE_URL}/pmsjobs/{pms_code)/change_pic/?pms_code=${pmsCode}&pic=${pic}`
       );
       if (response.ok) {
         const data = await response.json();
@@ -163,21 +167,21 @@ const Pms = () => {
                 </p>
               </div>
 
-              <div className="flex flex-row gap-5">
-                {buttons.map((button) => (
-                  <button
-                    className={`px-[18px] py-[7px] border rounded-lg ${
-                      selectedButton === button.value
-                        ? "bg-[#E7F4FF] border-black"
-                        : "border-black"
-                    }`}
-                    onClick={() => setSelectedButton(button.value)}
-                  >
-                    {button.content}
-                  </button>
-                ))}
-              </div>
-            </div>
+
+          <div className="flex flex-row gap-5">
+            {buttons.map((button) => (
+              <button
+                className={`px-[18px] py-[4.5px] border rounded-lg ${
+                  selectedButton === button.value
+                    ? "bg-[#E7F4FF] border-black"
+                    : "border-black"
+                }`}
+                onClick={() => setSelectedButton(button.value)}
+              >
+                {button.content}
+              </button> 
+            ))}
+
           </div>
           <div className="py-[23px] pl-[36px] pr-[57px] flex flex-col gap-5 bg-white rounded-2xl">
             <div className="flex justify-between">

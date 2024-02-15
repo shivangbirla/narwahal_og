@@ -14,7 +14,7 @@ import Typography from "@mui/material/Typography";
 
 import InputBox from "./InputBox";
 import AddIcon from "@mui/icons-material/Add";
-import { Modal } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Modal, Select } from "@mui/material";
 
 
 const Inventory_listview = ({ setIsHome,isHome }) => {
@@ -122,7 +122,7 @@ const Inventory_listview = ({ setIsHome,isHome }) => {
       <div className="bg-[#F8F9FA]">
         <div className="flex flex-col">
           <h2 className="text-3xl font-medium mb-[22px]">Inventory</h2>
-
+          
           <div className="flex flex-row gap-5 mb-[30px]">
             {buttons.map((button, index) => (
               <button
