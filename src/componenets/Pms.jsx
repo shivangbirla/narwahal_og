@@ -156,7 +156,7 @@ const Pms = () => {
           <div className="flex flex-row gap-5">
             {buttons.map((button) => (
               <button
-                className={`px-[18px] py-[7px] border rounded-lg ${
+                className={`px-[18px] py-[4.5px] border rounded-lg ${
                   selectedButton === button.value
                     ? "bg-[#E7F4FF] border-black"
                     : "border-black"

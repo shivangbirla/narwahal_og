@@ -4,9 +4,9 @@ import icon_img from "../assets/Icon.png";
 import checking_in_img from "../assets/checking_in_img.png";
 import checkout_img from "../assets/checkout_img.png";
 import inventory_img from "../assets/inventory_img.png";
-import narwahal_logo from "../assets/narwahal_logo.png";
+import narwahal_logo from "../assets/logo.png";
 import pms_img from "../assets/pms_img.png";
-import sparepartorder_img from "../assets/sparepartorder_img.png";
+import sparepartorder_img from "../assets/Group 15iconnew.png";
 
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -62,9 +62,9 @@ const Sidebar = () => {
           <img
             src={narwahal_logo}
             alt="narwahal_logo"
-            className="w-[98px] h-[21px]"
+            className="w-[130px] h-[21px]"
           />
-          <span className="w-[126px] h-[22px]">Narwhal Project</span>
+          <span className="w-[130px] justify-center flex text-lg  h-[22px]">Narwhal Project</span>
         </div>
 
         <ul className="mx-auto w-4/5">
@@ -89,7 +89,7 @@ const Sidebar = () => {
                     src={item.img}
                     alt={item.alt}
                     className={`w-[17px] h-[17px] ${
-                      active ? "invert grayscale" : ""
+                      active ? "invert grayscale  scale-110" : ""
                     } `}
                   />
                 </div>
