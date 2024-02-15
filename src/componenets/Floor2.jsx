@@ -4,13 +4,13 @@ const Floor2 = ({ onClick }) => {
   const ref = useRef();
   const ref1 = useRef();
 
-  console.log(ref1)
 
   useEffect(() => {
     const handleClick = (event) => {
-      // alert("Mouse clicked on SVG element", event.target);
-      onClick();
-      // Add your desired logic here
+      onClick(2);
+    };
+    const handleClick2 = (event) => {
+      onClick(3);
     };
 
     const groupElement = ref.current;
@@ -19,23 +19,22 @@ const Floor2 = ({ onClick }) => {
       groupElement.addEventListener("click", handleClick);
     }
     if (groupElement1) {
-      groupElement1.addEventListener("click", handleClick);
+      groupElement1.addEventListener("click", handleClick2);
     }
 
     return () => {
-      // Clean up the event listener when the component unmounts
       if (groupElement) {
         groupElement.removeEventListener("click", handleClick);
       }
       if (groupElement1) {
-        groupElement1.removeEventListener("click", handleClick);
+        groupElement1.removeEventListener("click", handleClick2);
       }
     };
   }, []);
 
   return (
     <svg
-      // width="880"
+
       className="w-full h-full max-w-[971px] max-h-[635px]"
       viewBox="0 0 880 574"
       fill="none"

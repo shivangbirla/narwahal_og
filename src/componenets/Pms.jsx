@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { cn } from "../lib/utils";
 import touch from "../assets/touch_app.svg";
 import products from "../data/data_table";
-import Modal03 from "./Modal03";
-import Modal04 from "./Modal04";
+import Modal from "./Modal";
 import ShowcaseLoading from "./loading/ShowcaseLoading";
 
 const Pms = () => {
@@ -180,7 +179,6 @@ const Pms = () => {
               </div>
             </div>
           </div>
-
           <div className="py-[23px] pl-[36px] pr-[57px] flex flex-col gap-5 bg-white rounded-2xl">
             <div className="flex justify-between">
               <h1 className="text-black text-lg my-auto">PMS- Lorem Ipsum</h1>
@@ -283,7 +281,7 @@ const Pms = () => {
               </div>
             )}
           </div>
-          <Modal03 isOpen={isComponentOpen} setIsOpen={closeComponent}>
+          <Modal isOpen={isComponentOpen} setIsOpen={closeComponent}>
             <div className="w-full h-[550px] flex flex-col gap-6">
               <div className="flex items-center">
                 <div className="flex gap-5 w-full justify-between">
@@ -456,24 +454,27 @@ const Pms = () => {
                 <div></div>
               )}
             </div>
-          </Modal03>
-          <Modal04 isOpen={isComponent01Open} setIsOpen={closeComponent01}>
-            <h3 className="text-md font-semibold uppercase mb-1">Update PIC</h3>
+          </Modal>
+
+          <Modal isOpen={isComponent01Open} setIsOpen={closeComponent01}>
+            <h3 className="text-md font-semibold uppercase mb-1">
+              Update the PIC
+            </h3>
             <div className="flex justify-between">
               <input
                 type="text"
                 value={picValue}
                 onChange={(e) => setPicValue(e.target.value)}
-                className="border-2 border-black rounded-md px-4 py-2 min-w-[85%]"
+                className="border-2 border-black rounded-md px-4 py-2 min-w-[80%]"
               />
               <button
                 onClick={() => updatePic(options[index].pms_code, picValue)}
-                className="rounded-md px-4 py-1 bg-[#47AFFF] hover:bg-blue-500 text-white"
+                className="rounded-md border-2 px-1 py-[2px] border-[#47AFFF] bg-[#47AFFF] text-white"
               >
                 Confirm
               </button>
             </div>
-          </Modal04>
+          </Modal>
         </div>
       )}
     </>
