@@ -7,13 +7,11 @@ import Modal from "./Modal";
 const Spo = () => {
   const [selectedValue, setSelectedValue] = useState("");
   const [isComponentOpen, setIsComponentOpen] = useState(false);
-    const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState("");
 
-    const handleChange = (e) => {
-      setInputValue(e.target.value);
-    };
-
-
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
+  };
 
   const handleSelectChange = (event) => {
     setSelectedValue(event.target.value);
@@ -144,8 +142,6 @@ const Spo = () => {
         setIsOpen={closeComponent}
         classes={"!w-[500px] !p-6"}
       >
-
-       
         <div className="w-full h-fit flex flex-col gap-8">
           <h1 className="text-black font-medium font-dm-sans text-[28px] leading-normal">
             Order
