@@ -5,9 +5,6 @@ import Floor1 from "./Floor1";
 import Floor2 from "./Floor2";
 import Floor3 from "./Floor3";
 import Modal from "./Modal";
-
-
-
 import FloorData from "./FloorData";
 
 const Home = ({ setIsHome, isHome }) => {
@@ -359,7 +356,7 @@ const Home = ({ setIsHome, isHome }) => {
         </div>
       </Modal>
 
-      <Modal isOpen={isComponentOpen} setIsOpen={closeComponent}>
+      <Modal isOpen={isComponentOpen} setIsOpen={closeComponent} classes={"max-h-[80%] overflow-y-scroll"}>
         <FloorData isComponentOpen={isComponentOpen} inventory={setInverntory} shelve={shelve} rack={rack}/>
       </Modal>
       <h2 className="text-3xl font-medium ">Inventory</h2>
