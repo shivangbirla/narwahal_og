@@ -5,9 +5,7 @@ const Floor3 = ({onClick}) => {
 
   useEffect(() => {
     const handleClick = (event) => {
-      // alert("Mouse clicked on SVG element", event.target);
-      onClick()
-      // Add your desired logic here
+      onClick(4)
     };
 
     const groupElement = ref.current;

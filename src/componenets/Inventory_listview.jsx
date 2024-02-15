@@ -7,12 +7,11 @@ import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import { styled } from "@mui/material/styles";
 import { ReactComponent as DropDownIcon } from "../assets/expand_more.svg";
 import { ReactComponent as DropDownIconb } from "../assets/expand_moreb.svg";
-import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
+
 
 import Typography from "@mui/material/Typography";
 
 
-import Modal02 from "./Modal02";
 import InputBox from "./InputBox";
 import AddIcon from "@mui/icons-material/Add";
 import { Modal } from "@mui/material";
@@ -348,7 +347,7 @@ const Inventory_listview = ({ setIsHome,isHome }) => {
           </div>
         )}
 
-        <Modal02 isOpen={isComponent01Open} setIsOpen={closeComponent01}>
+        <Modal isOpen={isComponent01Open} setIsOpen={closeComponent01}>
           <div className="h-full flex flex-col gap-6">
             <div className="flex items-center justify-between">
               <InputBox
@@ -385,7 +384,7 @@ const Inventory_listview = ({ setIsHome,isHome }) => {
               </tbody>
             </table>
           </div>
-        </Modal02>
+        </Modal>
 
         <Modal
           open={isopen}

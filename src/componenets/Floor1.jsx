@@ -6,7 +6,7 @@ const Floor1 = ({onClick}) => {
   useEffect(() => {
     const handleClick = (event) => {
       // alert("Mouse clicked on SVG element", event.target);
-      onClick()
+      onClick(1)
       // Add your desired logic here
     };
 
