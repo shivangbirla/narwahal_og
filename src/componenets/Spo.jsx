@@ -7,13 +7,11 @@ import Modal from "./Modal";
 const Spo = () => {
   const [selectedValue, setSelectedValue] = useState("");
   const [isComponentOpen, setIsComponentOpen] = useState(false);
-    const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState("");
 
-    const handleChange = (e) => {
-      setInputValue(e.target.value);
-    };
-
-
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
+  };
 
   const handleSelectChange = (event) => {
     setSelectedValue(event.target.value);
@@ -139,7 +137,11 @@ const Spo = () => {
         </div>
       </div>
 
-      <Modal isOpen={isComponentOpen} setIsOpen={closeComponent} classes={"!w-fit"}>
+      <Modal
+        isOpen={isComponentOpen}
+        setIsOpen={closeComponent}
+        classes={"!w-fit"}
+      >
         <div className="w-fit h-fit flex flex-col gap-8">
           <h1 className="text-black font-medium font-dm-sans text-[28px] leading-normal">
             Order
@@ -159,7 +161,6 @@ const Spo = () => {
                   borderRadius: "5px",
                   border: "1px solid rgba(0, 0, 0, 0.20)",
                 }}
-
               />
             </div>
             <div className="w-full flex justify-end gap-4">
@@ -169,7 +170,6 @@ const Spo = () => {
               <button className="rounded-md border-2 px-4 py-[2px] border-[#47AFFF] bg-[#47AFFF] text-white">
                 Confirm
               </button>
-
             </div>
           </div>
         </div>

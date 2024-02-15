@@ -3,6 +3,7 @@ import { cn } from "../lib/utils";
 import touch from "../assets/touch_app.svg";
 import products from "../data/data_table";
 import Modal03 from "./Modal03";
+import Modal04 from "./Modal04";
 
 const Pms = () => {
   const [selectedView, setSelectedView] = useState("Timeline");
@@ -10,6 +11,7 @@ const Pms = () => {
   const [selectedButton, setSelectedButton] = useState("week");
   const [options, setOptions] = useState([]);
   const [index, setIndex] = useState(1);
+  const [picValue, setPicValue] = useState("");
 
   const fetchOptions = async () => {
     try {
@@ -36,6 +38,7 @@ const Pms = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({}),
+        mode: "cors",
       };
 
       const response = await fetch(
@@ -53,6 +56,22 @@ const Pms = () => {
       }
     } catch (error) {
       console.error("Error updating options:", error.message);
+    }
+  };
+
+  const updatePic = async (pmsCode, pic) => {
+    try {
+      const response = await fetch(
+        `http://159.89.204.17:81/pmsjobs/{pms_code)/change_pic/?pms_code=${pmsCode}&pic=${pic}`
+      );
+      if (response.ok) {
+        const data = await response.json();
+        console.log("PIC Updated!");
+      } else {
+        throw new Error(`Error: ${await response.text()}`);
+      }
+    } catch (error) {
+      console.error("Error fetching options:", error.message);
     }
   };
 
@@ -88,17 +107,23 @@ const Pms = () => {
     setSelectedValue(event.target.value);
   };
 
-  // State to track whether the component is open or closed
   const [isComponentOpen, setIsComponentOpen] = useState(false);
 
-  // Function to handle opening the component
   const openComponent = () => {
     setIsComponentOpen(true);
   };
 
-  // Function to handle closing the component
   const closeComponent = () => {
     setIsComponentOpen(false);
+  };
+  const [isComponent01Open, setIsComponent01Open] = useState(false);
+
+  const openComponent01 = () => {
+    setIsComponent01Open(true);
+  };
+
+  const closeComponent01 = () => {
+    setIsComponent01Open(false);
   };
 
   return (
@@ -187,32 +212,45 @@ const Pms = () => {
                       <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
                         Status
                       </th>
+                      <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                        Desc
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="pt-[10px] pb-[12px]">
                     {options.map((option, index) => (
-                      <tr
-                        key={index}
-                        className="bg-white text-[#535353]"
-                        onClick={() => {
-                          openComponent();
-                          setIndex(index);
-                        }}
-                      >
+                      <tr key={index} className="bg-white text-[#535353]">
                         <td className="px-[15px] py-[6px] whitespace-nowrap px-auto">
                           {option.pms_desc}
                         </td>
-                        <td className="px-[15px] py-[6px] whitespace-nowrap">
-                          PIC
+                        <td
+                          className="px-[15px] py-[6px] whitespace-nowrap cursor-pointer"
+                          onClick={() => {
+                            openComponent01();
+                            setIndex(index);
+                          }}
+                        >
+                          {option.pic}
                         </td>
                         <td className="px-[15px] py-[6px] whitespace-nowrap">
                           {selectedButton}
                         </td>
                         <td className="px-[15px] py-[6px] whitespace-nowrap">
-                          {option.due_date}
+                          {option.due_date?.toString().slice(0, 10)}
                         </td>
                         <td className="px-[15px] py-[6px] whitespace-nowrap">
                           {selectedValue}
+                        </td>
+                        <td
+                          className="px-[15px] py-[6px] whitespace-nowrap"
+                          onClick={() => {
+                            openComponent();
+                            setIndex(index);
+                          }}
+                        >
+                          <button className="rounded-md border-2 px-3 py-[1px] border-[#47AFFF] bg-[#47AFFF] text-white">
+                            show
+                          </button>
                         </td>
                       </tr>
                     ))}
@@ -280,37 +318,75 @@ const Pms = () => {
                 </th>
               </tr>
             </thead>
-            <tbody className="pt-[10px] pb-[12px]">
-              {options[index]?.products.map((opt, i) => (
-                <tr key={i} className="bg-white text-[#535353]">
-                  <td className="px-[15px] py-[6px] whitespace-nowrap px-auto">
-                    {opt.material_desc}
-                  </td>
-                  <td className="px-[15px] py-[6px] whitespace-nowrap">
-                    {opt.part_no}
-                  </td>
-                  <td className="px-[15px] py-[6px] whitespace-nowrap">
-                    {opt.rob}
-                  </td>
-                  <td className="px-[15px] py-[6px] whitespace-nowrap">
-                    {opt.work}
-                  </td>
-                  <td className="px-[15px] py-[6px] whitespace-nowrap">
-                    LOCATION
-                  </td>
-                  <td className="px-[15px] py-[6px] whitespace-nowrap">USED</td>
-                  <td className="px-[15px] py-[6px] whitespace-nowrap">
-                    {opt.scanned_quantity}
-                  </td>
-                  <td className="px-[15px] py-[6px] whitespace-nowrap">
-                    {opt.reconditioned}
-                  </td>
-                  <td className="px-[15px] py-[6px] whitespace-nowrap">
-                    DETECTION
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+            {selectedValue === "completed" ? (
+              <tbody className="pt-[10px] pb-[12px]">
+                {options[index]?.history.map((opt, i) => (
+                  <tr key={i} className="bg-white text-[#535353]">
+                    <td className="px-[15px] py-[6px] whitespace-nowrap px-auto">
+                      {opt.material_desc}
+                    </td>
+                    <td className="px-[15px] py-[6px] whitespace-nowrap">
+                      {opt.part_no}
+                    </td>
+                    <td className="px-[15px] py-[6px] whitespace-nowrap">
+                      {opt.rob}
+                    </td>
+                    <td className="px-[15px] py-[6px] whitespace-nowrap">
+                      {opt.work}
+                    </td>
+                    <td className="px-[15px] py-[6px] whitespace-nowrap">
+                      LOCATION
+                    </td>
+                    <td className="px-[15px] py-[6px] whitespace-nowrap">
+                      USED
+                    </td>
+                    <td className="px-[15px] py-[6px] whitespace-nowrap">
+                      {opt.scanned_quantity}
+                    </td>
+                    <td className="px-[15px] py-[6px] whitespace-nowrap">
+                      {opt.reconditioned}
+                    </td>
+                    <td className="px-[15px] py-[6px] whitespace-nowrap">
+                      DETECTION
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            ) : (
+              <tbody className="pt-[10px] pb-[12px]">
+                {options[index]?.products.map((opt, i) => (
+                  <tr key={i} className="bg-white text-[#535353]">
+                    <td className="px-[15px] py-[6px] whitespace-nowrap px-auto">
+                      {opt.material_desc}
+                    </td>
+                    <td className="px-[15px] py-[6px] whitespace-nowrap">
+                      {opt.part_no}
+                    </td>
+                    <td className="px-[15px] py-[6px] whitespace-nowrap">
+                      {opt.rob}
+                    </td>
+                    <td className="px-[15px] py-[6px] whitespace-nowrap">
+                      {opt.work}
+                    </td>
+                    <td className="px-[15px] py-[6px] whitespace-nowrap">
+                      LOCATION
+                    </td>
+                    <td className="px-[15px] py-[6px] whitespace-nowrap">
+                      USED
+                    </td>
+                    <td className="px-[15px] py-[6px] whitespace-nowrap">
+                      {opt.scanned_quantity}
+                    </td>
+                    <td className="px-[15px] py-[6px] whitespace-nowrap">
+                      {opt.reconditioned}
+                    </td>
+                    <td className="px-[15px] py-[6px] whitespace-nowrap">
+                      DETECTION
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            )}
           </table>
           {selectedValue === "in_progress" ? (
             <button
@@ -338,6 +414,23 @@ const Pms = () => {
           )}
         </div>
       </Modal03>
+      <Modal04 isOpen={isComponent01Open} setIsOpen={closeComponent01}>
+        <h3 className="text-md font-semibold uppercase mb-1">Update the PIC</h3>
+        <div className="flex justify-between">
+          <input
+            type="text"
+            value={picValue}
+            onChange={(e) => setPicValue(e.target.value)}
+            className="border-2 border-black rounded-md px-4 py-2 min-w-[80%]"
+          />
+          <button
+            onClick={() => updatePic(options[index].pms_code, picValue)}
+            className="rounded-md border-2 px-1 py-[2px] border-[#47AFFF] bg-[#47AFFF] text-white"
+          >
+            Confirm
+          </button>
+        </div>
+      </Modal04>
     </div>
   );
 };
