@@ -128,7 +128,7 @@ const Inventory_listview = ({ setIsHome }) => {
           <div className="flex flex-row gap-5 mb-[30px]">
             {buttons.map((button) => (
               <button
-                className="px-[18px] py-[7px] border border-black rounded-lg"
+                className="px-[18px] py-[5px] border border-black rounded-lg"
                 onClick={button.onClick}
               >
                 {button.content}
