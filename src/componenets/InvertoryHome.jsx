@@ -5,9 +5,9 @@ import Home from './Home'
 const InvertoryHome = () => {
   const [isHome, setIsHome] = useState(true)
   return isHome ? (
-    <Home setIsHome={setIsHome} />
+    <Home setIsHome={setIsHome} isHome={isHome} />
   ) : (
-    <Inventory_listview setIsHome={setIsHome} />
+    <Inventory_listview setIsHome={setIsHome} isHome={isHome} />
   );
 }
 
