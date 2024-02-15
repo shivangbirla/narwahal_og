@@ -70,8 +70,8 @@ const Cin_table = () => {
 
   return (
     <>
-      <div className="bg-[#F8F9FA]">
-        <h2 className="text-[20px] font-medium mb-6">Check In</h2>
+      <div className="bg-[#F8F9FA] ">
+        <h2 className="text-3xl font-medium mb-[22px]">Check In</h2>
         <div className="flex justify-between items-center">
           <ul className="tabs group">
             {tabs.map((tab, index) => (
