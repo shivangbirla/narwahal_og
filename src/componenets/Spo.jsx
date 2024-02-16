@@ -88,15 +88,15 @@ const Spo = () => {
       <div className=" flex flex-col gap-5 bg-white rounded-2xl">
         <div className="">
           <div className="p-[8px] shadow-sm bg-opacity-25 rounded-2xl">
-            <div className="h-fit rounded-t-2xl overflow-hidden">
+            <div className="h-fit rounded-t-2xl overflow-x-scroll">
               <table className="min-w-full text-black shadow-sm">
                 <thead className="bg-[#F3F9FF]">
                   <tr>
                     <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                      Machinery
+                      Material Code
                     </th>
-                    <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                      Maker
+                    <th className="px-4 py-3 text-left text-sm font-semibold uppercase whitespace-nowrap">
+                      Maker Desc.
                     </th>
                     <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
                       Material Desc.
@@ -129,31 +129,40 @@ const Spo = () => {
                       onClick={openComponent}
                     >
                       <td className="px-[15px] py-[6px] whitespace-nowrap px-auto">
-                        Lorem Ipsum
+                        {product.material_code}
+                      </td>
+                      <td className="px-[15px] py-[6px] whitespace-nowrap line-clamp-1 max-w-[200px]">
+                        {product.maker_desc}
                       </td>
                       <td className="px-[15px] py-[6px] whitespace-nowrap">
-                        Pic
+                        {product.material_desc}
                       </td>
                       <td className="px-[15px] py-[6px] whitespace-nowrap">
-                        Interval
+                        {product.part_no}
                       </td>
                       <td className="px-[15px] py-[6px] whitespace-nowrap">
-                        Due Date
+                        {product.rob}
                       </td>
                       <td className="px-[15px] py-[6px] whitespace-nowrap">
-                        Status
+                        {product.consumed}
                       </td>
                       <td className="px-[15px] py-[6px] whitespace-nowrap">
-                        Status
+                        4
                       </td>
                       <td className="px-[15px] py-[6px] whitespace-nowrap">
-                        Status
+                        ----
                       </td>
-                      <td className="px-[15px] py-[6px] whitespace-nowrap">
-                        Status
-                      </td>
-                      <td className="px-[15px] py-[6px] whitespace-nowrap">
-                        Status
+                      <td className={cn(
+                          "px-4 py-2 whitespace-nowrap capitalize text-center",
+                      )}>
+                        <div className={cn(
+                            "rounded-lg text-white ring-1 px-2",
+                            product.status === "ok" ? "bg-emerald-400 ring-emerald-700" :
+                                product.status === "critical" ? "bg-orange-300 ring-orange-700"
+                                : ""
+                        )}>
+                          {product.status}
+                        </div>
                       </td>
                     </tr>
                   ))}
