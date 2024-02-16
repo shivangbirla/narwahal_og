@@ -35,8 +35,10 @@ const Pms = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
-        setOptions(data);
+        if (data.result.length > 0) {
+          setOptions(data.result);
+          setNoPages(data.pages);
+        }
       } else {
         throw new Error(`Error: ${await response.text()}`);
       }
@@ -66,7 +68,7 @@ const Pms = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        console.log(data.result);
         console.log("Updated");
         // Handle the updated data as needed
       } else {
@@ -242,7 +244,7 @@ const Pms = () => {
                         </tr>
                       </thead>
                       <tbody className="pt-[10px] pb-[12px]">
-                        {options.map((option, index) => (
+                        {options?.map((option, index) => (
                           <tr key={index} className="bg-white text-[#535353]">
                             <td className="px-[15px] py-[6px] whitespace-nowrap px-auto">
                               {option.pms_desc}
@@ -280,15 +282,19 @@ const Pms = () => {
                         ))}
                       </tbody>
                     </table>
-                    <Pagination
-                      count={noPages}
-                      page={page}
-                      onChange={handlePageChange}
-                      variant="outlined"
-                      shape="rounded"
-                      className="mx-auto flex items-center justify-center my-5"
-                      color="primary"
-                    />
+                    {noPages ? (
+                      <Pagination
+                        count={noPages}
+                        page={page}
+                        onChange={handlePageChange}
+                        variant="outlined"
+                        shape="rounded"
+                        className="mx-auto flex items-center justify-center my-5"
+                        color="primary"
+                      />
+                    ):<div className="w-full my-4 text-lg text-gray-400 font-semibold text-center">
+                      No Data Found
+                      </div>}
                   </div>
                 </div>
                 <div className="mt-[12px] flex justify-end mr-4 gap-4">
@@ -353,7 +359,7 @@ const Pms = () => {
                 </thead>
                 {selectedValue === "completed" ? (
                   <tbody className="pt-[10px] pb-[12px]">
-                    {options[index]?.history.map((opt, i) => (
+                    {options[index]?.history?.map((opt, i) => (
                       <tr key={i} className="bg-white text-[#535353]">
                         <td className="px-[15px] py-[6px] whitespace-nowrap px-auto">
                           {opt.material_desc}
@@ -421,6 +427,8 @@ const Pms = () => {
                   </tbody>
                 )}
               </table>
+              
+              
 
               {selectedValue === "in_progress" && (
                 <div className="mt-[12px] flex justify-end mr-4 gap-4">
@@ -433,7 +441,7 @@ const Pms = () => {
                   <button
                     className="self-end bg-[#47AFFF] hover:bg-blue-500 text-white rounded-md px-[24px] py-[8px]"
                     onClick={() =>
-                      updateOptions(options[index].pms_code, "completed")
+                      updateOptions(options[index]?.pms_code, "completed")
                     }
                   >
                     Complete
@@ -451,7 +459,7 @@ const Pms = () => {
                   <button
                     className="self-end bg-[#47AFFF] hover:bg-blue-500 text-white rounded-md px-[24px] py-[8px]"
                     onClick={() =>
-                      updateOptions(options[index].pms_code, "in_progress")
+                      updateOptions(options[index]?.pms_code, "in_progress")
                     }
                   >
                     Check-Out & Start
@@ -483,7 +491,7 @@ const Pms = () => {
                 className="border-2 border-black rounded-md px-4 py-2 min-w-[80%]"
               />
               <button
-                onClick={() => updatePic(options[index].pms_code, picValue)}
+                onClick={() => updatePic(options[index]?.pms_code, picValue)}
                 className="rounded-md border-2 px-1 py-[2px] border-[#47AFFF] bg-[#47AFFF] text-white"
               >
                 Confirm
