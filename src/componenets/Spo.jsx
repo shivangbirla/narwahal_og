@@ -160,12 +160,13 @@ const Spo = () => {
                 </tbody>
               </table>
               <Pagination
-                  count={pages}
-                  page={page}
-                  onChange={handlePageChange}
-                  variant="outlined"
-                  shape="rounded"
-                  className="mx-auto flex items-center justify-center my-5"
+                count={pages}
+                page={page}
+                onChange={handlePageChange}
+                variant="outlined"
+                shape="rounded"
+                className="mx-auto flex items-center justify-center my-5"
+                color="primary"
               />
             </div>
           </div>

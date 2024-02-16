@@ -238,7 +238,7 @@ export const AccordianComponent = ({
                     className="bg-[#47AFFF] text-[10px] px-2 py-[2px] my-auto text-white disabled:bg-slate-200 disabled:text-gray-400 disabled:border-gray-300 disabled:border cursor-pointer rounded-md"
                     disabled={da.rob === 0}
                   >
-                    Track{" "}
+                    Track
                   </button>
                 </td>
               </tr>
@@ -252,6 +252,7 @@ export const AccordianComponent = ({
           variant="outlined"
           shape="rounded"
           className="mx-auto flex items-center justify-center my-5"
+          color="primary"
         />
       </AccordionDetails>
     </Accordion>
