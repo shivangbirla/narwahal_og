@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { cn } from "../lib/utils";
 import touch from "../assets/touch_app.svg";
 import products from "../data/data_table";
 import Modal from "./Modal";
+import {Pagination} from "@mui/material";
+import {BASE_URL} from "../lib/functions";
 
 const Spo = () => {
   const [selectedValue, setSelectedValue] = useState("");
   const [isComponentOpen, setIsComponentOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [pages, setPages] = useState(1);
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
@@ -29,6 +32,30 @@ const Spo = () => {
     setIsComponentOpen(false);
   };
 
+  const [page, setpage] = useState(1);
+  const handlePageChange = (event, value) => {
+    setpage(value);
+  };
+
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const effect = async () => {
+      const resp = await fetch(
+        `${BASE_URL}/spo/products?page_no=${page - 1}`
+      );
+      const data = await resp.json();
+      console.log(data);
+      setProducts(data.products);
+      setPages(data.total_pages);
+      setLoading(false);
+    }
+    setLoading(true);
+    effect();
+  }, [page]);
+
+
   return (
     <div className="flex flex-col gap-[22px] h-full">
       <div className="bg-[#F8F9FA]">
@@ -49,10 +76,10 @@ const Spo = () => {
               Monthly
             </button>
             <button className="px-[18px] py-[7px] border border-black rounded-lg">
-              Quaterly
+              Quarterly
             </button>
             <button className="px-[18px] py-[7px] border border-black rounded-lg">
-              Anually
+              Annually
             </button>
           </div>
         </div>
@@ -95,7 +122,7 @@ const Spo = () => {
                   </tr>
                 </thead>
                 <tbody className="pt-[10px] pb-[12px]">
-                  {[1, 2, 3, 4, 5, 6, 7].map((_, index) => (
+                  {products.map((product, index) => (
                     <tr
                       key={index}
                       className="bg-white text-[#535353]"
@@ -132,6 +159,14 @@ const Spo = () => {
                   ))}
                 </tbody>
               </table>
+              <Pagination
+                  count={pages}
+                  page={page}
+                  onChange={handlePageChange}
+                  variant="outlined"
+                  shape="rounded"
+                  className="mx-auto flex items-center justify-center my-5"
+              />
             </div>
           </div>
         </div>
