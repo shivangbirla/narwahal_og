@@ -152,15 +152,21 @@ const Spo = () => {
                       <td className="px-[15px] py-[6px] whitespace-nowrap">
                         ----
                       </td>
-                      <td className={cn(
-                          "px-4 py-2 whitespace-nowrap capitalize text-center",
-                      )}>
-                        <div className={cn(
-                            "rounded-lg text-white ring-1 px-2",
-                            product.status === "ok" ? "bg-emerald-400 ring-emerald-700" :
-                                product.status === "critical" ? "bg-orange-300 ring-orange-700"
-                                : ""
-                        )}>
+                      <td
+                        className={cn(
+                          "px-4 py-2 whitespace-nowrap capitalize text-center"
+                        )}
+                      >
+                        <div
+                          className={cn(
+                            "rounded-lg text-white text-sm  ring-1 px-2 w-5/6",
+                            product.status === "ok"
+                              ? "bg-emerald-400/80 hover:bg-emerald-500 ring-emerald-700"
+                              : product.status === "critical"
+                              ? "bg-orange-300/80 hover:bg-orange-500  ring-orange-700"
+                              : ""
+                          )}
+                        >
                           {product.status}
                         </div>
                       </td>
