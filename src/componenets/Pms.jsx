@@ -7,6 +7,7 @@ import Modal from "./Modal";
 import { BASE_URL } from "../lib/functions";
 
 import ShowcaseLoading from "./loading/ShowcaseLoading";
+import {Pagination} from "@mui/material";
 
 const Pms = () => {
   const [selectedView, setSelectedView] = useState("Timeline");
@@ -16,13 +17,18 @@ const Pms = () => {
   const [index, setIndex] = useState(1);
   const [picValue, setPicValue] = useState("");
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  }
 
   const fetchOptions = async () => {
     try {
       setLoading(true);
 
       const response = await fetch(
-        `${BASE_URL}/pms/get_jobs?status=${selectedValue}&due_within=${selectedButton}?page_no=1`
+        `${BASE_URL}/pms/get_jobs?status=${selectedValue}&due_within=${selectedButton}?page_no=${page}`
       );
       if (response.ok) {
         const data = await response.json();
@@ -86,7 +92,7 @@ const Pms = () => {
 
   useEffect(() => {
     fetchOptions();
-  }, [selectedButton, selectedValue]);
+  }, [selectedButton, selectedValue, page]);
 
   const tabs = [
     {
@@ -274,6 +280,14 @@ const Pms = () => {
                             ))}
                           </tbody>
                         </table>
+                        <Pagination
+                            count={5}
+                            page={page}
+                            onChange={handlePageChange}
+                            variant="outlined"
+                            shape="rounded"
+                            className="mx-auto flex items-center justify-center my-5"
+                        />
                       </div>
                     </div>
                     <div className="mt-[12px] flex justify-end mr-4 gap-4">
