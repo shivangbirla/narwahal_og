@@ -16,7 +16,6 @@ const Home = ({ setIsHome, isHome }) => {
   const [rack, setRack] = useState();
   const [shelve, setShelve] = useState();
 
-  console.log("hello", setInverntory, rack, shelve);
 
   const handleOpen = (inventory) => {
     setIsOpen(true);

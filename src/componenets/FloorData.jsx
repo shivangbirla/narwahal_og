@@ -14,6 +14,7 @@ import toast from "react-hot-toast";
 const FloorData = ({ inventory, rack, shelve, isComponentOpen }) => {
   const [accordianData, setAccordianData] = useState([]);
   const [selectedAccordian, setSelectedAccordian] = useState();
+  const [isStock, setIsStock] = useState(false);
 
   const handleChange = (panel) => {
     setSelectedAccordian(selectedAccordian === panel ? null : panel);
@@ -62,17 +63,25 @@ const FloorData = ({ inventory, rack, shelve, isComponentOpen }) => {
               className="pl-9 pr-4 py-2 border h-full bg-transparent border-gray-300 rounded-md focus:outline-none focus:border-blue-500 "
             />
           </div>
-          <button className="bg-transparent !min-w-[214px] hover:bg-gray-100 border border-gray-400 rounded-lg">
+          <button
+            className={cn(
+              "bg-transparent !min-w-[214px] hover:bg-gray-100 border border-gray-400 rounded-lg",
+              isStock && "bg-blue-100 border-blue-400 text-blue-500"
+            )}
+            onClick={() => setIsStock(!isStock)}
+          >
             Stock Reconciliation
           </button>
         </div>
       </div>
+      s
       <div className="h-full w-full flex flex-col gap-6">
         {accordianData.map((acc) => (
           <AccordianComponent
             handleChange={handleChange}
             selectedAccordian={selectedAccordian}
             acc={acc}
+            isStock={isStock}
             key={acc._id}
           />
         ))}
@@ -87,6 +96,7 @@ export const AccordianComponent = ({
   selectedAccordian,
   acc,
   handleChange,
+  isStock,
 }) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -197,23 +207,14 @@ export const AccordianComponent = ({
               </th>
             </tr>
           </thead>
-          {/* {
-    "_id": "65cc7a9abcf1e9296c2b4522",
-    "material_code": "VS.NAS.9035579",
-    "material_desc": "FUSE, 250V 2A",
-    "part_no": "119902300-A-2",
-    "rob": 0,
-    "work": 1,
-    "reconditioned": 0,
-    "consumed": 0
-} */}
+
           <tbody className="pt-[10px] pb-[12px]">
             {data.map((da, index) => (
               <tr
                 key={index}
                 className={cn(
                   "bg-white text-[#535353]",
-                  da.rob === 0 && "bg-[#FFF7F2] text-[#E56108] "
+                  isStock && da.rob === 0 && "bg-[#FFF7F2] text-[#E56108] "
                 )}
                 // onClick={openComponent01}
               >
@@ -236,7 +237,7 @@ export const AccordianComponent = ({
                 <td className="px-[15px] py-[6px] whitespace-nowrap">
                   <button
                     className="bg-[#47AFFF] text-[10px] px-2 py-[2px] my-auto text-white disabled:bg-slate-200 disabled:text-gray-400 disabled:border-gray-300 disabled:border cursor-pointer rounded-md"
-                    disabled={da.rob === 0}
+                    disabled={isStock && da.rob === 0}
                   >
                     Track
                   </button>
