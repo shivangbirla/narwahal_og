@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { cn } from "../lib/utils";
 import touch from "../assets/touch_app.svg";
-import products from "../data/data_table";
 import Modal from "./Modal";
 
 import { BASE_URL } from "../lib/functions";
@@ -17,11 +16,14 @@ const Pms = () => {
   const [index, setIndex] = useState(1);
   const [picValue, setPicValue] = useState("");
   const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
   const [noPages, setNoPages] = useState(0);
+  const [selectedPms, setSelectedPms] = useState(null);
+  const [modalPage, setModalPage] = useState(1);
+  const [modalTotalPages, setModalTotalPages] = useState(1);
+  const [modalData, setModalData] = useState(null);
 
   const handlePageChange = (event, value) => {
-    setPage(value);
+    setModalPage(value);
   };
 
   const fetchOptions = async () => {
@@ -30,7 +32,7 @@ const Pms = () => {
 
       const response = await fetch(
         `${BASE_URL}/pms/get_jobs?status=${selectedValue}&due_within=${selectedButton}&page_no=${
-          page - 1
+          modalPage - 1
         }`
       );
       if (response.ok) {
@@ -97,7 +99,7 @@ const Pms = () => {
 
   useEffect(() => {
     fetchOptions();
-  }, [selectedButton, selectedValue, page]);
+  }, [selectedButton, selectedValue, modalPage]);
 
   const tabs = [
     {
@@ -129,8 +131,9 @@ const Pms = () => {
 
   const [isComponentOpen, setIsComponentOpen] = useState(false);
 
-  const openComponent = () => {
+  const openComponent = (pms_code) => {
     setIsComponentOpen(true);
+    setSelectedPms(pms_code)
   };
 
   const closeComponent = () => {
@@ -145,6 +148,16 @@ const Pms = () => {
   const closeComponent01 = () => {
     setIsComponent01Open(false);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+        const response = await fetch(`${BASE_URL}/pmsjobs/0EF000.00028/fetch_products?page_no=${modalPage - 1}`)
+        const data = await response.json();
+        setModalTotalPages(data.pages);
+        setModalData(data.products);
+    }
+    fetchData();
+  }, [selectedPms, modalPage]);
 
   return (
     <>
@@ -269,12 +282,14 @@ const Pms = () => {
                             </td>
                             <td
                               className="px-[15px] py-[6px] whitespace-nowrap"
-                              onClick={() => {
-                                openComponent();
-                                setIndex(index);
-                              }}
                             >
-                              <button className="rounded-md px-3 py-[1px] bg-[#47AFFF] text-white hover:bg-blue-500">
+                              <button
+                                  className="rounded-md px-3 py-[1px] bg-[#47AFFF] text-white hover:bg-blue-500"
+                                  onClick={() => {
+                                    openComponent(option.pms_code);
+                                    setIndex(index);
+                                  }}
+                              >
                                 show
                               </button>
                             </td>
@@ -285,7 +300,7 @@ const Pms = () => {
                     {noPages ? (
                       <Pagination
                         count={noPages}
-                        page={page}
+                        page={modalPage}
                         onChange={handlePageChange}
                         variant="outlined"
                         shape="rounded"
@@ -358,8 +373,9 @@ const Pms = () => {
                   </tr>
                 </thead>
                 {selectedValue === "completed" ? (
+
                   <tbody className="pt-[10px] pb-[12px]">
-                    {options[index]?.history?.map((opt, i) => (
+                    {modalData?.map((opt, i) => (
                       <tr key={i} className="bg-white text-[#535353]">
                         <td className="px-[15px] py-[6px] whitespace-nowrap px-auto">
                           {opt.material_desc}
@@ -393,7 +409,7 @@ const Pms = () => {
                   </tbody>
                 ) : (
                   <tbody className="pt-[10px] pb-[12px]">
-                    {options[index]?.products.map((opt, i) => (
+                    {modalData?.products.map((opt, i) => (
                       <tr key={i} className="bg-white text-[#535353]">
                         <td className="px-[15px] py-[6px] whitespace-nowrap px-auto">
                           {opt.material_desc}
@@ -427,7 +443,14 @@ const Pms = () => {
                   </tbody>
                 )}
               </table>
-              
+              <Pagination
+                  count={modalTotalPages}
+                  page={modalPage}
+                  onChange={setModalPage}
+                  variant="outlined"
+                  shape="rounded"
+                  className="mx-auto flex items-center justify-center my-5"
+              />
               
 
               {selectedValue === "in_progress" && (

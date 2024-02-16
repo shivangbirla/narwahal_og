@@ -74,7 +74,6 @@ const FloorData = ({ inventory, rack, shelve, isComponentOpen }) => {
           </button>
         </div>
       </div>
-      s
       <div className="h-full w-full flex flex-col gap-6">
         {accordianData.map((acc) => (
           <AccordianComponent
