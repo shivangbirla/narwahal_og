@@ -7,7 +7,7 @@ import Modal from "./Modal";
 import { BASE_URL } from "../lib/functions";
 
 import ShowcaseLoading from "./loading/ShowcaseLoading";
-import {Pagination} from "@mui/material";
+import { Pagination } from "@mui/material";
 
 const Pms = () => {
   const [selectedView, setSelectedView] = useState("Timeline");
@@ -18,17 +18,20 @@ const Pms = () => {
   const [picValue, setPicValue] = useState("");
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
+  const [noPages, setNoPages] = useState(0);
 
   const handlePageChange = (event, value) => {
     setPage(value);
-  }
+  };
 
   const fetchOptions = async () => {
     try {
       setLoading(true);
 
       const response = await fetch(
-        `${BASE_URL}/pms/get_jobs?status=${selectedValue}&due_within=${selectedButton}&?page_no=${page}`
+        `${BASE_URL}/pms/get_jobs?status=${selectedValue}&due_within=${selectedButton}&page_no=${
+          page - 1
+        }`
       );
       if (response.ok) {
         const data = await response.json();
@@ -186,311 +189,307 @@ const Pms = () => {
                   </button>
                 ))}
               </div>
-              <div className="py-[23px] pl-[36px] pr-[57px] flex flex-col gap-5 bg-white rounded-2xl">
-                <div className="flex justify-between">
-                  <h1 className="text-black text-lg my-auto">
-                    PMS- Lorem Ipsum
-                  </h1>
-                  <div className="flex flex-row items-center mr-6">
-                    <label
-                      htmlFor="dropdown"
-                      className="text-[16px] font-medium mr-4"
-                    >
-                      Status
-                    </label>
-                    <select
-                      id="dropdown"
-                      className="border border-gray-300 pr-12 py-2 rounded-md focus:outline-none"
-                      value={selectedValue}
-                      onChange={handleSelectChange}
-                    >
-                      <option value="in_progress">In Progress</option>
-                      <option value="completed">Completed</option>
-                      <option value="planning">Planning</option>
-                    </select>
-                  </div>
-                </div>
-
-                {selectedView === "Timeline" && (
-                  <div className="">
-                    <div className="p-[8px] shadow-sm bg-opacity-25 rounded-2xl">
-                      <div className="h-fit rounded-t-2xl overflow-hidden">
-                        <table className="min-w-full text-black shadow-sm">
-                          <thead className="bg-[#F3F9FF]">
-                            <tr>
-                              <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                                Maintenance Job
-                              </th>
-                              <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                                PIC
-                              </th>
-                              <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                                Interval
-                              </th>
-                              <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                                Due Date
-                              </th>
-                              <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                                Status
-                              </th>
-                              <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                                Desc
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody className="pt-[10px] pb-[12px]">
-                            {options.map((option, index) => (
-                              <tr
-                                key={index}
-                                className="bg-white text-[#535353]"
-                              >
-                                <td className="px-[15px] py-[6px] whitespace-nowrap px-auto">
-                                  {option.pms_desc}
-                                </td>
-                                <td
-                                  className="px-[15px] py-[6px] whitespace-nowrap cursor-pointer"
-                                  onClick={() => {
-                                    openComponent01();
-                                    setIndex(index);
-                                  }}
-                                >
-                                  {option.pic}
-                                </td>
-                                <td className="px-[15px] py-[6px] whitespace-nowrap">
-                                  {selectedButton}
-                                </td>
-                                <td className="px-[15px] py-[6px] whitespace-nowrap">
-                                  {option.due_date?.toString().slice(0, 10)}
-                                </td>
-                                <td className="px-[15px] py-[6px] whitespace-nowrap">
-                                  {selectedValue}
-                                </td>
-                                <td
-                                  className="px-[15px] py-[6px] whitespace-nowrap"
-                                  onClick={() => {
-                                    openComponent();
-                                    setIndex(index);
-                                  }}
-                                >
-                                  <button className="rounded-md px-3 py-[1px] bg-[#47AFFF] text-white hover:bg-blue-500">
-                                    show
-                                  </button>
-                                </td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                        <Pagination
-                            count={5}
-                            page={page}
-                            onChange={handlePageChange}
-                            variant="outlined"
-                            shape="rounded"
-                            className="mx-auto flex items-center justify-center my-5"
-                        />
-                      </div>
-                    </div>
-                    <div className="mt-[12px] flex justify-end mr-4 gap-4">
-                      <button className="rounded-md border-black border px-4 py-[2px]">
-                        Cancel
-                      </button>
-                      <button className="rounded-md px-4 py-1 bg-[#47AFFF] text-white hover:bg-blue-500">
-                        Confirm
-                      </button>
-                    </div>
-                  </div>
-                )}
+            </div>
+          </div>
+          <div className="py-[23px] pl-[36px] pr-[57px] flex flex-col gap-5 bg-white rounded-2xl">
+            <div className="flex justify-between">
+              <h1 className="text-black text-lg my-auto">PMS- Lorem Ipsum</h1>
+              <div className="flex flex-row items-center mr-6">
+                <label
+                  htmlFor="dropdown"
+                  className="text-[16px] font-medium mr-4"
+                >
+                  Status
+                </label>
+                <select
+                  id="dropdown"
+                  className="border border-gray-300 pr-12 py-2 rounded-md focus:outline-none"
+                  value={selectedValue}
+                  onChange={handleSelectChange}
+                >
+                  <option value="in_progress">In Progress</option>
+                  <option value="completed">Completed</option>
+                  <option value="planning">Planning</option>
+                </select>
               </div>
-              <Modal isOpen={isComponentOpen} setIsOpen={closeComponent}>
-                <div className="w-full h-[550px] flex flex-col gap-6">
-                  <div className="flex items-center">
-                    <div className="flex gap-5 w-full justify-between">
-                      <h1 className="my-auto text-black  font-sans font-medium text-lg leading-normal tracking-tighter">
-                        PMS Job Description
-                      </h1>
-                      <div className="flex flex-row gap-3">
-                        <button className="px-[18px] py-[7px] border border-gray-300 rounded-lg">
-                          Instructions
-                        </button>
-                        <button className="px-[18px] py-[7px] border border-gray-300 rounded-lg">
-                          Drawings
-                        </button>
-                      </div>
-                    </div>
+            </div>
+
+            {selectedView === "Timeline" && (
+              <div className="">
+                <div className="p-[8px] shadow-sm bg-opacity-25 rounded-2xl">
+                  <div className="h-fit rounded-t-2xl overflow-hidden">
+                    <table className="min-w-full text-black shadow-sm">
+                      <thead className="bg-[#F3F9FF]">
+                        <tr>
+                          <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                            Maintenance Job
+                          </th>
+                          <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                            PIC
+                          </th>
+                          <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                            Interval
+                          </th>
+                          <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                            Due Date
+                          </th>
+                          <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                            Status
+                          </th>
+                          <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                            Desc
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody className="pt-[10px] pb-[12px]">
+                        {options.map((option, index) => (
+                          <tr key={index} className="bg-white text-[#535353]">
+                            <td className="px-[15px] py-[6px] whitespace-nowrap px-auto">
+                              {option.pms_desc}
+                            </td>
+                            <td
+                              className="px-[15px] py-[6px] whitespace-nowrap cursor-pointer"
+                              onClick={() => {
+                                openComponent01();
+                                setIndex(index);
+                              }}
+                            >
+                              {option.pic}
+                            </td>
+                            <td className="px-[15px] py-[6px] whitespace-nowrap">
+                              {selectedButton}
+                            </td>
+                            <td className="px-[15px] py-[6px] whitespace-nowrap">
+                              {option.due_date?.toString().slice(0, 10)}
+                            </td>
+                            <td className="px-[15px] py-[6px] whitespace-nowrap">
+                              {selectedValue}
+                            </td>
+                            <td
+                              className="px-[15px] py-[6px] whitespace-nowrap"
+                              onClick={() => {
+                                openComponent();
+                                setIndex(index);
+                              }}
+                            >
+                              <button className="rounded-md px-3 py-[1px] bg-[#47AFFF] text-white hover:bg-blue-500">
+                                show
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                    <Pagination
+                      count={noPages}
+                      page={page}
+                      onChange={handlePageChange}
+                      variant="outlined"
+                      shape="rounded"
+                      className="mx-auto flex items-center justify-center my-5"
+                      color="primary"
+                    />
                   </div>
-                  <table className="min-w-full text-black shadow-sm">
-                    <thead className="bg-[#F3F9FF]">
-                      <tr>
-                        <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
-                          Part Description
-                        </th>
-                        <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
-                          Part No.
-                        </th>
-                        <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
-                          ROB
-                        </th>
-                        <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
-                          Working & Replace
-                        </th>
-                        <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
-                          Location
-                        </th>
-                        <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
-                          Used
-                        </th>
-                        <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
-                          Remanining Qty.
-                        </th>
-                        <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
-                          Condition
-                        </th>
-                        <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
-                          Detection
-                        </th>
-                      </tr>
-                    </thead>
-                    {selectedValue === "completed" ? (
-                      <tbody className="pt-[10px] pb-[12px]">
-                        {options[index]?.history.map((opt, i) => (
-                          <tr key={i} className="bg-white text-[#535353]">
-                            <td className="px-[15px] py-[6px] whitespace-nowrap px-auto">
-                              {opt.material_desc}
-                            </td>
-                            <td className="px-[15px] py-[6px] whitespace-nowrap">
-                              {opt.part_no}
-                            </td>
-                            <td className="px-[15px] py-[6px] whitespace-nowrap">
-                              {opt.rob}
-                            </td>
-                            <td className="px-[15px] py-[6px] whitespace-nowrap">
-                              {opt.work}
-                            </td>
-                            <td className="px-[15px] py-[6px] whitespace-nowrap">
-                              LOCATION
-                            </td>
-                            <td className="px-[15px] py-[6px] whitespace-nowrap">
-                              USED
-                            </td>
-                            <td className="px-[15px] py-[6px] whitespace-nowrap">
-                              {opt.scanned_quantity}
-                            </td>
-                            <td className="px-[15px] py-[6px] whitespace-nowrap">
-                              {opt.reconditioned}
-                            </td>
-                            <td className="px-[15px] py-[6px] whitespace-nowrap">
-                              DETECTION
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    ) : (
-                      <tbody className="pt-[10px] pb-[12px]">
-                        {options[index]?.products.map((opt, i) => (
-                          <tr key={i} className="bg-white text-[#535353]">
-                            <td className="px-[15px] py-[6px] whitespace-nowrap px-auto">
-                              {opt.material_desc}
-                            </td>
-                            <td className="px-[15px] py-[6px] whitespace-nowrap">
-                              {opt.part_no}
-                            </td>
-                            <td className="px-[15px] py-[6px] whitespace-nowrap">
-                              {opt.rob}
-                            </td>
-                            <td className="px-[15px] py-[6px] whitespace-nowrap">
-                              {opt.work}
-                            </td>
-                            <td className="px-[15px] py-[6px] whitespace-nowrap">
-                              LOCATION
-                            </td>
-                            <td className="px-[15px] py-[6px] whitespace-nowrap">
-                              USED
-                            </td>
-                            <td className="px-[15px] py-[6px] whitespace-nowrap">
-                              {opt.scanned_quantity}
-                            </td>
-                            <td className="px-[15px] py-[6px] whitespace-nowrap">
-                              {opt.reconditioned}
-                            </td>
-                            <td className="px-[15px] py-[6px] whitespace-nowrap">
-                              DETECTION
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    )}
-                  </table>
-
-                  {selectedValue === "in_progress" && (
-                    <div className="mt-[12px] flex justify-end mr-4 gap-4">
-                      <button
-                        className="rounded-md border-black border px-4 py-[2px]"
-                        onClick={closeComponent}
-                      >
-                        Close
-                      </button>
-                      <button
-                        className="self-end bg-[#47AFFF] hover:bg-blue-500 text-white rounded-md px-[24px] py-[8px]"
-                        onClick={() =>
-                          updateOptions(options[index].pms_code, "completed")
-                        }
-                      >
-                        Complete
-                      </button>
-                    </div>
-                  )}
-                  {selectedValue === "planning" && (
-                    <div className="mt-[12px] flex justify-end mr-4 gap-4">
-                      <button
-                        className="rounded-md border-black border px-4 py-[2px]"
-                        onClick={closeComponent}
-                      >
-                        Close
-                      </button>
-                      <button
-                        className="self-end bg-[#47AFFF] hover:bg-blue-500 text-white rounded-md px-[24px] py-[8px]"
-                        onClick={() =>
-                          updateOptions(options[index].pms_code, "in_progress")
-                        }
-                      >
-                        Check-Out & Start
-                      </button>
-                    </div>
-                  )}
-                  {selectedValue === "completed" && (
-                    <div className="mt-[12px] flex justify-end mr-4">
-                      <button
-                        className="rounded-md border-black border px-4 py-[2px]"
-                        onClick={closeComponent}
-                      >
-                        Close
-                      </button>
-                    </div>
-                  )}
                 </div>
-              </Modal>
-
-              <Modal isOpen={isComponent01Open} setIsOpen={closeComponent01}>
-                <h3 className="text-md font-semibold uppercase mb-1">
-                  Update the PIC
-                </h3>
-                <div className="flex justify-between">
-                  <input
-                    type="text"
-                    value={picValue}
-                    onChange={(e) => setPicValue(e.target.value)}
-                    className="border-2 border-black rounded-md px-4 py-2 min-w-[80%]"
-                  />
-                  <button
-                    onClick={() => updatePic(options[index].pms_code, picValue)}
-                    className="rounded-md border-2 px-1 py-[2px] border-[#47AFFF] bg-[#47AFFF] text-white"
-                  >
+                <div className="mt-[12px] flex justify-end mr-4 gap-4">
+                  <button className="rounded-md border-black border px-4 py-[2px]">
+                    Cancel
+                  </button>
+                  <button className="rounded-md px-4 py-1 bg-[#47AFFF] text-white hover:bg-blue-500">
                     Confirm
                   </button>
                 </div>
-              </Modal>
-            </div>
+              </div>
+            )}
           </div>
+          <Modal isOpen={isComponentOpen} setIsOpen={closeComponent}>
+            <div className="w-full h-[550px] flex flex-col gap-6">
+              <div className="flex items-center">
+                <div className="flex gap-5 w-full justify-between">
+                  <h1 className="my-auto text-black  font-sans font-medium text-lg leading-normal tracking-tighter">
+                    PMS Job Description
+                  </h1>
+                  <div className="flex flex-row gap-3">
+                    <button className="px-[18px] py-[7px] border border-gray-300 rounded-lg">
+                      Instructions
+                    </button>
+                    <button className="px-[18px] py-[7px] border border-gray-300 rounded-lg">
+                      Drawings
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <table className="min-w-full text-black shadow-sm">
+                <thead className="bg-[#F3F9FF]">
+                  <tr>
+                    <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
+                      Part Description
+                    </th>
+                    <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
+                      Part No.
+                    </th>
+                    <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
+                      ROB
+                    </th>
+                    <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
+                      Working & Replace
+                    </th>
+                    <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
+                      Location
+                    </th>
+                    <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
+                      Used
+                    </th>
+                    <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
+                      Remanining Qty.
+                    </th>
+                    <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
+                      Condition
+                    </th>
+                    <th className="px-[15px] py-[6px] text-left text-sm font-semibold uppercase">
+                      Detection
+                    </th>
+                  </tr>
+                </thead>
+                {selectedValue === "completed" ? (
+                  <tbody className="pt-[10px] pb-[12px]">
+                    {options[index]?.history.map((opt, i) => (
+                      <tr key={i} className="bg-white text-[#535353]">
+                        <td className="px-[15px] py-[6px] whitespace-nowrap px-auto">
+                          {opt.material_desc}
+                        </td>
+                        <td className="px-[15px] py-[6px] whitespace-nowrap">
+                          {opt.part_no}
+                        </td>
+                        <td className="px-[15px] py-[6px] whitespace-nowrap">
+                          {opt.rob}
+                        </td>
+                        <td className="px-[15px] py-[6px] whitespace-nowrap">
+                          {opt.work}
+                        </td>
+                        <td className="px-[15px] py-[6px] whitespace-nowrap">
+                          LOCATION
+                        </td>
+                        <td className="px-[15px] py-[6px] whitespace-nowrap">
+                          USED
+                        </td>
+                        <td className="px-[15px] py-[6px] whitespace-nowrap">
+                          {opt.scanned_quantity}
+                        </td>
+                        <td className="px-[15px] py-[6px] whitespace-nowrap">
+                          {opt.reconditioned}
+                        </td>
+                        <td className="px-[15px] py-[6px] whitespace-nowrap">
+                          DETECTION
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                ) : (
+                  <tbody className="pt-[10px] pb-[12px]">
+                    {options[index]?.products.map((opt, i) => (
+                      <tr key={i} className="bg-white text-[#535353]">
+                        <td className="px-[15px] py-[6px] whitespace-nowrap px-auto">
+                          {opt.material_desc}
+                        </td>
+                        <td className="px-[15px] py-[6px] whitespace-nowrap">
+                          {opt.part_no}
+                        </td>
+                        <td className="px-[15px] py-[6px] whitespace-nowrap">
+                          {opt.rob}
+                        </td>
+                        <td className="px-[15px] py-[6px] whitespace-nowrap">
+                          {opt.work}
+                        </td>
+                        <td className="px-[15px] py-[6px] whitespace-nowrap">
+                          LOCATION
+                        </td>
+                        <td className="px-[15px] py-[6px] whitespace-nowrap">
+                          USED
+                        </td>
+                        <td className="px-[15px] py-[6px] whitespace-nowrap">
+                          {opt.scanned_quantity}
+                        </td>
+                        <td className="px-[15px] py-[6px] whitespace-nowrap">
+                          {opt.reconditioned}
+                        </td>
+                        <td className="px-[15px] py-[6px] whitespace-nowrap">
+                          DETECTION
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                )}
+              </table>
+
+              {selectedValue === "in_progress" && (
+                <div className="mt-[12px] flex justify-end mr-4 gap-4">
+                  <button
+                    className="rounded-md border-black border px-4 py-[2px]"
+                    onClick={closeComponent}
+                  >
+                    Close
+                  </button>
+                  <button
+                    className="self-end bg-[#47AFFF] hover:bg-blue-500 text-white rounded-md px-[24px] py-[8px]"
+                    onClick={() =>
+                      updateOptions(options[index].pms_code, "completed")
+                    }
+                  >
+                    Complete
+                  </button>
+                </div>
+              )}
+              {selectedValue === "planning" && (
+                <div className="mt-[12px] flex justify-end mr-4 gap-4">
+                  <button
+                    className="rounded-md border-black border px-4 py-[2px]"
+                    onClick={closeComponent}
+                  >
+                    Close
+                  </button>
+                  <button
+                    className="self-end bg-[#47AFFF] hover:bg-blue-500 text-white rounded-md px-[24px] py-[8px]"
+                    onClick={() =>
+                      updateOptions(options[index].pms_code, "in_progress")
+                    }
+                  >
+                    Check-Out & Start
+                  </button>
+                </div>
+              )}
+              {selectedValue === "completed" && (
+                <div className="mt-[12px] flex justify-end mr-4">
+                  <button
+                    className="rounded-md border-black border px-4 py-[2px]"
+                    onClick={closeComponent}
+                  >
+                    Close
+                  </button>
+                </div>
+              )}
+            </div>
+          </Modal>
+
+          <Modal isOpen={isComponent01Open} setIsOpen={closeComponent01}>
+            <h3 className="text-md font-semibold uppercase mb-1">
+              Update the PIC
+            </h3>
+            <div className="flex justify-between">
+              <input
+                type="text"
+                value={picValue}
+                onChange={(e) => setPicValue(e.target.value)}
+                className="border-2 border-black rounded-md px-4 py-2 min-w-[80%]"
+              />
+              <button
+                onClick={() => updatePic(options[index].pms_code, picValue)}
+                className="rounded-md border-2 px-1 py-[2px] border-[#47AFFF] bg-[#47AFFF] text-white"
+              >
+                Confirm
+              </button>
+            </div>
+          </Modal>
         </div>
       )}
     </>
