@@ -167,10 +167,9 @@ const Pms = () => {
         <div className="flex flex-col gap-[22px] h-full">
           <div className="bg-[#F8F9FA]">
             <ul className="tabs group">
-              {tabs.map((tab, index) => (
+              {tabs?.map((tab, index) => (
                 <li
                   className={cn(
-                    // "w-1/2 bg-[#E8E8E8] py-3 px-11",
                     selectedView === tab.content && "active"
                   )}
                   onClick={() => {
@@ -191,7 +190,7 @@ const Pms = () => {
               </div>
 
               <div className="flex flex-row gap-5">
-                {buttons.map((button) => (
+                {buttons?.map((button) => (
                   <button
                     className={`px-[18px] py-[4.5px] border rounded-lg ${
                       selectedButton === button.value
@@ -409,7 +408,7 @@ const Pms = () => {
                   </tbody>
                 ) : (
                   <tbody className="pt-[10px] pb-[12px]">
-                    {modalData?.products.map((opt, i) => (
+                    {modalData?.products?.map((opt, i) => (
                       <tr key={i} className="bg-white text-[#535353]">
                         <td className="px-[15px] py-[6px] whitespace-nowrap px-auto">
                           {opt.material_desc}

@@ -67,6 +67,7 @@ const Cin_table = () => {
   };
 
   const handleSelectChange = (event) => {
+    
     setSelectedValue(event.target.value);
   };
 
@@ -78,7 +79,7 @@ const Cin_table = () => {
       setProducts(resp.data.products);
       setPage(resp.data.total_pages);
     } catch (error) {
-      toast.error("Not Found")
+      toast.error("Not Found");
     }
   };
 
@@ -148,15 +149,13 @@ const Cin_table = () => {
                         Scanned Qty.
                       </th>
                       <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                       Checkout Qty.
+                        Checkout Qty.
                       </th>
                       <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
                         Check in
                       </th>
 
-                      <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
-                        
-                      </th>
+                      <th className="px-4 py-3 text-left text-sm font-semibold uppercase"></th>
                     </tr>
                   </thead>
                   <tbody className="pt-[10px] pb-[12px]">
@@ -279,7 +278,7 @@ const Cin_table = () => {
 
 export default Cin_table;
 
- const TableComponent= ({ product })=> {
+const TableComponent = ({ product }) => {
   const [quantity, setQuantity] = useState(0);
 
   const onClick = async () => {
@@ -292,7 +291,7 @@ export default Cin_table;
       `${BASE_URL}/checkin_checkout/check_in?material_code=${product.material_code}&check_in_quantity=${quantity}`,
       {}
     );
-    console.log(resp)
+    console.log(resp);
     toast.success("Checked in successfully");
   };
 
@@ -336,4 +335,4 @@ export default Cin_table;
       </td>
     </tr>
   );
-}
+};
