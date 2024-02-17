@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { cn } from "../lib/utils";
 import touch from "../assets/touch_app.svg";
 import products from "../data/data_table";
 import Modal from "./Modal";
-import {Pagination} from "@mui/material";
-import {BASE_URL} from "../lib/functions";
+import { Pagination } from "@mui/material";
+import { BASE_URL } from "../lib/functions";
 
 const Spo = () => {
   const [selectedValue, setSelectedValue] = useState("");
@@ -42,24 +42,21 @@ const Spo = () => {
 
   useEffect(() => {
     const effect = async () => {
-      const resp = await fetch(
-        `${BASE_URL}/spo/products?page_no=${page - 1}`
-      );
+      const resp = await fetch(`${BASE_URL}/spo/products?page_no=${page - 1}`);
       const data = await resp.json();
       console.log(data);
       setProducts(data.products);
       setPages(data.total_pages);
       setLoading(false);
-    }
+    };
     setLoading(true);
     effect();
   }, [page]);
 
-
   return (
     <div className="flex flex-col gap-[22px] h-full">
       <div className="bg-[#F8F9FA]">
-        <div className="w-full bg-white flex flex-col gap-8 p-7 rounded-xl ">
+        <div className="w-full bg-white flex flex-col gap-8 p-7 rounded-xl">
           <h1 className="text-black font-medium font-dm-sans text-[28px] leading-normal">
             Separate Parts Order
           </h1>

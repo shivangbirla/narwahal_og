@@ -89,7 +89,7 @@ const Pms = () => {
       if (response.ok) {
         const data = await response.json();
         console.log("PIC Updated!");
-        closeComponent01()
+        closeComponent01();
       } else {
         throw new Error(`Error: ${await response.text()}`);
       }
@@ -134,7 +134,7 @@ const Pms = () => {
 
   const openComponent = (pms_code) => {
     setIsComponentOpen(true);
-    setSelectedPms(pms_code)
+    setSelectedPms(pms_code);
   };
 
   const closeComponent = () => {
@@ -152,11 +152,15 @@ const Pms = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-        const response = await fetch(`${BASE_URL}/pmsjobs/0EF000.00028/fetch_products?page_no=${modalPage - 1}`)
-        const data = await response.json();
-        setModalTotalPages(data.pages);
-        setModalData(data.products);
-    }
+      const response = await fetch(
+        `${BASE_URL}/pmsjobs/0EF000.00028/fetch_products?page_no=${
+          modalPage - 1
+        }`
+      );
+      const data = await response.json();
+      setModalTotalPages(data.pages);
+      setModalData(data.products);
+    };
     fetchData();
   }, [selectedPms, modalPage]);
 
@@ -170,9 +174,7 @@ const Pms = () => {
             <ul className="tabs group">
               {tabs?.map((tab, index) => (
                 <li
-                  className={cn(
-                    selectedView === tab.content && "active"
-                  )}
+                  className={cn(selectedView === tab.content && "active")}
                   onClick={() => {
                     setSelectedView(tab.content);
                   }}
@@ -232,7 +234,7 @@ const Pms = () => {
             {selectedView === "Timeline" && (
               <div className="">
                 <div className="p-[8px] shadow-sm bg-opacity-25 rounded-2xl">
-                  <div className="h-fit rounded-t-2xl overflow-hidden">
+                  <div className="h-fit rounded-t-2xl overflow-x-scroll">
                     <table className="min-w-full text-black shadow-sm">
                       <thead className="bg-[#F3F9FF]">
                         <tr>
@@ -280,15 +282,13 @@ const Pms = () => {
                             <td className="px-[15px] py-[6px] whitespace-nowrap">
                               {selectedValue}
                             </td>
-                            <td
-                              className="px-[15px] py-[6px] whitespace-nowrap"
-                            >
+                            <td className="px-[15px] py-[6px] whitespace-nowrap">
                               <button
-                                  className="rounded-md px-3 py-[1px] bg-[#47AFFF] text-white hover:bg-blue-500"
-                                  onClick={() => {
-                                    openComponent(option.pms_code);
-                                    setIndex(index);
-                                  }}
+                                className="rounded-md px-3 py-[1px] bg-[#47AFFF] text-white hover:bg-blue-500"
+                                onClick={() => {
+                                  openComponent(option.pms_code);
+                                  setIndex(index);
+                                }}
                               >
                                 show
                               </button>
@@ -307,9 +307,11 @@ const Pms = () => {
                         className="mx-auto flex items-center justify-center my-5"
                         color="primary"
                       />
-                    ):<div className="w-full my-4 text-lg text-gray-400 font-semibold text-center">
-                      No Data Found
-                      </div>}
+                    ) : (
+                      <div className="w-full my-4 text-lg text-gray-400 font-semibold text-center">
+                        No Data Found
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className="mt-[12px] flex justify-end mr-4 gap-4">
@@ -373,7 +375,6 @@ const Pms = () => {
                   </tr>
                 </thead>
                 {selectedValue === "completed" ? (
-
                   <tbody className="pt-[10px] pb-[12px]">
                     {modalData?.map((opt, i) => (
                       <tr key={i} className="bg-white text-[#535353]">
@@ -444,14 +445,13 @@ const Pms = () => {
                 )}
               </table>
               <Pagination
-                  count={modalTotalPages}
-                  page={modalPage}
-                  onChange={setModalPage}
-                  variant="outlined"
-                  shape="rounded"
-                  className="mx-auto flex items-center justify-center my-5"
+                count={modalTotalPages}
+                page={modalPage}
+                onChange={setModalPage}
+                variant="outlined"
+                shape="rounded"
+                className="mx-auto flex items-center justify-center my-5"
               />
-              
 
               {selectedValue === "in_progress" && (
                 <div className="mt-[12px] flex justify-end mr-4 gap-4">
