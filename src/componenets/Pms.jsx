@@ -89,6 +89,7 @@ const Pms = () => {
       if (response.ok) {
         const data = await response.json();
         console.log("PIC Updated!");
+        closeComponent01()
       } else {
         throw new Error(`Error: ${await response.text()}`);
       }

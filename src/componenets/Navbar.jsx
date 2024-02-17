@@ -87,7 +87,7 @@ const Navbar = ({ searchValue, setSearchValue }) => {
   return (
     <div className="flex justify-between py-2 my-4 items-center">
       <div
-        className=" lg:hidden w-[17px] h-full flex items-center justify-center"
+        className=" xl:hidden w-[17px] h-full flex items-center justify-center"
         onClick={() => setOpen(true)}
       >
         <svg
