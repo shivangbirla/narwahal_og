@@ -71,11 +71,15 @@ const Cin_table = () => {
   };
 
   const getData = async () => {
-    const resp = await axios.get(
-      `${BASE_URL}/checkin_checkout/get_products?page_no=${page}`
-    );
-    setProducts(resp.data.products);
-    setPage(resp.data.total_pages);
+    try {
+      const resp = await axios.get(
+        `${BASE_URL}/checkin_checkout/get_products?page_no=${page}`
+      );
+      setProducts(resp.data.products);
+      setPage(resp.data.total_pages);
+    } catch (error) {
+      toast.error("Not Found")
+    }
   };
 
   useEffect(() => {
@@ -142,6 +146,9 @@ const Cin_table = () => {
                       </th>
                       <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
                         Scanned Qty.
+                      </th>
+                      <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
+                       Checkout Qty.
                       </th>
                       <th className="px-4 py-3 text-left text-sm font-semibold uppercase">
                         Check in
@@ -282,7 +289,7 @@ export default Cin_table;
     }
 
     const resp = await axios.post(
-      `${BASE_URL}/checkin_checkout/checkin?material_code=${product.material_code}&check_in_quantity=${quantity}`,
+      `${BASE_URL}/checkin_checkout/check_in?material_code=${product.material_code}&check_in_quantity=${quantity}`,
       {}
     );
     console.log(resp)
@@ -303,8 +310,9 @@ export default Cin_table;
       <td className="px-[15px] py-[6px] whitespace-nowrap">
         {product.part_no}
       </td>
+      <td className="px-[15px] py-[6px] whitespace-nowrap">{"--"}</td>
       <td className="px-[15px] py-[6px] whitespace-nowrap">
-        {"--"}
+        {product.checked_out}
       </td>
       <td className="px-[15px] py-[6px] whitespace-nowrap">
         <input
