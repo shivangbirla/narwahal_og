@@ -16,7 +16,6 @@ const Home = ({ setIsHome, isHome }) => {
   const [rack, setRack] = useState();
   const [shelve, setShelve] = useState();
 
-
   const handleOpen = (inventory) => {
     setIsOpen(true);
     setSetInverntory(inventory);
@@ -49,7 +48,6 @@ const Home = ({ setIsHome, isHome }) => {
     setIsComponentOpen(true);
   };
 
-
   const buttons = [
     {
       content: "Floor View",
@@ -64,8 +62,6 @@ const Home = ({ setIsHome, isHome }) => {
       },
     },
   ];
-
-
 
   return (
     <div className="flex flex-col gap-[22px] h-fit ">
@@ -355,12 +351,21 @@ const Home = ({ setIsHome, isHome }) => {
         </div>
       </Modal>
 
-      <Modal isOpen={isComponentOpen} setIsOpen={closeComponent} classes={"max-h-[80%] overflow-y-scroll"}>
-        <FloorData isComponentOpen={isComponentOpen} inventory={setInverntory} shelve={shelve} rack={rack}/>
+      <Modal
+        isOpen={isComponentOpen}
+        setIsOpen={closeComponent}
+        classes={"max-h-[80%] overflow-y-scroll"}
+      >
+        <FloorData
+          isComponentOpen={isComponentOpen}
+          inventory={setInverntory}
+          shelve={shelve}
+          rack={rack}
+        />
       </Modal>
-      <h2 className="text-3xl font-medium ">Inventory</h2>
+      {/* <h2 className="text-3xl font-medium ">Inventory</h2> */}
 
-      <div className="flex flex-row gap-5 mb-[30px]">
+      {/* <div className="flex flex-row gap-5 mb-[30px]">
         {buttons.map((button, index) => (
           <button
             className={cn(
@@ -372,22 +377,35 @@ const Home = ({ setIsHome, isHome }) => {
             {button.content}
           </button>
         ))}
-      </div>
+      </div> */}
       <div className="flex flex-col">
-        <ul className="tabs group">
-          {tabs.map((tab, index) => (
-            <li
-              className={cn(
-                selectedView === index && "active"
-              )}
-              onClick={() => {
-                setSelectedView(index);
-              }}
-            >
-              <div>{tab.content}</div>
-            </li>
-          ))}
-        </ul>
+        <div className="flex flex-row justify-between items-center">
+          <ul className="tabs group">
+            {tabs.map((tab, index) => (
+              <li
+                className={cn(selectedView === index && "active")}
+                onClick={() => {
+                  setSelectedView(index);
+                }}
+              >
+                <div>{tab.content}</div>
+              </li>
+            ))}
+          </ul>
+          <div className="flex flex-row gap-5 mr-20">
+            {buttons.map((button, index) => (
+              <button
+                className={cn(
+                  "px-[18px] py-[5px] border border-black rounded-lg",
+                  Number(!isHome) === index && "bg-[#E7F4FF] "
+                )}
+                onClick={button.onClick}
+              >
+                {button.content}
+              </button>
+            ))}
+          </div>
+        </div>
         <div
           ref={ref}
           className="w-full h-fit flex flex-col items-center justify-center gap-10 max-w-[1175px] box-border min-h-[600px] max-h-[765px] bg-white rounded-2xl rounded-tl-none p-6"

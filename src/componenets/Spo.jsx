@@ -57,9 +57,9 @@ const Spo = () => {
     <div className="flex flex-col gap-[22px] h-full">
       <div className="bg-[#F8F9FA]">
         <div className="w-full bg-white flex flex-col gap-8 p-7 rounded-xl">
-          <h1 className="text-black font-medium font-dm-sans text-[28px] leading-normal">
+          {/* <h1 className="text-black font-medium font-dm-sans text-[28px] leading-normal">
             Separate Parts Order
-          </h1>
+          </h1> */}
 
           <div className="rounded-xl px-3 py-2 text-black flex gap-2 bg-[#E7F4FF]">
             <img src={touch} alt="" className="w-[24px] h-[24px]" />

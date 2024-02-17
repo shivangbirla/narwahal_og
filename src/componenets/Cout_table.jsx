@@ -16,7 +16,7 @@ const Cout_table = () => {
   return (
     <>
       <div className="bg-[#F8F9FA] flex flex-col gap-[22px]">
-        <h2 className="text-3xl font-medium ">Check Out</h2>
+        {/* <h2 className="text-3xl font-medium ">Check Out</h2> */}
         <div className="flex flex-col">
           <ul className="tabs group">
             {tabs.map((tab, index) => (

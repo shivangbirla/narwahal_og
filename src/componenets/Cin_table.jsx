@@ -67,7 +67,6 @@ const Cin_table = () => {
   };
 
   const handleSelectChange = (event) => {
-    
     setSelectedValue(event.target.value);
   };
 
@@ -90,7 +89,7 @@ const Cin_table = () => {
   return (
     <>
       <div className="bg-[#F8F9FA] ">
-        <h2 className="text-3xl font-medium mb-[22px]">Check In</h2>
+        {/* <h2 className="text-3xl font-medium mb-[22px]">Check In</h2> */}
         <div className="flex justify-between items-center">
           <ul className="tabs group">
             {tabs.map((tab, index) => (

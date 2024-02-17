@@ -165,10 +165,30 @@ const Inventory_listview = ({ setIsHome, isHome }) => {
   return (
     <>
       <div className="bg-[#F8F9FA]">
-        <div className="flex flex-col">
-          <h2 className="text-3xl font-medium mb-[22px]">Inventory</h2>
+        {/* <div className="flex flex-col"> */}
+        {/* <h2 className="text-3xl font-medium mb-[22px]">Inventory</h2> */}
 
-          <div className="flex flex-row gap-5 mb-[30px]">
+        {/* <div className="flex flex-row gap-5 mb-[30px]">
+            {buttons.map((button, index) => (
+              <button
+                className={cn(
+                  "px-[18px] py-[5px] border border-black rounded-lg",
+                  Number(!isHome) === index && "bg-[#E7F4FF] "
+                )}
+                onClick={button.onClick}
+              >
+                {button.content}
+              </button>
+            ))}
+          </div> */}
+        {/* </div> */}
+        <div className="flex flex-row justify-between items-center">
+          <ul className="tabs group">
+            <li className={cn("active")}>
+              <div>List View</div>
+            </li>
+          </ul>
+          <div className="flex flex-row gap-5 mr-4">
             {buttons.map((button, index) => (
               <button
                 className={cn(
@@ -181,13 +201,6 @@ const Inventory_listview = ({ setIsHome, isHome }) => {
               </button>
             ))}
           </div>
-        </div>
-        <div className="flex">
-          <ul className="tabs group">
-            <li className={cn("active")}>
-              <div>List View</div>
-            </li>
-          </ul>
         </div>
         {selectedView === "List View" && products && products.length > 0 && (
           <div className="p-[20px] bg-[#FFFFFF] rounded-2xl rounded-tl-none">
@@ -358,7 +371,7 @@ export default Inventory_listview;
 
 const AccordianComponent = ({ selectedAccordian, acc, handleChange }) => {
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);  
+  const [isLoading, setIsLoading] = useState(false);
   const [page, setpage] = useState(1);
   const handlePageChange = (event, value) => {
     setpage(value);
@@ -467,15 +480,12 @@ const AccordianComponent = ({ selectedAccordian, acc, handleChange }) => {
               </th>
             </tr>
           </thead>
-         
+
           <tbody className="pt-[10px] pb-[12px]">
             {data.map((da, index) => (
               <tr
                 key={index}
-                className={cn(
-                  "bg-white text-[#535353]",
-                  
-                )}
+                className={cn("bg-white text-[#535353]")}
                 // onClick={openComponent01}
               >
                 <td className="px-[15px] py-[6px] whitespace-nowrap px-auto">
@@ -495,9 +505,7 @@ const AccordianComponent = ({ selectedAccordian, acc, handleChange }) => {
                 </td>
 
                 <td className="px-[15px] py-[6px] whitespace-nowrap">
-                  <button
-                    className="bg-[#47AFFF] text-[10px] px-2 py-[2px] my-auto text-white disabled:bg-slate-200 disabled:text-gray-400 disabled:border-gray-300 disabled:border cursor-pointer rounded-md"
-                  >
+                  <button className="bg-[#47AFFF] text-[10px] px-2 py-[2px] my-auto text-white disabled:bg-slate-200 disabled:text-gray-400 disabled:border-gray-300 disabled:border cursor-pointer rounded-md">
                     Track
                   </button>
                 </td>

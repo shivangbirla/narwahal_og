@@ -57,14 +57,16 @@ const Sidebar = () => {
 
   return (
     <>
-      <nav className="box-border border-box h-full bg-inherit flex flex-col gap-7 w-[20vw]">
+      <nav className="box-border border-box h-full bg-inherit flex flex-col gap-7 w-[300px]">
         <div className="flex flex-col pt-[30px] mb-6 px-10">
           <img
             src={narwahal_logo}
             alt="narwahal_logo"
             className="w-[130px] h-[21px]"
           />
-          <span className="w-[130px] justify-center flex text-lg  h-[22px]">Narwhal Project</span>
+          <span className="w-[130px] justify-center flex text-lg  h-[22px]">
+            Narwhal Project
+          </span>
         </div>
 
         <ul className="mx-auto w-4/5">
